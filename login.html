@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login / Sign Up | Nami's Cake and Bake</title>
+    <link
+      rel="shortcut icon"
+      href="assets/favicon_io/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Link the main stylesheet -->
+    <style>
+      /* Basic styling for the login form container */
+      .auth-container {
+        max-width: 450px;
+        margin: 60px auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+
+      .auth-container h1 {
+        font-family: "Playfair Display", serif;
+        color: var(--accent);
+        margin-bottom: 30px;
+      }
+
+      .auth-form .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .auth-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .auth-form input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: "Quicksand", sans-serif;
+      }
+
+      .auth-form input:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: none; /* Remove the box shadow */
+      }
+
+      .auth-buttons {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 15px; /* Space between buttons */
+      }
+
+      .auth-buttons .btn {
+        /* Ensure buttons take full width */
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-family: "Quicksand", sans-serif;
+        border-radius: 999px; /* Fully rounded buttons */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        background-color: #4d3327;
+        color: white;
+      }
+      .auth-buttons .btn:hover {
+        background-color: var(--accent);
+        color: white; /* Make sure text stays visible */
+      }
+
+      /* Optional: Google Sign-in Button Style */
+      .btn-google {
+        background-color: #4d3327;
+        color: white;
+        border-radius: 999px;
+        border: none;
+      }
+      .btn-google:hover {
+        background-color: var(--accent);
+      }
+
+      #auth-error {
+        color: red;
+        margin-top: 15px;
+        font-size: 0.9em;
+        min-height: 1.2em; /* Reserve space even when empty */
+      }
+
+      
+
+      /* Add this CSS in the style section */
+      .show-password-container {
+        display: flex;
+        align-items: center;
+        margin-top: 8px;
+        gap: 8px;
+      }
+
+      .show-password-container input[type="checkbox"] {
+        width: auto;
+        margin: 0;
+      }
+
+      .show-password-container label {
+        margin: 0;
+        font-weight: normal;
+        color: var(--accent);
+        cursor: pointer;
+      }
+
+      
+    </style>
+  </head>
+  <body>
+   <!-- Navigation -->
+ <nav>
+  <div class="nav-container">
+    <div class="brand">
+      <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
+      <div class="logo">Nami's Cake and Bake</div>
+    </div>
+    <ul class="nav-links">
+         <li><a href="index.html">Home</a></li>
+         <li><a href="cakes.html">Cakes</a></li>
+         <li><a href="gallery.html">Gallery</a></li>
+         <li><a href="classes.html">Classes</a></li>
+         <li><a href="upcoming-classes.html">Schedule</a></li>
+         <li id="cart-nav-item">
+             <a href="cart.html">
+                 <i class="fas fa-shopping-cart"></i> Cart
+                 <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
+             </a>
+         </li>
+         
+         <li id="login-nav-item"><a href="login.html">Login</a></li>
+         <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+     </ul>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+
+    <!-- Main Login/Signup Section -->
+    <main class="auth-container">
+      <h1>Login or Sign Up</h1>
+      <form id="auth-form" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+          <div class="show-password-container">
+            <input type="checkbox" id="show-password" />
+            <label for="show-password">Show Password</label>
+          </div>
+        </div>
+        <div id="auth-error"></div>
+        <!-- To display error messages -->
+        <div class="auth-buttons">
+          <button type="button" id="login-button" class="btn">Login</button>
+          <button type="button" id="signup-button" class="btn">Sign Up</button>
+          <!-- Optional: Google Sign-in Button -->
+          <button
+            type="button"
+            id="google-signin-button"
+            class="btn btn-google"
+          >
+            <i class="fab fa-google" style="margin-right: 8px"></i> Sign in with
+            Google
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Footer (Consistent with other pages) -->
+    <footer>
+      <div class="footer-container">
+        <!-- Footer content copied from index.html -->
+        <div class="footer-col">
+          <h3>Nami's Cake and Bake</h3>
+          <p>
+            Creating delicious memories since 2015 through custom cakes and
+            baking classes.
+          </p>
+          <div class="social-links">
+            <a
+              href="https://www.instagram.com/namis_cakenbake_/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://wa.me/918767542742"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cakes.html">Custom Cakes</a></li>
+            <li><a href="classes.html">Classes</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Info</h3>
+          <ul class="footer-links">
+            <li>
+              <a
+                href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i
+                  class="fas fa-map-marker-alt"
+                  style="margin-right: 10px"
+                ></i>
+                Vishrambag, Sangli</a
+              >
+            </li>
+            <li>
+              <i class="fas fa-phone" style="margin-right: 10px"></i> +91
+              87675427442
+            </li>
+            <li>
+              <i class="fas fa-envelope" style="margin-right: 10px"></i>
+              namiscakeandbake@gmail.com
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2025 Nami's Cake and Bake. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-NXYG9PJ8KQ");
+    </script>
+
+    <!-- Firebase Initialization and Auth Logic -->
+    <script type="module">
+      // Import functions from the Firebase SDKs
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signInWithEmailAndPassword, // For Email/Password Login
+        createUserWithEmailAndPassword, // For Email/Password Sign Up
+        GoogleAuthProvider, // For Google Sign-in
+        signInWithPopup, // For Google Sign-in Popup
+      } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0",
+  authDomain: "namis-cake-bake-auth.firebaseapp.com",
+  projectId: "namis-cake-bake-auth",
+  storageBucket: "namis-cake-bake-auth.firebasestorage.app",
+  messagingSenderId: "213318410638",
+  appId: "1:213318410638:web:5d0531e93ed38f434c04df",
+  measurementId: "G-HPWS91PN1C"
+};
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const googleProvider = new GoogleAuthProvider(); // Create Google Provider instance
+
+      // --- Page Specific Logic ---
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        const loginButton = document.getElementById("login-button");
+        const signupButton = document.getElementById("signup-button");
+        const googleSigninButton = document.getElementById(
+          "google-signin-button"
+        ); // Get Google button
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const authErrorDiv = document.getElementById("auth-error");
+
+        // --- Hamburger Menu ---
+        if (hamburger && navLinks) {
+          hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+          });
+        }
+
+        // --- Clear Error on Input ---
+        if (emailInput)
+          emailInput.addEventListener(
+            "input",
+            () => (authErrorDiv.textContent = "")
+          );
+        if (passwordInput)
+          passwordInput.addEventListener(
+            "input",
+            () => (authErrorDiv.textContent = "")
+          );
+
+        // --- Auth State Listener (handles redirects and nav updates) ---
+        onAuthStateChanged(auth, (user) => {
+          const loginNavItem = document.getElementById("login-nav-item");
+          const profileNavItem = document.getElementById("profile-nav-item");
+          if (user) {
+            // If user is logged in (or just logged in), redirect to profile
+            console.log(
+              "Auth state changed: User signed in, redirecting to profile..."
+            );
+            // Small delay allows Firebase to potentially settle state if needed
+            setTimeout(() => {
+              window.location.href = "profile.html";
+            }, 100);
+          } else {
+            // User is signed out, ensure nav is correct for login page
+            console.log("Auth state changed: User signed out.");
+            if (loginNavItem) loginNavItem.style.display = "list-item";
+            if (profileNavItem) profileNavItem.style.display = "none";
+          }
+        });
+
+        // --- Email/Password Login Button Click ---
+        if (loginButton) {
+          loginButton.addEventListener("click", async () => {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            authErrorDiv.textContent = ""; // Clear previous errors
+
+            if (!email || !password) {
+              authErrorDiv.textContent =
+                "Please enter both email and password.";
+              return;
+            }
+
+            console.log(`Attempting login for: ${email}`);
+            try {
+              const userCredential = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+              );
+              console.log("Login successful:", userCredential.user);
+              // Redirect is handled by onAuthStateChanged
+            } catch (error) {
+              console.error("Login failed:", error.code, error.message);
+              authErrorDiv.textContent = getFirebaseErrorMessage(error);
+            }
+          });
+        }
+
+        // --- Email/Password Sign Up Button Click ---
+        if (signupButton) {
+          signupButton.addEventListener("click", async () => {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            authErrorDiv.textContent = ""; // Clear previous errors
+
+            if (!email || !password) {
+              authErrorDiv.textContent =
+                "Please enter both email and password.";
+              return;
+            }
+            if (password.length < 6) {
+              authErrorDiv.textContent =
+                "Password should be at least 6 characters.";
+              return;
+            }
+
+            console.log(`Attempting signup for: ${email}`);
+            try {
+              const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+              );
+              console.log("Signup successful:", userCredential.user);
+              // Redirect is handled by onAuthStateChanged
+            } catch (error) {
+              console.error("Signup failed:", error.code, error.message);
+              authErrorDiv.textContent = getFirebaseErrorMessage(error);
+            }
+          });
+        }
+
+        // --- Google Sign-in Button Click ---
+        if (googleSigninButton) {
+          googleSigninButton.addEventListener("click", async () => {
+            authErrorDiv.textContent = ""; // Clear previous errors
+            console.log("Attempting Google Sign-in...");
+            try {
+              const result = await signInWithPopup(auth, googleProvider);
+              const credential =
+                GoogleAuthProvider.credentialFromResult(result);
+              const token = credential.accessToken; // If needed
+              const user = result.user;
+              console.log("Google Sign-in successful:", user);
+              // Redirect is handled by onAuthStateChanged
+            } catch (error) {
+              console.error("Google Sign-in failed:", error); // Log the full error object
+              console.error("Google Sign-in Raw Error Code:", error.code); // Log the code specifically
+              console.error("Google Sign-in Raw Error Message:", error.message); // Log the message specifically
+
+              const errorCode = error.code;
+              const credential = GoogleAuthProvider.credentialFromError(error);
+
+              // --- More specific error handling for Google Sign-in ---
+              if (errorCode === "auth/popup-closed-by-user") {
+                authErrorDiv.textContent =
+                  "Sign-in window closed before completion.";
+              } else if (
+                errorCode === "auth/cancelled-popup-request" ||
+                errorCode === "auth/popup-blocked"
+              ) {
+                authErrorDiv.textContent =
+                  "Popup blocked or cancelled. Please allow popups for this site.";
+              } else if (
+                errorCode === "auth/account-exists-with-different-credential"
+              ) {
+                authErrorDiv.textContent =
+                  "An account already exists with this email using a different sign-in method (e.g., password). Try logging in with that method.";
+              } else if (errorCode === "auth/operation-not-allowed") {
+                authErrorDiv.textContent =
+                  "Google Sign-in is not enabled for this app. (Admin check required)";
+              } else if (errorCode === "auth/auth-domain-config-mismatch") {
+                authErrorDiv.textContent =
+                  "App domain not authorized. (Admin check required)";
+              } else {
+                authErrorDiv.textContent = getFirebaseErrorMessage(error); // Use generic handler for others
+              }
+            }
+          });
+        } else {
+          console.warn(
+            "Google Sign-in button not found (ID: google-signin-button)"
+          );
+        }
+
+        // --- Show Password Toggle ---
+        const showPasswordCheckbox = document.getElementById("show-password");
+        if (showPasswordCheckbox) {
+          showPasswordCheckbox.addEventListener("change", function () {
+            passwordInput.type = this.checked ? "text" : "password";
+          });
+        }
+
+        // --- Function to provide user-friendly error messages ---
+        function getFirebaseErrorMessage(error) {
+          console.log("Mapping generic error code:", error.code); // Log the code for debugging
+          switch (error.code) {
+            // Email/Password Errors
+            case "auth/invalid-email":
+              return "Please enter a valid email address.";
+            case "auth/user-disabled":
+              return "This user account has been disabled.";
+            case "auth/user-not-found":
+              return "No account found with this email. Please Sign Up or try Google Sign-in.";
+            case "auth/wrong-password":
+              return "Incorrect password. Please try again.";
+            case "auth/missing-password":
+              return "Please enter a password.";
+            case "auth/email-already-in-use":
+              return "This email address is already registered. Try Logging In or use Google Sign-in.";
+            case "auth/weak-password":
+              return "Password should be at least 6 characters long.";
+
+            // General Errors
+            case "auth/too-many-requests":
+              return "Access temporarily disabled due to too many attempts. Try again later.";
+            case "auth/network-request-failed":
+              return "Network error. Please check your connection and try again.";
+
+            // Google Sign-in Specific Errors (already handled more specifically above, but good fallback)
+            case "auth/popup-closed-by-user":
+              return "Sign-in window closed before completion.";
+            case "auth/cancelled-popup-request":
+              return "Multiple sign-in windows opened. Please close others and try again.";
+            case "auth/popup-blocked":
+              return "Popup blocked by browser. Please allow popups for this site.";
+            case "auth/account-exists-with-different-credential":
+              return "An account already exists with this email using a different sign-in method.";
+            case "auth/operation-not-allowed":
+              return "Sign-in method is disabled."; // More generic
+            case "auth/auth-domain-config-mismatch":
+              return "Domain not authorized."; // More generic
+
+            default:
+              return `An authentication error occurred (${error.code}). Please try again.`; // Include code for unhandled cases
+          }
+        }
+      }); // End of DOMContentLoaded
+    </script>
+  </body>
+</html>

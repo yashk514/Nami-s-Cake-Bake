@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Nami's Cake and Bake</title>
+    <link rel="shortcut icon" href="assets/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link the main stylesheet -->
+    <style>
+        /* Root variables from your styles.css or defined here */
+        :root {
+            --primary: #E05E85; /* Example primary color */
+            --secondary: #fff; /* Example secondary color */
+            --accent: #5c4033; /* Example accent color */
+            --light: #fff; /* Example light color */
+            --dark: #3c3c3c; /* Example dark color */
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --footer: #4e4e4e; /* Example footer color */
+        }
+        body {
+             margin: 0;
+             font-family: "Quicksand", sans-serif;
+             background-color: var(--light);
+             color: var(--dark);
+        }
+        /* Basic Nav styles (assuming similar structure in styles.css) */
+        nav { background-color: white; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; }
+        .nav-icon { width: 32px; height: 32px; margin-right: 10px; }
+        .logo { font-family: "Playfair Display", serif; font-size: 1.8rem; color: var(--accent); font-weight: bold; }
+        .nav-links { display: flex; list-style: none; padding: 0; margin: 0; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .hamburger { display: none; font-size: 28px; background: none; border: none; cursor: pointer; color: var(--dark); }
+        @media (max-width: 768px) { .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; right: 15px; background-color: white; box-shadow: var(--shadow); width: 200px; padding: 15px; z-index: 999; } .nav-links.active { display: flex; } .nav-links li { margin: 10px 0; margin-left: 0; } .hamburger { display: block; } }
+
+        /* --- Checkout Specific Styles --- */
+        .checkout-container { max-width: 800px; margin: 40px auto; padding: 30px; background-color: #fff; border-radius: 15px; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr; gap: 40px; }
+        @media (min-width: 768px) { .checkout-container { grid-template-columns: 1fr 1fr; } .order-summary { order: 2; } .shipping-details { order: 1; } }
+        .checkout-container h1, .checkout-container h2 { font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 20px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
+        .checkout-container h1 { grid-column: 1 / -1; text-align: center; margin-bottom: 30px; }
+        .order-summary { background-color: #fdfaf7; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
+        #summary-items-list { margin-bottom: 20px; max-height: 300px; overflow-y: auto; }
+        .summary-item { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; font-size: 0.95rem; border-bottom: 1px dashed #eee; gap: 10px; }
+        .summary-item:last-child { border-bottom: none; }
+        .summary-item .item-name { color: var(--dark); flex-grow: 1; margin-right: auto; }
+        .summary-item .item-qty { color: #666; white-space: nowrap; }
+        .summary-item .item-price { font-weight: 600; color: var(--accent); white-space: nowrap; }
+        .summary-total { text-align: right; margin-top: 20px; padding-top: 15px; border-top: 2px solid var(--secondary); font-size: 1.2rem; font-weight: bold; }
+        .summary-total span { color: var(--primary); }
+        .shipping-details .form-group { margin-bottom: 20px; }
+        .shipping-details label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent); }
+        .shipping-details input[type="text"], .shipping-details input[type="email"], .shipping-details input[type="tel"], .shipping-details textarea, .shipping-details input[type="file"] { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; font-family: "Quicksand", sans-serif; box-sizing: border-box; }
+        .shipping-details input[type="file"] { padding: 10px; }
+        .shipping-details textarea { resize: vertical; min-height: 80px; }
+        .shipping-details input:focus, .shipping-details textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 5px rgba(224, 94, 133, 0.5); } /* Adjusted shadow color to match primary */
+        .payment-method-options label { display: inline-block; margin-left: 5px; margin-right: 15px; font-weight: normal; color: var(--dark); cursor: pointer; }
+        .payment-method-options input[type="radio"] { vertical-align: middle; margin-right: 3px; }
+        .payment-method-details { margin-top: 10px; padding: 15px; background-color: #f8f8f8; border: 1px solid #eee; border-radius: 5px; font-size: 0.95rem; display: none; }
+        .payment-method-details img.qr-code { display: block; max-width: 180px; height: auto; margin: 10px auto; border: 1px solid #ccc; }
+        .payment-method-details p { margin-bottom: 8px; line-height: 1.5; }
+        .payment-method-details strong { color: var(--accent); }
+        #payment_screenshot { margin-top: 10px; border: 1px dashed #ccc; cursor: pointer; background-color: #fdfdfd; }
+        #payment_screenshot:hover { border-color: var(--primary); }
+        #screenshot-feedback { font-size: 0.85em; color: green; margin-top: 5px; display: none; text-align: left; }
+        #checkout-error { color: red; margin-top: 15px; font-size: 0.9em; min-height: 1.2em; text-align: left; }
+        .btn { display: inline-block; padding: 10px 20px; border-radius: 8px; text-decoration: none; background-color: var(--accent); color: white; font-weight: bold; cursor: pointer; border: none; transition: background-color 0.3s, transform 0.2s; text-align: center; }
+        .btn:hover { background-color: #4d3327; transform: translateY(-2px); }
+        .place-order-btn { width: 100%; padding: 14px; font-size: 1.1rem; margin-top: 15px; background-color: var(--primary); }
+        .place-order-btn:hover { background-color: #d44a70; } /* Slightly darker primary on hover */
+        .place-order-btn:disabled { background-color: #ccc; cursor: not-allowed; transform: none; }
+        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.7); z-index: 1001; justify-content: center; align-items: center; }
+        .loading-overlay i { font-size: 3rem; color: var(--primary); }
+        /* Responsive */
+        @media (max-width: 480px) { .checkout-container { margin: 20px 15px; padding: 20px; } .checkout-container h1 { font-size: 1.8rem; } .checkout-container h2 { font-size: 1.5rem; } .summary-item { font-size: 0.9rem; } .summary-total { font-size: 1.1rem; } }
+
+        /* --- Footer Styles --- */
+        footer { background: var(--footer); color: white; padding: 60px 20px 30px; margin-top: 60px;}
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+        .footer-col h3 { font-family: "Playfair Display", serif; margin-bottom: 20px; font-size: 1.3rem; position: relative; padding-bottom: 10px; }
+        .footer-col h3::after { content: ""; position: absolute; bottom: 0; left: 0; width: 50px; height: 2px; background: var(--primary); }
+        .footer-col p { margin-bottom: 20px; font-size: 0.95rem; opacity: 0.9; }
+        .footer-links { list-style: none; padding-left: 0; margin: 0; }
+        .footer-links li { margin-bottom: 12px; display: flex; align-items: center; }
+        .footer-links i.fas, .footer-links i.fab { margin-right: 10px; width: 20px; color: var(--primary); text-align: center; } /* Target both font awesome types */
+        .footer-links a { color: white; text-decoration: none; transition: all 0.3s; font-size: 0.95rem; display: flex; align-items: center; }
+        .footer-links a:hover { color: var(--secondary); padding-left: 5px; }
+        .social-links { display: flex; margin-top: 20px; padding: 0; }
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; margin-right: 10px; color: white; transition: all 0.3s; }
+        .social-links a:last-child { margin-right: 0; }
+        .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+        .copyright { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.9rem; opacity: 0.8; }
+        @media (max-width: 768px) { .footer-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); text-align: center; } .footer-col { align-items: center; } .footer-col h3::after { left: 50%; transform: translateX(-50%); } .social-links { justify-content: center; } .footer-links li { justify-content: center; } .footer-links a { justify-content: center; } .footer-links i.fas, .footer-links i.fab { margin-right: 8px; } }
+        @media (max-width: 480px) { .footer-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+     <!-- Navigation -->
+     <nav>
+        <div class="nav-container">
+          <div class="brand">
+            <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
+            <div class="logo">Nami's Cake and Bake</div>
+          </div>
+          <ul class="nav-links">
+               <li><a href="index.html">Home</a></li>
+               <li><a href="cakes.html">Cakes</a></li>
+               <li><a href="gallery.html">Gallery</a></li>
+               <li><a href="classes.html">Classes</a></li>
+               <li><a href="upcoming-classes.html">Schedule</a></li>
+               <li id="cart-nav-item">
+                   <a href="cart.html">
+                       <i class="fas fa-shopping-cart"></i> Cart
+                       <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
+                   </a>
+               </li>
+
+               <li id="login-nav-item"><a href="login.html">Login</a></li>
+               <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+           </ul>
+          <button class="hamburger" id="hamburger">☰</button>
+        </div>
+      </nav>
+
+    <!-- Main Checkout Section -->
+    <main class="checkout-container">
+        <h1>Checkout</h1>
+
+        <!-- Shipping Details -->
+        <section class="shipping-details">
+            <h2>Shipping & Contact Information</h2>
+
+            <!-- *** CORRECTED FORM TAG *** -->
+            <!-- All attributes MUST be inside the single <form ... > tag -->
+            <form id="checkout-form" name="cake-checkout" method="POST" data-netlify="true" enctype="multipart/form-data">
+
+                <!-- Form fields start here -->
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="customer_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" name="shipping_address" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="postcode">Postal Code</label>
+                    <input type="text" id="postcode" name="postcode" required>
+                </div>
+                 <div class="form-group">
+                    <label for="notes">Order Notes (Optional)</label>
+                    <textarea id="notes" name="order_notes" placeholder="Any special instructions for delivery or the order?"></textarea>
+                </div>
+
+                <!-- Payment Method Selection -->
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-method-options">
+                        <input type="radio" id="payment_cod" name="payment_method" value="COD" checked required>
+                        <label for="payment_cod">Cash on Delivery</label>
+                    </div>
+                     <div class="payment-method-options">
+                        <input type="radio" id="payment_upi" name="payment_method" value="UPI/QR">
+                        <label for="payment_upi">UPI / QR Code</label>
+                    </div>
+                </div>
+
+                <!-- UPI/QR Details (Shows QR/ID and Screenshot Input) -->
+                <div id="upi-details" class="payment-method-details">
+                    <p>Please scan the QR code below or pay using the UPI ID:</p>
+                    <img src="assets/payment.jpg" alt="UPI QR Code" class="qr-code">
+                    <p><strong>UPI ID:</strong> yashkumbhoje2005@oksbi</p>
+                    <p><strong>Amount:</strong> <span id="upi-amount">₹ 0.00</span></p>
+                    <hr style="margin: 15px 0;">
+                    <p><strong>After payment, please upload the screenshot below:</strong></p>
+                    <div class="form-group">
+                        <label for="payment_screenshot" style="font-weight:bold;">Upload Payment Screenshot (Required for UPI)</label>
+                        <input type="file" id="payment_screenshot" name="payment_screenshot" accept="image/*">
+                        <div id="screenshot-feedback"></div>
+                    </div>
+                </div>
+
+                <!-- Hidden fields for cart items/total FOR NETLIFY -->
+                <input type="hidden" name="cart_items" id="cart_items_hidden">
+                <input type="hidden" name="cart_total" id="cart_total_hidden">
+
+                <div id="checkout-error"></div>
+                <button type="submit" id="place-order-button" class="btn place-order-btn">Place Order</button>
+            </form> <!-- Form ends here -->
+        </section>
+
+        <!-- Order Summary -->
+        <section class="order-summary">
+            <h2>Order Summary</h2>
+            <div id="summary-items-list">
+                <p style="text-align: center; color: #888;">Loading cart...</p>
+            </div>
+            <div class="summary-total">
+                Total: <span id="summary-total-amount">₹ 0.00</span>
+            </div>
+        </section>
+
+    </main>
+
+     <!-- Loading Overlay -->
+     <div id="loading-overlay" class="loading-overlay">
+        <i class="fas fa-spinner fa-spin"></i>
+     </div>
+
+    <!-- Footer -->
+     <footer>
+      <div class="footer-container">
+         <div class="footer-col">
+           <h3>Nami's Cake and Bake</h3>
+           <p>Creating delicious memories since 2015.</p>
+           <div class="social-links">
+             <a href="https://www.instagram.com/namis_cakenbake_/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+             <a href="https://wa.me/918767542742" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+           </div>
+         </div>
+         <div class="footer-col">
+           <h3>Quick Links</h3>
+           <ul class="footer-links">
+             <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+             <li><a href="cakes.html"><i class="fas fa-birthday-cake"></i>Cakes</a></li>
+             <li><a href="classes.html"><i class="fas fa-chalkboard-teacher"></i>Classes</a></li>
+             <li><a href="gallery.html"><i class="fas fa-images"></i>Gallery</a></li>
+             <li><a href="contact.html"><i class="fas fa-envelope"></i>Contact</a></li>
+           </ul>
+         </div>
+         <div class="footer-col">
+           <h3>Contact Info</h3>
+           <ul class="footer-links">
+             <li><a href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7" target="_blank" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Vishrambag, Sangli</a></li>
+             <li><i class="fas fa-phone"></i> +91 8767542742</li>
+             <li><i class="fas fa-envelope"></i> info@namiscakeandbake.com</li>
+           </ul>
+         </div>
+      </div>
+      <div class="copyright">
+        © 2025 Nami's Cake and Bake. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NXYG9PJ8KQ');
+    </script>
+
+    <!-- Firebase and Checkout Logic -->
+    <script type="module">
+        // Import Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        // Import Firestore functions
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+        // --- PASTE YOUR FIREBASE CONFIGURATION OBJECT HERE ---
+         const firebaseConfig = {
+            apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0",
+            authDomain: "namis-cake-bake-auth.firebaseapp.com",
+            projectId: "namis-cake-bake-auth",
+            storageBucket: "namis-cake-bake-auth.appspot.com", // Use .appspot.com
+            messagingSenderId: "213318410638",
+            appId: "1:213318410638:web:5d0531e93ed38f434c04df",
+            measurementId: "G-HPWS91PN1C"
+          };
+        // --- END FIREBASE CONFIG ---
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app); // Initialize Firestore
+
+        // --- Cart Management Functions ---
+        const CART_KEY = 'namiShopCart';
+        function getCart() {
+            const cart = localStorage.getItem(CART_KEY);
+            try { return cart ? JSON.parse(cart) : []; } catch (e) { console.error("Cart parse error:", e); return []; }
+        }
+        function clearCart() {
+            localStorage.removeItem(CART_KEY);
+            updateCartCount();
+            renderOrderSummary(); // Re-render summary which will show empty
+            // Optionally redirect after a short delay
+            // setTimeout(() => { window.location.href = 'order-success.html'; }, 500);
+        }
+        function updateCartCount() {
+            const cart = getCart();
+            const cartCountSpan = document.getElementById('cart-count');
+            if (cartCountSpan) {
+                const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+                cartCountSpan.textContent = totalItems;
+                cartCountSpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            }
+        }
+        // --- END Cart Management ---
+
+        // --- Function to Display Cart Summary ---
+        function renderOrderSummary() {
+            const cart = getCart();
+            const summaryList = document.getElementById('summary-items-list');
+            const summaryTotalSpan = document.getElementById('summary-total-amount');
+            const upiAmountSpan = document.getElementById('upi-amount');
+            const placeOrderButton = document.getElementById('place-order-button');
+            const hiddenCartItemsInput = document.getElementById('cart_items_hidden');
+            const hiddenCartTotalInput = document.getElementById('cart_total_hidden');
+
+            if (!summaryList || !summaryTotalSpan || !placeOrderButton || !hiddenCartItemsInput || !hiddenCartTotalInput || !upiAmountSpan) {
+                 console.error("One or more checkout summary/UPI elements not found.");
+                 return;
+            }
+            summaryList.innerHTML = ''; // Clear previous items
+            let total = 0;
+            let cartDetailsString = "";
+
+            if (!cart || cart.length === 0) {
+                summaryList.innerHTML = '<p style="text-align: center; color: #888;">Your cart is empty.</p>';
+                summaryTotalSpan.textContent = '₹ 0.00';
+                upiAmountSpan.textContent = '₹ 0.00';
+                placeOrderButton.disabled = true;
+                hiddenCartItemsInput.value = "";
+                hiddenCartTotalInput.value = "";
+                return;
+            }
+
+            cart.forEach(item => {
+                const itemElement = document.createElement('div'); itemElement.classList.add('summary-item');
+                const priceString = String(item.price || '0').replace(/[^0-9.]/g, '');
+                const price = parseFloat(priceString) || 0;
+                const quantity = parseInt(item.quantity || 0);
+                const itemTotal = price * quantity;
+                total += itemTotal;
+                itemElement.innerHTML = `<span class="item-name">${item.name || 'Unknown'}</span> <span class="item-qty">Qty: ${quantity}</span> <span class="item-price">₹ ${itemTotal.toFixed(2)}</span>`;
+                summaryList.appendChild(itemElement);
+                cartDetailsString += `${item.name || 'Unknown'} (Qty: ${quantity}, Price: ${item.price || 'N/A'}, Subtotal: ₹${itemTotal.toFixed(2)}); `;
+            });
+
+            const finalTotal = total;
+            const formattedTotal = `₹ ${finalTotal.toFixed(2)}`;
+            summaryTotalSpan.textContent = formattedTotal;
+            upiAmountSpan.textContent = formattedTotal;
+
+            // Set hidden values (will be re-done before submit, but good practice)
+            hiddenCartItemsInput.value = cartDetailsString.trim();
+            hiddenCartTotalInput.value = formattedTotal;
+
+            placeOrderButton.disabled = false;
+        }
+        // --- END renderOrderSummary ---
+
+        // --- ASYNC Function to Save Order Copy to Firestore (Background Backup) ---
+        async function saveOrderCopyToFirestore(orderData) {
+            try {
+                // Ensure items are stored correctly, might need to re-map if structure differs
+                const firestoreData = {
+                    ...orderData, // Include user details, address, etc.
+                    items: orderData.items.map(item => ({ // Explicitly map items if needed
+                        id: item.id || null,
+                        name: item.name || 'Unknown',
+                        quantity: item.quantity || 0,
+                        price: item.price || '0', // Store price as string or number consistently
+                        image: item.image || null
+                    })),
+                    orderDate: serverTimestamp() // Use server timestamp
+                };
+                const docRef = await addDoc(collection(db, "orders"), firestoreData);
+                console.log("Firestore copy saved successfully (background):", docRef.id);
+            } catch (error) {
+                console.error("Error saving Firestore copy (background):", error);
+            }
+        }
+        // --- END ASYNC Function ---
+
+        // --- Code to Run When Page Loads ---
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.querySelector(".nav-links");
+            const checkoutForm = document.getElementById('checkout-form');
+            const checkoutErrorDiv = document.getElementById('checkout-error');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const placeOrderButton = document.getElementById('place-order-button');
+            const upiDetailsDiv = document.getElementById('upi-details');
+            const screenshotInput = document.getElementById('payment_screenshot'); // Keep reference if using file upload
+            const screenshotFeedback = document.getElementById('screenshot-feedback'); // Keep reference
+            const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
+
+            let currentUser = null;
+
+            // Hamburger Menu
+            if (hamburger && navLinks) { hamburger.addEventListener("click", () => navLinks.classList.toggle("active")); }
+
+            // Auth State
+            onAuthStateChanged(auth, (user) => {
+                currentUser = user;
+                const loginNavItem = document.getElementById('login-nav-item');
+                const profileNavItem = document.getElementById('profile-nav-item');
+                const emailInput = document.getElementById('email');
+                if (user) {
+                    if(loginNavItem) loginNavItem.style.display = 'none';
+                    if(profileNavItem) profileNavItem.style.display = 'list-item';
+                    if(emailInput && user.email && !emailInput.value) { emailInput.value = user.email; }
+                } else {
+                    // Redirect if not logged in (ensure login page exists)
+                    // Consider showing a message instead if immediate redirect is disruptive
+                    if (!window.location.pathname.includes('login.html')) { // Avoid redirect loop on login page
+                        console.log("User not logged in, redirecting to login.");
+                        // alert("Please login to proceed to checkout."); // Optional alert
+                        window.location.href = "login.html?redirect=checkout.html"; // Redirect back after login
+                    }
+                    if(loginNavItem) loginNavItem.style.display = 'list-item';
+                    if(profileNavItem) profileNavItem.style.display = 'none';
+                }
+                // Check cart status regardless of login state for button disable
+                const cart = getCart();
+                if (placeOrderButton) placeOrderButton.disabled = cart.length === 0 || !user; // Also disable if not logged in
+            });
+
+            // UPI Details Toggle & Screenshot Requirement
+            function toggleUpiDetails() {
+                 if (!upiDetailsDiv || !screenshotInput) { console.warn("UPI details or screenshot input not found"); return; }
+                 const checkedRadio = document.querySelector('input[name="payment_method"]:checked');
+                 if (!checkedRadio) return;
+                 const selectedMethod = checkedRadio.value;
+                 if (selectedMethod === 'UPI/QR') {
+                    upiDetailsDiv.style.display = 'block';
+                    screenshotInput.required = true; // Make required for Netlify validation
+                 } else {
+                    upiDetailsDiv.style.display = 'none';
+                    screenshotInput.required = false;
+                    screenshotInput.value = ''; // Clear file input if switching away
+                    if (screenshotFeedback) screenshotFeedback.style.display = 'none';
+                 }
+             }
+             if (paymentMethodRadios.length > 0) {
+                 paymentMethodRadios.forEach(radio => radio.addEventListener('change', toggleUpiDetails));
+                 toggleUpiDetails(); // Initial check
+             }
+
+             // Screenshot Filename Feedback (Keep if using file upload)
+             if (screenshotInput && screenshotFeedback) {
+                 screenshotInput.addEventListener('change', () => {
+                     if (screenshotInput.files && screenshotInput.files.length > 0) {
+                         screenshotFeedback.textContent = `Selected: ${screenshotInput.files[0].name}`;
+                         screenshotFeedback.style.display = 'block';
+                     } else {
+                         screenshotFeedback.style.display = 'none';
+                     }
+                 });
+             }
+
+            // Initial Setup
+            renderOrderSummary();
+            updateCartCount();
+
+             // FORM SUBMIT Event Listener for NETLIFY
+             if(checkoutForm) {
+                 checkoutForm.addEventListener('submit', function(e) {
+                     e.preventDefault(); // Prevent default initially to run checks
+                     if(checkoutErrorDiv) checkoutErrorDiv.textContent = '';
+
+                     // --- Perform ALL checks first ---
+                     // 1. Check Login
+                     if (!currentUser) {
+                         if(checkoutErrorDiv) checkoutErrorDiv.textContent = 'Error: You must be logged in to place an order.';
+                         // Optional: Maybe scroll to top or highlight login link
+                         return;
+                     }
+
+                     // 2. Validate Form Fields (including required screenshot if UPI)
+                     const requiredFields = checkoutForm.querySelectorAll('[required]');
+                     let formIsValid = true; let firstInvalidField = null;
+                     requiredFields.forEach(field => {
+                         field.style.border = ''; // Reset border
+                         let isFieldInvalid = false;
+                         // Specific check for the file input if it's required
+                         if (field.type === 'file' && field.required && (!field.files || field.files.length === 0)) {
+                             isFieldInvalid = true;
+                             if (checkoutErrorDiv && !checkoutErrorDiv.textContent) checkoutErrorDiv.textContent = 'Please upload the payment screenshot for UPI.';
+                             console.warn("Screenshot missing for UPI.");
+                         } else if (field.type !== 'file' && !field.value.trim()) { // Check other required fields
+                             isFieldInvalid = true;
+                             console.warn(`Required field empty: ${field.name}`);
+                         }
+
+                         if (isFieldInvalid) {
+                             formIsValid = false;
+                             field.style.border = '1px solid red';
+                             if (!firstInvalidField) firstInvalidField = field; // Track first invalid field to focus
+                         }
+                     });
+
+                     if (!formIsValid) {
+                         if (checkoutErrorDiv && !checkoutErrorDiv.textContent) checkoutErrorDiv.textContent = 'Please fill all required fields (marked in red).';
+                         if (firstInvalidField) firstInvalidField.focus(); // Focus the first invalid field
+                         return; // Stop submission
+                     }
+
+                     // 3. Check Cart
+                     const cart = getCart();
+                     if (cart.length === 0) {
+                         if(checkoutErrorDiv) checkoutErrorDiv.textContent = 'Your cart is empty. Please add items before checking out.';
+                         return; // Stop submission
+                     }
+
+                     // --- If ALL checks pass: Proceed ---
+                     console.log("Form validation passed.");
+                     if (loadingOverlay) loadingOverlay.style.display = 'flex';
+                     if (placeOrderButton) placeOrderButton.disabled = true; // Keep disabled
+
+                     // --- Re-calculate Cart Details and Total JUST BEFORE SUBMIT ---
+                     let finalOrderTotal = 0;
+                     let finalCartDetailsString = "";
+                     cart.forEach(item => {
+                         const priceString = String(item.price || '0').replace(/[^0-9.]/g, '');
+                         const price = parseFloat(priceString) || 0;
+                         const quantity = parseInt(item.quantity || 0);
+                         finalOrderTotal += price * quantity;
+                         finalCartDetailsString += `${item.name || 'Unknown'} (Qty: ${quantity}, Price: ${item.price || 'N/A'}, Subtotal: ₹${(price * quantity).toFixed(2)}); `;
+                     });
+
+                     // *** Populate Hidden Fields for Netlify ***
+                     const hiddenCartItemsInput = document.getElementById('cart_items_hidden');
+                     const hiddenCartTotalInput = document.getElementById('cart_total_hidden');
+                     if (hiddenCartItemsInput) {
+                         hiddenCartItemsInput.value = finalCartDetailsString.trim();
+                         console.log("Populating hidden cart_items for Netlify:", hiddenCartItemsInput.value);
+                     }
+                     if (hiddenCartTotalInput) {
+                         hiddenCartTotalInput.value = `₹ ${finalOrderTotal.toFixed(2)}`;
+                         console.log("Populating hidden cart_total for Netlify:", hiddenCartTotalInput.value);
+                     }
+                     // *** END Populate Hidden Fields ***
+
+                     // Prepare data for Firestore (Optional Backup)
+                     const formData = new FormData(checkoutForm); // Get current form data including user inputs
+                     const orderItemsForFirestore = cart.map(item => ({
+                         id: item.id || null, name: item.name || 'Unknown', quantity: item.quantity || 0, price: item.price || '0', image: item.image || null
+                     }));
+                     const orderDataForFirestore = {
+                         userId: currentUser.uid,
+                         userName: formData.get('customer_name'), // Use correct name attribute
+                         userEmail: formData.get('email'),
+                         userPhone: formData.get('phone'),
+                         shippingAddress: {
+                            address: formData.get('shipping_address'), // Use correct name attribute
+                            city: formData.get('city'),
+                            postcode: formData.get('postcode') },
+                         orderNotes: formData.get('order_notes') || '', // Use correct name attribute
+                         paymentMethod: formData.get('payment_method'),
+                         items: orderItemsForFirestore,
+                         totalAmount: finalOrderTotal,
+                         orderStatus: 'Pending',
+                         // Firestore timestamp will be added by saveOrderCopyToFirestore function
+                     };
+
+                     // START Firestore save (background)
+                     saveOrderCopyToFirestore(orderDataForFirestore);
+
+                     // Clear local cart (do this AFTER getting data for Firestore/Netlify)
+                     clearCart();
+
+                     // EXPLICITLY SUBMIT THE FORM TO NETLIFY *after* all checks/prep
+                     console.log("Checks passed. Submitting form to Netlify...");
+                     checkoutForm.submit(); // Let Netlify handle the actual submission
+
+                 }); // end form submit listener
+             } else {
+                  console.error("Checkout form element not found.");
+             }
+
+        }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>

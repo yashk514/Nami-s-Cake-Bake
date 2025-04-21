@@ -1,0 +1,905 @@
+:root {
+  --primary: #E05E85;
+  --secondary: #fff;
+  --accent: #5c4033;
+  --light: #fff;
+  --dark: #3c3c3c;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --testimonial-bg: radial-gradient(circle, rgba(230, 227, 227, 1) 0%, rgba(255, 222, 235, 1) 100%);
+  --footer: #4e4e4e;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+  background-color: white;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+/* Add active class style for navigation */
+.nav-links a.active {
+    color: var(--primary);
+    position: relative;
+}
+.nav-links a.active::after { /* Simple underline for active */
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+
+/* Hero Section (Used on Classes page) */
+.classes-hero {
+  background: radial-gradient(circle, var(--primary), rgba(255, 255, 255, 0.6));
+
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.classes-hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.classes-hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+/* Tabs Navigation (Used on Classes page) */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto 0;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 25px;
+  background: none;
+  border: none;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.tab-btn.active {
+  color: var(--primary);
+}
+
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+/* Classes Section & Cards (Used on Classes page) */
+.classes-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.class-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* --- Button Alignment Fix --- */
+.class-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  display: flex;         /* ADDED: Make card a flex container */
+  flex-direction: column; /* ADDED: Stack image and info vertically */
+}
+/* --- End Fix --- */
+
+.class-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.class-img {
+  height: 200px;
+  overflow: hidden;
+}
+
+.class-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+  display: block; /* ADDED: Prevent extra space below image */
+}
+
+.class-card:hover .class-img img {
+  transform: scale(1.1);
+}
+
+/* --- Button Alignment Fix --- */
+.class-info {
+  padding: 25px;
+  display: flex;         /* ADDED: Make info area a flex container */
+  flex-direction: column; /* ADDED: Stack items vertically */
+  flex-grow: 1;          /* ADDED: Allow this section to grow and fill space */
+  /* Add text-align if needed, e.g., text-align: center; */
+}
+/* --- End Fix --- */
+
+.class-info h3 {
+  font-family: "Playfair Display", serif;
+  color: var(--accent);
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.class-meta {
+  display: flex;
+  justify-content: space-between; /* Adjust if text-align: center */
+  flex-wrap: wrap; /* Allow wrapping on smaller cards */
+  gap: 10px; /* Add gap between meta items */
+  margin-bottom: 15px;
+  color: var(--dark);
+  font-size: 0.9rem;
+}
+
+.class-meta span {
+  display: flex;
+  align-items: center;
+}
+
+.class-meta i {
+  margin-right: 5px;
+  color: var(--primary);
+}
+
+.class-description {
+  margin-bottom: 20px;
+  color: var(--dark);
+}
+
+.price {
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  display: block;
+  margin-top: 15px; /* ADDED: Consistent spacing above price */
+}
+
+/* General Button Style (use this as baseline) */
+.btn {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  text-align: center; /* Ensure text is centered */
+  width:100%;
+}
+
+.btn:hover {
+  background-color: #e66a6a;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Button Alignment Fix --- */
+/* Specific style for Book Now button inside class cards */
+.class-info .btn.book-now {
+    margin-top: auto;       /* ADDED: Push to bottom */
+    align-self: center;    /* ADDED: Center horizontally */
+                            /* Use align-self: flex-start; if content is left-aligned */
+    width: fit-content;     /* ADDED: Size based on text */
+    /* Inherits padding, color etc from general .btn */
+    /* Add margin-bottom if needed */
+    margin-bottom: 5px;
+}
+/* Hover specific to this button if needed, otherwise general .btn:hover applies */
+/* .class-info .btn.book-now:hover { ... } */
+/* --- End Fix --- */
+
+
+/* Kids Special Section (Used on Classes page) */
+.kids-section {
+  background-color: var(--secondary);
+  padding: 80px 20px;
+  margin-top: 60px;
+}
+
+.kids-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.kids-section h2 {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  color: var(--accent);
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+/* CTA Section (General Use) */
+.cta {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"); /* Consider a local image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.cta h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+}
+
+/* CTA Button Outline Style */
+.btn-outline {
+  display: inline-block; /* Changed from width 100% */
+  max-width: 220px; /* Adjusted max-width */
+  padding: 10px 25px; /* Adjusted padding */
+  font-size: 1rem; /* Adjusted font size */
+  color: white; /* Text color */
+  border: 2px solid white; /* Border color */
+  border-radius: 50px;
+  background: transparent;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: var(--primary); /* Text color on hover */
+}
+
+/* Testimonials Section (General Use) */
+.testimonials {
+  background-color: var(--light);
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section-header {
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-family: "Playfair Display", serif;
+  color: var(--accent);
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.section-subtitle {
+  color: var(--dark);
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+.divider-line {
+  height: 1px;
+  background-color: var(--primary);
+  flex-grow: 1;
+}
+
+.divider-icon {
+  margin: 0 15px;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.quote-icon {
+  color: var(--primary);
+  font-size: 2rem;
+  opacity: 0.3;
+  margin-bottom: 15px;
+}
+
+.testimonial-text {
+  font-style: italic;
+  color: var(--dark);
+  margin-bottom: 25px;
+  line-height: 1.7;
+  position: relative;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+}
+
+.author-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+  border: 3px solid var(--secondary);
+}
+
+.author-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-info h4 {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+.author-info p {
+  color: var(--dark);
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+.rating {
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+/* Contact Form Styles (General Use or Specific Page) */
+/* If this form is ONLY on contact.html, these styles could be moved there */
+/* Or keep them general if the structure is reused */
+#contact-form { /* Assuming this ID is used on classes.html form section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(circle at top left, #fffaf7, #ffeae2); /* Consider simpler background */
+  padding: 60px 20px;
+}
+
+/* Section Heading (General) */
+.section-title { /* Style for section titles like "Class Registration" */
+  text-align: center;
+  font-family: "Playfair Display", serif; /* Added font */
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: var(--accent); /* Use variable */
+  position: relative; /* For underline */
+}
+/* Optional underline for section titles */
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 3px;
+}
+
+
+/* Form Container (General) */
+.contact-form { /* General form container */
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+}
+
+/* Form Groups (General) */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--accent); /* Use variable */
+}
+
+/* General Input Field Styles */
+.input-field, /* Added class for consistency */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem; /* Consistent size */
+  font-family: "Quicksand", sans-serif;
+  transition: all 0.3s;
+  background-color: #fdfaf7; /* Slightly off-white */
+  color: var(--dark);
+  box-sizing: border-box;
+}
+
+/* Focus style for inputs */
+.input-field:focus,
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary); /* Use variable */
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 126, 126, 0.4); /* Use variable alpha */
+}
+
+/* Placeholder styles */
+.input-field::placeholder,
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* Textarea specific */
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Select specific */
+.form-group select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent, #6b4e41) 50%),
+                      linear-gradient(135deg, var(--accent, #6b4e41) 50%, transparent 50%);
+    background-position: calc(100% - 20px) center, calc(100% - 15px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
+/* Submit Button specific to contact form section if needed */
+/* Otherwise general .btn style applies */
+#contact-form .btn {
+  /* Styles here would override the general .btn */
+  margin-top: 10px; /* Space above button */
+}
+
+
+/* Footer (Ensure only ONE definition exists) */
+footer {
+  background: var(--footer);
+  color: white;
+  padding: 60px 20px 30px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.footer-col h3 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  position: relative; /* For underline */
+  padding-bottom: 10px; /* Space for underline */
+}
+/* Footer heading underline */
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px; /* Adjust width */
+    height: 2px;
+    background-color: var(--primary);
+}
+/* Center underline if footer column is centered */
+.footer-col.text-center h3::after { /* Example if you add text-center class */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.footer-links {
+  list-style: none;
+  padding-left: 0; /* Remove default padding */
+}
+
+.footer-links li {
+  margin-bottom: 12px; /* Adjusted spacing */
+  display: flex; /* Align icon/text if icons used */
+  align-items: center;
+}
+
+.footer-links i { /* Style for icons in footer links */
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+  color: var(--primary); /* Icon color */
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s; /* Smoother transition */
+  font-size: 0.95rem; /* Slightly smaller */
+  opacity: 0.9; /* Slightly transparent */
+}
+
+.footer-links a:hover {
+  color: var(--secondary);
+  opacity: 1;
+  padding-left: 5px; /* Slight indent on hover */
+}
+
+.social-links {
+  display: flex;
+  margin-top: 20px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  margin-right: 10px;
+  color: white;
+  font-size: 1.1rem; /* Slightly larger icon */
+  transition: all 0.3s;
+}
+.social-links a:last-child {
+    margin-right: 0; /* Remove margin on last icon */
+}
+
+.social-links a:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  /* hero */
+  .classes-hero { padding: 80px 20px; }
+  .classes-hero h1 { font-size: 3rem; }
+  .classes-hero p { font-size: 1.1rem; }
+
+  /* classes section */
+  .class-categories { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+  .class-info h3 { font-size: 1.4rem; }
+  .class-meta { font-size: 0.85rem; }
+  .price { font-size: 1.2rem; }
+  .btn { font-size: 0.95rem; padding: 9px 20px; } /* Adjust general button padding */
+   .class-info .btn.book-now { padding: 9px 20px; } /* Ensure book now matches */
+
+
+  /* kid's section */
+  .kids-section { padding: 60px 15px; }
+  .kids-section h2 { font-size: 2.2rem; }
+  /* .class-categories grid rule inherited */
+  /* .class-card .class-info h3 rule inherited */
+
+}
+
+@media (max-width: 768px) {
+  /* navigation */
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; right: 15px; background-color: white; box-shadow: var(--shadow); width: 200px; padding: 15px; z-index: 999; }
+  .nav-links.active { display: flex; }
+  .nav-links li { margin: 10px 0; margin-left: 0; }
+  .hamburger { display: block; }
+
+  /* hero */
+  .classes-hero { padding: 60px 15px; }
+  .classes-hero h1 { font-size: 2.5rem; }
+  .classes-hero p { font-size: 1rem; }
+
+  /* Tabs */
+  .tabs { justify-content: space-around; } /* Better distribution */
+  .tab-btn { flex-grow: 1; text-align: center; font-size: 1rem; padding: 10px 5px; } /* Adjust padding */
+   .tab-btn.active::after { width: 40%; } /* Adjust underline */
+
+
+  /* classes section */
+  .class-categories { grid-template-columns: 1fr; gap: 20px; }
+  .class-info { padding: 20px; }
+  .class-info h3 { font-size: 1.3rem; }
+  .class-description { font-size: 0.95rem; }
+  .btn { width: 100%; text-align: center; padding: 10px; }
+  .class-info .btn.book-now { width: auto; align-self: center; } /* Let book now button size itself */
+
+
+  /* kid's section */
+  .kids-section { padding: 50px 15px; }
+  .kids-section h2 { font-size: 2rem; }
+  /* .class-categories grid rule inherited */
+  /* .class-info rule inherited */
+  .class-meta { font-size: 0.9rem; }
+  .price { font-size: 1.2rem; }
+  /* .btn rule inherited */
+  /* .class-info .btn.book-now rule inherited */
+
+
+  /* testimonials */
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .section-header h2 { font-size: 2rem; }
+  .section-subtitle { font-size: 1rem; }
+  .testimonial-card { padding: 25px; }
+  .testimonial-text { font-size: 0.95rem; }
+  .author-img { width: 50px; height: 50px; }
+  .author-info h4 { font-size: 1rem; }
+  .author-info p { font-size: 0.85rem; }
+  .rating { font-size: 0.85rem; }
+
+  /* CTA */
+  .cta { padding: 70px 15px; } /* Adjusted padding */
+  .cta h2 { font-size: 2rem; }
+  .cta p { font-size: 1rem; padding: 0 10px; }
+  .btn-outline { padding: 10px 20px; font-size: 1rem; } /* Adjusted padding */
+
+  /* contact form */
+  .section-title { font-size: 2rem; } /* Adjusted */
+  .contact-form { padding: 20px; }
+  .input-field,
+  .form-group input,
+  .form-group select,
+  .form-group textarea { font-size: 1rem; padding: 10px 12px; } /* Adjusted */
+  .contact-form .btn { font-size: 1rem; padding: 12px; } /* Adjusted */
+
+  /* footer */
+  .footer-container { grid-template-columns: 1fr; text-align: center; padding: 0 15px; gap: 30px; } /* Added padding */
+  .footer-col { margin-bottom: 30px; }
+  .social-links { justify-content: center; }
+  .footer-col h3::after { left: 50%; transform: translateX(-50%); } /* Center underline */
+  .footer-links li { justify-content: center; font-size: 1rem; } /* Adjusted size */
+  .footer-links a { font-size: 1rem; } /* Adjusted size */
+  .social-links a { width: 38px; height: 38px; font-size: 1rem; } /* Adjusted size */
+  .copyright { font-size: 0.85rem; margin-top: 40px; }
+}
+
+
+@media (max-width: 480px) {
+  /* navigation */
+  .logo { font-size: 1.3rem; }
+  .nav-icon { width: 24px; height: 24px; }
+  .hamburger { font-size: 24px; }
+  .nav-links { right: 10px; width: 180px; }
+
+  /* hero */
+  .classes-hero { padding: 50px 10px; }
+  .classes-hero h1 { font-size: 1.8rem; } /* Adjusted */
+  .classes-hero p { font-size: 0.9rem; } /* Adjusted */
+
+  /* tabs */
+  .tab-btn { font-size: 0.9rem; padding: 8px 10px; } /* Adjusted */
+  .tab-btn.active::after { height: 2px; }
+
+  /* classes section */
+  .class-img { height: 180px; }
+  .class-info h3 { font-size: 1.2rem; }
+  .class-meta { flex-direction: column; align-items: flex-start; gap: 5px; font-size: 0.8rem; }
+  .price { font-size: 1.1rem; }
+  .class-description { font-size: 0.9rem;}
+
+  /* kid's section */
+  .kids-section h2 { font-size: 1.8rem; }
+  /* .class-img rule inherited */
+  /* .class-meta rule inherited */
+  /* .class-card .class-info h3 rule inherited */
+  /* .class-description rule inherited */
+  /* .price rule inherited */
+  .btn { font-size: 0.95rem; }
+  .class-info .btn.book-now { padding: 8px 18px;} /* Adjust padding */
+
+
+  /* Testimonials */
+  .testimonials { padding: 50px 10px; } /* Adjusted padding */
+  .section-header h2 { font-size: 1.8rem; }
+  .testimonial-card { padding: 20px; }
+  .testimonial-text { font-size: 0.9rem; }
+  .quote-icon { font-size: 1.5rem; }
+  .author-img { width: 45px; height: 45px; margin-right: 10px; }
+  .author-info h4 { font-size: 0.95rem; }
+  .author-info p { font-size: 0.8rem; }
+  .rating { font-size: 0.8rem; }
+
+  /* CTA */
+  .cta { padding: 60px 10px; }
+  .cta h2 { font-size: 1.6rem; line-height: 1.3; }
+  .cta p { font-size: 0.95rem; }
+  .btn-outline { font-size: 0.9rem; padding: 10px 20px; } /* Adjusted */
+
+  /* contact form */
+  .section-title { font-size: 1.8rem; } /* Adjusted */
+  .contact-form { padding: 15px; }
+  .input-field,
+  .form-group input,
+  .form-group select,
+  .form-group textarea { font-size: 0.9rem; padding: 10px; } /* Adjusted */
+  .contact-form .btn { font-size: 0.95rem; padding: 10px; } /* Adjusted */
+
+  /* footer */
+  .footer-col h3 { font-size: 1.2rem; }
+  .footer-col p,
+  .footer-links li { font-size: 0.9rem; }
+  /* .footer-container rule inherited */
+  /* .social-links rule inherited */
+  /* .footer-links li justify inherited */
+   .social-links a { width: 36px; height: 36px; font-size: 0.9rem; } /* Adjusted size */
+
+}

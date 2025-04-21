@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class Catalog | Nami's Cake and Bake</title> <!-- Changed Title -->
+    <link
+      rel="shortcut icon"
+      href="assets/favicon_io/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Removed Calendly Widget CSS -->
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="brand">
+          <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
+          <div class="logo">Nami's Cake and Bake</div>
+        </div>
+        <ul class="nav-links">
+             <li><a href="index.html">Home</a></li>
+             <li><a href="cakes.html">Cakes</a></li>
+             <li><a href="gallery.html">Gallery</a></li>
+             <li><a href="classes.html">Classes</a></li>
+             <li><a href="upcoming-classes.html">Schedule</a></li>
+             <li id="cart-nav-item">
+                 <a href="cart.html">
+                     <i class="fas fa-shopping-cart"></i> Cart
+                     <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
+                 </a>
+             </li>
+             
+             <li id="login-nav-item"><a href="login.html">Login</a></li>
+             <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+         </ul>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="classes-hero">
+      <h1>Baking & Cooking Classes</h1>
+      <p>
+        Explore our range of fun and interactive classes designed for all skill levels. Find a class you love and check the schedule for upcoming dates!
+      </p>
+    </section>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="indian">Indian Cuisine</button>
+      <button class="tab-btn" data-tab="baking">Baking</button>
+      <button class="tab-btn" data-tab="snacks">Snacks</button>
+      <button class="tab-btn" data-tab="kids">Kids Classes</button>
+    </div>
+
+    <!-- Classes Sections (Class Catalog) -->
+    <div class="classes-section">
+      <!-- Indian Cuisine Tab -->
+      <div class="tab-content active" id="indian">
+        <h2 style="text-align: center; font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 20px;">
+          Indian Cuisine Classes
+        </h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px">
+          Master the art of Indian cooking with our specialized classes covering regional cuisines from across the country.
+        </p>
+        <div class="class-categories">
+          <!-- North Indian -->
+           <div class="class-card">
+            <div class="class-img"><img src="assets/NorthIndianClassic.webp" alt="North Indian Cuisine"/></div>
+            <div class="class-info">
+              <h3>North Indian Classics</h3>
+              <div class="class-meta"><span><i class="far fa-clock"></i> 3 Hours</span><span><i class="fas fa-user-friends"></i> Max 8</span></div>
+              <p class="class-description">Learn to make authentic North Indian dishes including butter chicken, dal makhani, naan, and more.</p>
+              <span class="price">₹1,500 per session</span>
+              <!-- Changed Button to Link -->
+              <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+            </div>
+          </div>
+          <!-- South Indian -->
+          <div class="class-card">
+            <div class="class-img"><img src="assets/SouthIndianDelight.jpg" alt="South Indian Cuisine"/></div>
+            <div class="class-info">
+              <h3>South Indian Delights</h3>
+              <div class="class-meta"><span><i class="far fa-clock"></i> 3 Hours</span><span><i class="fas fa-user-friends"></i> Max 8</span></div>
+              <p class="class-description">Master the art of dosa, idli, sambar, and other South Indian specialties.</p>
+              <span class="price">₹1,500 per session</span>
+              <!-- Changed Button to Link -->
+              <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+            </div>
+          </div>
+          <!-- Thali Making -->
+          <div class="class-card">
+            <div class="class-img"><img src="assets/Thali.avif" alt="Indian Thali"/></div>
+            <div class="class-info">
+              <h3>Complete Thali Workshop</h3>
+              <div class="class-meta"><span><i class="far fa-clock"></i> 4 Hours</span><span><i class="fas fa-user-friends"></i> Max 6</span></div>
+              <p class="class-description">Learn to prepare a balanced Indian thali with dal, sabzi, roti, rice, raita, and dessert.</p>
+              <span class="price">₹2,000 per session</span>
+              <!-- Changed Button to Link -->
+              <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Baking Tab -->
+      <div class="tab-content" id="baking">
+          <h2 style="text-align: center;font-family: 'Playfair Display', serif;color: var(--accent);margin-bottom: 20px;">Baking Classes</h2>
+          <p style="text-align: center; max-width: 800px; margin: 0 auto 40px">From basic cookies to elaborate cakes, our baking classes will turn you into a confident baker.</p>
+          <div class="class-categories">
+             <!-- Cake Basics -->
+             <div class="class-card">
+                 <div class="class-img"><img src="assets/CakeBasics.webp" alt="Cake Basics"/></div>
+                 <div class="class-info">
+                   <h3>Cake Basics</h3>
+                   <div class="class-meta"><span><i class="far fa-clock"></i> 3 Hours</span><span><i class="fas fa-user-friends"></i> Max 8</span></div>
+                   <p class="class-description">Learn the fundamentals of cake making - sponges, buttercream, and simple decorations.</p>
+                   <span class="price">₹1,800 per session</span>
+                   <!-- Changed Button to Link -->
+                   <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                 </div>
+             </div>
+             <!-- Bread Making -->
+             <div class="class-card">
+                  <div class="class-img"><img src="assets/ArtisanBread.jpg" alt="Artisan Bread"/></div>
+                  <div class="class-info">
+                      <h3>Artisan Bread Making</h3>
+                      <div class="class-meta"><span><i class="far fa-clock"></i> 4 Hours</span><span><i class="fas fa-user-friends"></i> Max 6</span></div>
+                      <p class="class-description">Master the art of bread making including sourdough, focaccia, and dinner rolls.</p>
+                      <span class="price">₹2,200 per session</span>
+                      <!-- Changed Button to Link -->
+                      <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                  </div>
+             </div>
+             <!-- Pastry Workshop -->
+             <div class="class-card">
+                 <div class="class-img"><img src="assets/Pastry.jpg" alt="Pastry Workshop"/></div>
+                 <div class="class-info">
+                     <h3>Pastry Workshop</h3>
+                     <div class="class-meta"><span><i class="far fa-clock"></i> 3.5 Hours</span><span><i class="fas fa-user-friends"></i> Max 6</span></div>
+                     <p class="class-description">Learn to make puff pastry, croissants, danishes, and other flaky delights.</p>
+                     <span class="price">₹2,500 per session</span>
+                     <!-- Changed Button to Link -->
+                     <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                 </div>
+             </div>
+         </div>
+      </div>
+      <!-- Snacks Tab -->
+       <div class="tab-content" id="snacks">
+           <h2 style="text-align: center;font-family: 'Playfair Display', serif;color: var(--accent);margin-bottom: 20px;">Snacks & Quick Bites</h2>
+           <p style="text-align: center; max-width: 800px; margin: 0 auto 40px">Perfect your snack game with these quick, delicious recipes perfect for any occasion.</p>
+           <div class="class-categories">
+              <!-- Indian Snacks -->
+              <div class="class-card">
+                  <div class="class-img"><img src="assets/TeaTimeSnack.webp" alt="Indian Snacks"/></div>
+                  <div class="class-info">
+                    <h3>Indian Tea-Time Snacks</h3>
+                    <div class="class-meta"><span><i class="far fa-clock"></i> 2.5 Hours</span><span><i class="fas fa-user-friends"></i> Max 10</span></div>
+                    <p class="class-description">Learn to make samosas, pakoras, chakli, and other popular Indian snacks.</p>
+                    <span class="price">₹1,200 per session</span>
+                    <!-- Changed Button to Link -->
+                    <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                  </div>
+              </div>
+              <!-- Healthy Snacks -->
+              <div class="class-card">
+                   <div class="class-img"><img src="assets/HealthySnack.webp" alt="Healthy Snacks"/></div>
+                   <div class="class-info">
+                       <h3>Healthy Snack Alternatives</h3>
+                       <div class="class-meta"><span><i class="far fa-clock"></i> 2 Hours</span><span><i class="fas fa-user-friends"></i> Max 10</span></div>
+                       <p class="class-description">Delicious and nutritious snack options for health-conscious individuals.</p>
+                       <span class="price">₹1,500 per session</span>
+                       <!-- Changed Button to Link -->
+                       <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                   </div>
+              </div>
+              <!-- International Snacks -->
+              <div class="class-card">
+                  <div class="class-img"><img src="assets/InternationalSnack.webp" alt="International Snacks"/></div>
+                  <div class="class-info">
+                      <h3>International Snacks</h3>
+                      <div class="class-meta"><span><i class="far fa-clock"></i> 3 Hours</span><span><i class="fas fa-user-friends"></i> Max 8</span></div>
+                      <p class="class-description">Explore global snack favorites from spring rolls to bruschetta and more.</p>
+                      <span class="price">₹1,800 per session</span>
+                      <!-- Changed Button to Link -->
+                      <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                  </div>
+              </div>
+          </div>
+       </div>
+      <!-- Kids Classes Tab -->
+       <div class="tab-content" id="kids">
+           <h2 style="text-align: center;font-family: 'Playfair Display', serif;color: var(--accent);margin-bottom: 20px;">Kids Baking Classes</h2>
+           <p style="text-align: center; max-width: 800px; margin: 0 auto 40px">Fun, safe, and educational baking experiences designed especially for young chefs!</p>
+           <div class="class-categories">
+              <!-- Cookie Decorating -->
+              <div class="class-card">
+                  <div class="class-img"><img src="assets/CookieDecorating.jpg" alt="Cookie Decorating"/></div>
+                  <div class="class-info">
+                    <h3>Cookie Decorating</h3>
+                    <div class="class-meta"><span><i class="far fa-clock"></i> 2 Hours</span><span><i class="fas fa-user-friends"></i> Max 6</span><span><i class="fas fa-child"></i> Ages 6-12</span></div>
+                    <p class="class-description">Kids learn to decorate cookies with royal icing and edible decorations.</p>
+                    <span class="price">₹1,000 per session</span>
+                    <!-- Changed Button to Link -->
+                    <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                  </div>
+              </div>
+              <!-- Cupcake Workshop -->
+              <div class="class-card">
+                   <div class="class-img"><img src="assets/cupcakeworkshop.webp" alt="Cupcake Workshop"/></div>
+                   <div class="class-info">
+                       <h3>Cupcake Workshop</h3>
+                       <div class="class-meta"><span><i class="far fa-clock"></i> 2.5 Hours</span><span><i class="fas fa-user-friends"></i> Max 6</span><span><i class="fas fa-child"></i> Ages 8-14</span></div>
+                       <p class="class-description">From baking to decorating, kids make their own creative cupcakes.</p>
+                       <span class="price">₹1,200 per session</span>
+                       <!-- Changed Button to Link -->
+                       <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                   </div>
+              </div>
+              <!-- Ice Cream Making -->
+              <div class="class-card">
+                  <div class="class-img"><img src="assets/IceCreamParty.jpeg" alt="Ice Cream Making"/></div>
+                  <div class="class-info">
+                      <h3>Ice Cream Party</h3>
+                      <div class="class-meta"><span><i class="far fa-clock"></i> 2 Hours</span><span><i class="fas fa-user-friends"></i> Max 8</span><span><i class="fas fa-child"></i> All Ages</span></div>
+                      <p class="class-description">Learn to make no-churn ice cream with fun mix-ins and toppings.</p>
+                      <span class="price">₹1,500 per session</span>
+                      <!-- Changed Button to Link -->
+                      <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                  </div>
+              </div>
+          </div>
+       </div>
+    </div> <!-- End .classes-section -->
+
+    <!-- Kids Special Section -->
+     <section class="kids-section">
+       <div class="kids-container">
+         <h2>Special Kids Programs</h2>
+         <div class="class-categories">
+            <!-- Birthday Parties -->
+            <div class="class-card">
+                <div class="class-img"><img src="assets/birthdayparty.jpg" alt="Birthday Parties"/></div>
+                <div class="class-info">
+                  <h3>Birthday Parties</h3>
+                  <div class="class-meta"><span><i class="far fa-clock"></i> 3 Hours</span><span><i class="fas fa-user-friends"></i> Up to 12 Kids</span></div>
+                  <p class="class-description">Celebrate birthdays with a fun baking activity! Choose from cookie decorating, cupcake making, or pizza parties.</p>
+                  <span class="price">₹5,000 per party</span>
+                  <!-- Changed Button to Link -->
+                  <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                </div>
+            </div>
+            <!-- Holiday Camps -->
+            <div class="class-card">
+                 <div class="class-img"><img src="assets/HolidayBakingCamp.jpg" alt="Holiday Camps"/></div>
+                 <div class="class-info">
+                     <h3>Holiday Baking Camps</h3>
+                     <div class="class-meta"><span><i class="far fa-calendar-alt"></i> 5-Day Program</span><span><i class="fas fa-user-friends"></i> Max 8 Students</span></div>
+                     <p class="class-description">Week-long camps during school holidays covering different baking techniques each day.</p>
+                     <span class="price">₹6,000 per child</span>
+                     <!-- Changed Button to Link -->
+                     <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                 </div>
+            </div>
+            <!-- Parent-Child Classes -->
+            <div class="class-card">
+                <div class="class-img"><img src="assets/ParentChildBaking.jpg" alt="Parent-Child Baking"/></div>
+                <div class="class-info">
+                    <h3>Parent-Child Baking</h3>
+                    <div class="class-meta"><span><i class="far fa-clock"></i> 2.5 Hours</span><span><i class="fas fa-user-friends"></i> 1 Adult + 1 Child</span></div>
+                    <p class="class-description">Special bonding classes where parents and children bake together.</p>
+                    <span class="price">₹2,500 per pair</span>
+                    <!-- Changed Button to Link -->
+                    <a href="upcoming-classes.html" class="btn book-now">See Schedule</a>
+                </div>
+            </div>
+        </div>
+       </div>
+     </section>
+
+    <!-- Testimonials -->
+     <section class="testimonials">
+       <div class="section-header">
+         <h2>What Our Students Say</h2>
+         <div class="divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-heart"></i></div><div class="divider-line"></div></div>
+         <p class="section-subtitle">Hear from our happy baking enthusiasts</p>
+       </div>
+       <div class="testimonial-grid">
+          <!-- Testimonial Cards remain the same -->
+          <div class="testimonial-card">
+             <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+             <div class="testimonial-text">"My daughter attended the kids cupcake class and had an amazing time! She came home so proud of her creations and has been baking non-stop since."</div>
+             <div class="testimonial-author"><div class="author-img"><img src="assets/authorImg2.png" alt="Payal"/></div><div class="author-info"><h4>Payal</h4><p>Parent</p><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+          </div>
+          <div class="testimonial-card">
+              <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+              <div class="testimonial-text">"The South Indian cooking class was fantastic! I learned so many techniques I can use in my everyday cooking. The instructor was patient and knowledgeable."</div>
+              <div class="testimonial-author"><div class="author-img"><img src="assets/authorImg1.png" alt="Rohan"/></div><div class="author-info"><h4>Rohan</h4><p>Cooking Student</p><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div></div>
+          </div>
+          <div class="testimonial-card">
+               <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+               <div class="testimonial-text">"I've taken three baking classes so far and each one has been better than the last. The small class size means you get plenty of individual attention."</div>
+               <div class="testimonial-author"><div class="author-img"><img src="assets/authorImg3.png" alt="Shreya"/></div><div class="author-info"><h4>Shreya</h4><p>Baking Student</p><div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+           </div>
+       </div>
+     </section>
+
+    <!-- Registration CTA -->
+     <section class="cta" id="contact-cta">
+       <h2>Ready to Register?</h2>
+       <p>Found a class on the schedule you like? Register below or contact us with any questions.</p>
+       <a href="#contact-form" class="btn btn-outline">Register Below</a>
+     </section>
+
+    <!-- Contact Form (for Registration) -->
+    <section class="section" id="contact-form">
+      <h2 class="section-title">Class Registration</h2>
+      <form
+        class="contact-form"
+        action="https://getform.io/f/bllyvdqb"
+        method="POST"
+      >
+        <div class="form-group">
+          <label for="reg-name">Your Name</label>
+          <input type="text" id="reg-name" name="name" placeholder="Enter your full name" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" name="email" placeholder="example@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-phone">Phone Number</label>
+          <input type="tel" id="reg-phone" name="phone" placeholder="e.g. +91 9876543210" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-class-type">Class Type / Scheduled Class</label> <!-- Updated Label -->
+          <select id="reg-class-type" name="class-type" required>
+            <option value="">Select a class or see schedule...</option>
+            <!-- These are still useful if someone registers without coming from schedule -->
+            <option value="north-indian">North Indian Cooking</option>
+            <option value="south-indian">South Indian Cooking</option>
+            <option value="cake-basics">Cake Basics</option>
+            <option value="bread-making">Artisan Bread Making</option>
+            <option value="pastry-workshop">Pastry Workshop</option>
+            <option value="indian-snacks">Indian Tea-Time Snacks</option>
+            <option value="healthy-snacks">Healthy Snack Alternatives</option>
+            <option value="international-snacks">International Snacks</option>
+            <option value="kids-cookie">Kids Cookie Decorating</option>
+            <option value="kids-cupcake">Kids Cupcake Workshop</option>
+            <option value="ice-cream">Kids Ice Cream Party</option>
+            <option value="birthday-party">Kids Birthday Party</option>
+            <option value="holiday-camp">Kids Holiday Baking Camp</option>
+            <option value="parent-child">Parent-Child Baking</option>
+            <!-- The prefill script will select the right option if coming from schedule -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="reg-participants">Number of Participants</label>
+          <input type="number" id="reg-participants" name="participants" placeholder="e.g. 1" min="1" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-message">Additional Notes (Include Class Date if known)</label> <!-- Updated Placeholder -->
+          <textarea id="reg-message" name="message" rows="4" placeholder="Please mention the specific class date if registering for a scheduled class. Also note allergies, preferences, or questions."></textarea>
+        </div>
+         <input type="hidden" name="_form_name" value="Nami's Class Registration Form">
+        <button type="submit" class="btn">Submit Registration</button>
+      </form>
+    </section>
+
+    <!-- Standard Footer -->
+    <footer>
+      <div class="footer-container">
+         <div class="footer-col">
+           <h3>Nami's Cake and Bake</h3>
+           <p>Bringing joy through baking and cooking since 2010. Inspiring creativity in the kitchen.</p>
+           <div class="social-links">
+             <a href="https://www.instagram.com/namis_cakenbake_/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+             <a href="https://wa.me/918767542742" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+           </div>
+         </div>
+         <div class="footer-col">
+           <h3>Quick Links</h3>
+           <ul class="footer-links">
+             <li><a href="index.html">Home</a></li>
+             <li><a href="cakes.html">Our Cakes</a></li>
+             <li><a href="classes.html">Class Catalog</a></li>
+             <li><a href="upcoming-classes.html">Schedule</a></li>
+             <li><a href="gallery.html">Gallery</a></li>
+             <li><a href="contact.html">Contact</a></li>
+           </ul>
+         </div>
+         <div class="footer-col">
+           <h3>Class Categories</h3>
+           <ul class="footer-links">
+             <li><a href="#indian">Indian Cuisine</a></li> <!-- Link to tab on this page -->
+             <li><a href="#baking">Baking Classes</a></li>
+             <li><a href="#snacks">Snacks & Quick Bites</a></li>
+             <li><a href="#kids">Kids Classes</a></li>
+             <li><a href="upcoming-classes.html">Upcoming Schedule</a></li> <!-- Link to schedule page -->
+           </ul>
+         </div>
+         <div class="footer-col">
+           <h3>Contact Us</h3>
+           <ul class="footer-links">
+             <li><a href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7" target="_blank" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i>Vishrambag, Sangli</a></li>
+             <li><i class="fas fa-phone"></i>+91 8767542742</li>
+             <li><i class="fas fa-envelope"></i>info@namiscakeandbake.com</li>
+             <li><i class="fas fa-clock"></i>Mon-Sat: 9am-7pm</li>
+           </ul>
+         </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 Nami's Cake and Bake. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NXYG9PJ8KQ');
+    </script>
+
+    <!-- Removed Calendly Widget JS -->
+
+    <!-- Module Script -->
+     <script type="module">
+       // Import functions from the Firebase SDKs
+       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+       import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+       // Your web app's Firebase configuration
+       const firebaseConfig = {
+         apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0", // Ensure this is correct
+         authDomain: "namis-cake-bake-auth.firebaseapp.com",
+         projectId: "namis-cake-bake-auth",
+         storageBucket: "namis-cake-bake-auth.appspot.com",
+         messagingSenderId: "213318410638",
+         appId: "1:213318410638:web:5d0531e93ed38f434c04df",
+         measurementId: "G-HPWS91PN1C"
+       };
+
+       // Initialize Firebase
+       const app = initializeApp(firebaseConfig);
+       const auth = getAuth(app);
+
+       // --- Cart Management Functions ---
+       const CART_KEY = 'namiShopCart';
+       function getCart() {
+           const cart = localStorage.getItem(CART_KEY);
+           try { return cart ? JSON.parse(cart) : []; }
+           catch (e) { console.error("Error parsing cart:", e); localStorage.removeItem(CART_KEY); return []; }
+       }
+        // Removed unused saveCart function for this page
+       function updateCartCount() {
+           try {
+               const cart = getCart();
+               const cartCountSpan = document.getElementById('cart-count');
+               if (cartCountSpan) {
+                   const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+                   cartCountSpan.textContent = totalItems;
+                   cartCountSpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
+               }
+           } catch (error) { console.error("Error updating cart count:", error); }
+       }
+       // --- End Cart Functions ---
+
+
+       // --- Form Pre-filling Function ---
+       function prefillFormFromUrl() {
+           const params = new URLSearchParams(window.location.search);
+           const className = params.get('class');
+           const classDate = params.get('date'); // Date string passed from schedule page
+
+           if (className) {
+               const classSelect = document.getElementById('reg-class-type');
+               if (classSelect) {
+                   let foundOption = false;
+                   // Try to find a matching option by value or text content
+                   for (let option of classSelect.options) {
+                       // Normalize names slightly for comparison (e.g., lowercase, remove extra spaces)
+                       const optionTextNormalized = option.text.toLowerCase().replace(/\s+/g, ' ').trim();
+                       const classNameNormalized = className.toLowerCase().replace(/\s+/g, ' ').trim();
+
+                       // Check if option text *contains* the class name from URL (more flexible)
+                       // Or check if option value matches a potential simplified value (e.g., cake-basics)
+                       if (optionTextNormalized.includes(classNameNormalized) || option.value === classNameNormalized.replace(/ /g,'-')) {
+                            option.selected = true;
+                            foundOption = true;
+                            break; // Stop after finding the first match
+                       }
+                   }
+                   // If no match, log it but don't prevent form submission
+                   if (!foundOption) {
+                        console.warn(`Class "${className}" from URL parameter not directly found in dropdown. User may need to select manually.`);
+                        // Optionally, you could add it as a new option dynamically, but that's more complex
+                        // Or just ensure the name is clearly in the message field below
+                   }
+               }
+           }
+
+           // Add class name and date to the message textarea
+           if (className || classDate) {
+               const messageTextarea = document.getElementById('reg-message');
+               if (messageTextarea) {
+                   let prefix = "Interested in class: ";
+                   if (className) prefix += className;
+                   if (classDate) prefix += ` on ${classDate}`;
+                   // Prepend the information to any existing text (or empty textarea)
+                   messageTextarea.value = prefix.trim() + "\n\n" + messageTextarea.value;
+               }
+           }
+
+           // Scroll to the form if the hash is present and parameters were found
+           if (window.location.hash === '#contact-form' && (className || classDate)) {
+               const formElement = document.getElementById('contact-form');
+               if (formElement) {
+                 formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+               }
+           }
+       }
+       // --- End Form Pre-filling Function ---
+
+
+       // --- Page Load Logic ---
+       document.addEventListener("DOMContentLoaded", function () {
+           console.log("classes.html: DOM fully loaded");
+
+           const hamburger = document.getElementById("hamburger");
+           const navLinks = document.querySelector(".nav-links");
+
+           // Hamburger Toggle
+           if (hamburger && navLinks) {
+               hamburger.addEventListener("click", () => {
+                   navLinks.classList.toggle("active");
+               });
+           } else { console.warn("Hamburger/NavLinks not found on classes.html"); }
+
+           // Auth State Listener
+           onAuthStateChanged(auth, (user) => {
+               const loginNavItem = document.getElementById('login-nav-item');
+               const profileNavItem = document.getElementById('profile-nav-item');
+               if (user) {
+                   if(loginNavItem) loginNavItem.style.display = 'none';
+                   if(profileNavItem) profileNavItem.style.display = 'list-item';
+               } else {
+                   if(loginNavItem) loginNavItem.style.display = 'list-item';
+                   if(profileNavItem) profileNavItem.style.display = 'none';
+               }
+           });
+
+           // Update cart count on initial load
+           updateCartCount();
+
+           // --- classes.html Specific Code ---
+
+           // ======= TAB FUNCTIONALITY =======
+           const tabBtns = document.querySelectorAll(".tab-btn");
+           const tabContents = document.querySelectorAll(".tab-content");
+
+           tabBtns.forEach((btn) => {
+             btn.addEventListener("click", () => {
+               tabBtns.forEach((b) => b.classList.remove("active"));
+               tabContents.forEach((content) => content.classList.remove("active"));
+
+               btn.classList.add("active");
+               const tabId = btn.getAttribute("data-tab");
+               const activeTab = document.getElementById(tabId);
+               if (activeTab) {
+                 activeTab.classList.add("active");
+               }
+             });
+           });
+
+           // ======= FORM SUBMISSION =======
+           const registrationForm = document.querySelector("#contact-form .contact-form");
+           if (registrationForm) {
+             registrationForm.addEventListener("submit", function (e) {
+               e.preventDefault(); // Prevent default form submission
+               const submitBtn = registrationForm.querySelector('button[type="submit"]');
+               const originalButtonText = submitBtn.textContent; // Store original text
+               if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting...'; }
+
+               // Submit using fetch to Getform endpoint
+               fetch(this.action, {
+                 method: "POST",
+                 body: new FormData(this),
+                 headers: {
+                    'Accept': 'application/json' // Important for Getform to redirect correctly or send JSON response
+                 }
+               })
+                 .then(response => {
+                   if (response.ok) {
+                     // Success!
+                     alert("Thank you! Your registration request has been submitted. We will contact you shortly to confirm.");
+                     registrationForm.reset(); // Clear the form fields
+                   } else {
+                     // Handle server-side errors from Getform (less common for basic setup)
+                     response.json().then(data => { // Try to get error details if available
+                        console.error("Form submission error:", data);
+                        alert("Oops! Something went wrong submitting the form. Please check your details and try again.");
+                     }).catch(err => {
+                        console.error("Error parsing error response:", err);
+                        alert("Oops! Something went wrong submitting the form. Please try again.");
+                     });
+                   }
+                 })
+                 .catch(error => {
+                   // Handle network errors
+                   console.error("Network error submitting form:", error);
+                   alert("Error submitting form: Could not connect. Please check your internet connection and try again.");
+                 })
+                 .finally(() => {
+                      // Re-enable button and restore text regardless of success/failure
+                      if(submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalButtonText; }
+                 });
+             });
+           } else {
+             console.warn("Registration form not found on classes.html");
+           }
+
+           // ======= Call Form Pre-fill Logic =======
+           prefillFormFromUrl(); // Check URL parameters and fill form if needed
+
+           // Removed Calendly Integration Code Block
+
+           // --- End classes.html Specific Code ---
+
+       }); // End of DOMContentLoaded
+     </script>
+
+  </body>
+</html>

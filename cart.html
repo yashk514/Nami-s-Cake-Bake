@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Nami's Cake and Bake</title>
+    <link rel="shortcut icon" href="assets/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link the main stylesheet -->
+    <style>
+        .cart-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .cart-container h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 15px;
+        }
+
+        #cart-items-container {
+            margin-bottom: 30px;
+            min-height: 100px; /* Ensure container has height even when empty */
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px dashed #eee;
+        }
+         .cart-item:last-child {
+            border-bottom: none;
+         }
+
+        .cart-item-details {
+            flex-grow: 1;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+         .cart-item-details h3 {
+             font-size: 1.1rem;
+             margin-bottom: 5px;
+             color: var(--dark);
+         }
+          .cart-item-details p {
+             font-size: 0.95rem;
+             color: #666;
+         }
+
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+
+         .cart-item-actions span {
+            margin: 0 15px;
+            font-weight: 600;
+         }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+         .remove-item-btn:hover {
+            color: red;
+         }
+
+
+        .cart-summary {
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--secondary);
+        }
+
+        .cart-summary p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .cart-summary #cart-total {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .checkout-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #888;
+            padding: 40px 0;
+            font-style: italic;
+        }
+
+         /* Responsive */
+        @media (max-width: 600px) {
+            .cart-container {
+                margin: 20px 15px;
+                padding: 20px;
+            }
+             .cart-container h1 {
+                 font-size: 1.8rem;
+             }
+             .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+             }
+             .cart-item-details {
+                 margin-left: 0;
+                 margin-right: 0;
+             }
+             .cart-item-actions {
+                 width: 100%;
+                 justify-content: space-between; /* Space out quantity and remove */
+             }
+             .cart-summary {
+                 text-align: center;
+             }
+             .checkout-btn {
+                 width: 100%;
+             }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+ <nav>
+    <div class="nav-container">
+      <div class="brand">
+        <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
+        <div class="logo">Nami's Cake and Bake</div>
+      </div>
+      <ul class="nav-links">
+           <li><a href="index.html">Home</a></li>
+           <li><a href="cakes.html">Cakes</a></li>
+           <li><a href="gallery.html">Gallery</a></li>
+           <li><a href="classes.html">Classes</a></li>
+           <li><a href="upcoming-classes.html">Schedule</a></li>
+           <li id="cart-nav-item">
+               <a href="cart.html">
+                   <i class="fas fa-shopping-cart"></i> Cart
+                   <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
+               </a>
+           </li>
+           
+           <li id="login-nav-item"><a href="login.html">Login</a></li>
+           <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+       </ul>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+  </nav>
+
+    <!-- Main Cart Section -->
+    <main class="cart-container">
+        <h1>Your Shopping Cart</h1>
+
+        <div id="cart-items-container">
+            <!-- Cart items will be loaded here by JavaScript -->
+             <p class="empty-cart-message">Your cart is currently empty.</p>
+        </div>
+
+        <div class="cart-summary">
+            <p>Total: <span id="cart-total">₹ 0.00</span></p>
+            <a href="checkout.html" id="checkout-link" class="btn checkout-btn" style="text-decoration: none;">Proceed to Checkout</a></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+         <!-- Footer content copied from index.html -->
+         <div class="footer-col">
+           <h3>Nami's Cake and Bake</h3>
+           <p>Creating delicious memories since 2015 through custom cakes and baking classes.</p>
+           <div class="social-links">
+             <a href="https://www.instagram.com/namis_cakenbake_/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+             <a href="https://wa.me/918767542742" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+           </div>
+         </div>
+         <div class="footer-col">
+           <h3>Quick Links</h3>
+           <ul class="footer-links">
+             <li><a href="index.html">Home</a></li>
+             <li><a href="cakes.html">Custom Cakes</a></li>
+             <li><a href="classes.html">Classes</a></li>
+             <li><a href="contact.html">Contact</a></li>
+           </ul>
+         </div>
+         <div class="footer-col">
+           <h3>Contact Info</h3>
+           <ul class="footer-links">
+             <li><a href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7" target="_blank" rel="noopener noreferrer"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Vishrambag, Sangli</a></li>
+             <li><i class="fas fa-phone" style="margin-right: 10px;"></i> +91 87675427442</li>
+             <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> namiscakeandbake@gmail.com</li>
+           </ul>
+         </div>
+      </div>
+      <div class="copyright">
+        © 2025 Nami's Cake and Bake. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NXYG9PJ8KQ');
+    </script>
+
+    <!-- Firebase and Cart Logic -->
+    <script type="module">
+        // Import Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+        // Firebase Config (same as other pages)
+        const firebaseConfig = {
+          apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0",
+          authDomain: "namis-cake-bake-auth.firebaseapp.com",
+          projectId: "namis-cake-bake-auth",
+          storageBucket: "namis-cake-bake-auth.appspot.com",
+          messagingSenderId: "213318410638",
+          appId: "1:213318410638:web:5d0531e93ed38f434c04df",
+          measurementId: "G-HPWS91PN1C"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Cart Management Functions (using localStorage)
+        const CART_KEY = 'namiShopCart';
+
+        function getCart() {
+            const cart = localStorage.getItem(CART_KEY);
+            return cart ? JSON.parse(cart) : [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            updateCartCount(); // Update nav count whenever cart is saved
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const cartCountSpan = document.getElementById('cart-count');
+            if (cartCountSpan) {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountSpan.textContent = totalItems;
+                cartCountSpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            }
+        }
+
+         function removeFromCart(productId) {
+            let cart = getCart();
+            cart = cart.filter(item => item.id !== productId);
+            saveCart(cart);
+            renderCartItems(); // Re-render the cart display
+        }
+
+        function renderCartItems() {
+            const cart = getCart();
+            const container = document.getElementById('cart-items-container');
+            const totalSpan = document.getElementById('cart-total');
+            const emptyCartMessage = container.querySelector('.empty-cart-message');
+
+            container.innerHTML = ''; // Clear previous items (keep the empty message template potentially)
+             if (!cart || cart.length === 0) {
+                 container.innerHTML = '<p class="empty-cart-message">Your cart is currently empty.</p>';
+                 totalSpan.textContent = '₹ 0.00';
+                 updateCartCount();
+                 return;
+             }
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+
+                // Clean price string (remove currency symbols, commas, etc.) and convert to number
+                const priceString = String(item.price).replace(/[^0-9.]/g, '');
+                const price = parseFloat(priceString);
+                const itemTotal = price * item.quantity;
+                total += itemTotal;
+
+                itemElement.innerHTML = `
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: ₹ ${price.toFixed(2)}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <span>Subtotal: ₹ ${itemTotal.toFixed(2)}</span>
+                        <button class="remove-item-btn" data-id="${item.id}" title="Remove Item">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+
+                 // Add event listener for the remove button
+                const removeBtn = itemElement.querySelector('.remove-item-btn');
+                if(removeBtn) {
+                    removeBtn.addEventListener('click', () => {
+                         console.log(`Removing item with ID: ${item.id}`);
+                         removeFromCart(item.id);
+                     });
+                 }
+
+
+                container.appendChild(itemElement);
+            });
+
+            totalSpan.textContent = `₹ ${total.toFixed(2)}`;
+            updateCartCount(); // Ensure count is accurate after rendering
+        }
+
+
+        // --- Page Load Logic ---
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.querySelector(".nav-links");
+
+             // Hamburger Menu
+            if (hamburger && navLinks) {
+                hamburger.addEventListener("click", () => {
+                    navLinks.classList.toggle("active");
+                });
+            }
+
+            // Auth State Listener (for nav updates)
+            onAuthStateChanged(auth, (user) => {
+                const loginNavItem = document.getElementById('login-nav-item');
+                const profileNavItem = document.getElementById('profile-nav-item');
+                if (user) {
+                    if(loginNavItem) loginNavItem.style.display = 'none';
+                    if(profileNavItem) profileNavItem.style.display = 'list-item';
+                } else {
+                    if(loginNavItem) loginNavItem.style.display = 'list-item';
+                    if(profileNavItem) profileNavItem.style.display = 'none';
+                }
+            });
+
+            // Initial cart rendering
+            renderCartItems();
+
+             // Add listener for checkout button (optional functionality for later)
+             const checkoutButton = document.getElementById('checkout-button');
+             if (checkoutButton) {
+                 checkoutButton.addEventListener('click', () => {
+                     alert('Checkout functionality not yet implemented!');
+                     // Later: Redirect to a checkout page or process payment
+                 });
+             }
+
+        }); // End DOMContentLoaded
+
+    </script>
+
+</body>
+</html>

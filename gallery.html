@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery | Nami's Cake and Bake</title>
+    <link rel="stylesheet" href="styles.css" /> <!-- Link main CSS -->
+    <link
+      rel="shortcut icon"
+      href="assets/favicon_io/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Embedded styles specific to gallery elements -->
+    <style>
+      /* Gallery specific styles - Keeping these for layout */
+      :root {
+        /* Define colors - ensure they don't conflict badly with styles.css */
+        /* Using different variable names to avoid direct override if styles.css also defines them */
+        --gallery-primary: var(--primary, #e67e22); /* Fallback to orange */
+        --gallery-light: var(--light, #fff9f5);
+        --gallery-accent: var(--accent, #5c4033);
+        --gallery-dark: var(--dark, #333);
+        --gallery-shadow: var(--shadow, 0 4px 6px rgba(0, 0, 0, 0.1));
+      }
+
+      /* Gallery Header */
+      .gallery-header {
+        text-align: center;
+        padding: 60px 20px 30px;
+        background-color: var(--gallery-light); /* Use gallery light */
+      }
+
+      .gallery-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        color: var(--gallery-primary); /* Use gallery primary */
+        margin-bottom: 10px;
+      }
+       .gallery-header p {
+           color: var(--gallery-dark);
+           font-size: 1.1rem;
+       }
+
+      /* Toggle Buttons */
+      .toggle-buttons {
+        text-align: center;
+        margin: 30px 0;
+        padding: 0 15px; /* Add padding for smaller screens */
+        display: flex; /* Use flex for better control */
+        justify-content: center;
+        gap: 10px; /* Space between buttons */
+        flex-wrap: wrap;
+      }
+
+      .toggle-btn {
+        background-color: #eee;
+        border: 1px solid #ccc;
+        padding: 10px 20px;
+        margin: 5px; /* Reduced margin */
+        border-radius: 25px;
+        font-size: 1rem; /* Adjusted size */
+        font-weight: 600;
+        font-family: "Quicksand", sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .toggle-btn:hover,
+      .toggle-btn.active {
+        background-color: var(--gallery-primary);
+        color: white;
+        border-color: var(--gallery-primary);
+      }
+
+      /* Gallery Container */
+      .gallery-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px 40px;
+      }
+
+      /* Gallery Rows */
+      .gallery-row {
+        display: none; /* Hide rows by default */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        animation: fadeInGallery 0.6s ease-in-out; /* Add fade-in */
+      }
+      .gallery-row.active { /* Show active row */
+          display: grid;
+      }
+
+      @keyframes fadeInGallery {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+
+
+      /* Post Card */
+      .post-card {
+        width: 100%;
+        aspect-ratio: 1/1; /* Maintain square aspect ratio */
+        border-radius: 10px;
+        box-shadow: var(--gallery-shadow);
+        overflow: hidden;
+        background: #fff; /* White background for loading */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative; /* For potential overlays or links */
+      }
+
+      .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Instagram Embed Specific Styling */
+      .instagram-media {
+        background: white;
+        border: 0;
+        border-radius: 3px;
+        box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);
+        margin: 1px;
+        max-width: 100%; /* Ensure it doesn't overflow card */
+        min-width: 300px; /* Minimum width */
+        padding: 0;
+        width: calc(100% - 2px); /* Account for margin */
+        /* Height will be handled by Instagram script or aspect-ratio */
+        display: block; /* Ensure it behaves like a block */
+        height: 100%; /* Try to fill parent */
+      }
+
+      /* Responsive */
+       @media (max-width: 768px) {
+          .gallery-header h1 { font-size: 2rem; }
+          .gallery-header p { font-size: 1rem; }
+          .toggle-btn { font-size: 0.95rem; padding: 8px 18px; }
+          .gallery-row { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+       }
+        @media (max-width: 480px) {
+            .gallery-header h1 { font-size: 1.75rem; }
+            .gallery-header p { font-size: 0.9rem; }
+            .toggle-buttons { flex-direction: column; align-items: center; }
+            .toggle-btn { width: 80%; max-width: 300px; font-size: 0.9rem; margin: 5px 0; }
+            .gallery-row { grid-template-columns: 1fr; gap: 15px; }
+            .post-card { aspect-ratio: auto; } /* Let height adjust */
+             .instagram-media { min-width: auto; } /* Remove min-width */
+        }
+
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+ <nav>
+  <div class="nav-container">
+    <div class="brand">
+      <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
+      <div class="logo">Nami's Cake and Bake</div>
+    </div>
+    <ul class="nav-links">
+         <li><a href="index.html">Home</a></li>
+         <li><a href="cakes.html">Cakes</a></li>
+         <li><a href="gallery.html">Gallery</a></li>
+         <li><a href="classes.html">Classes</a></li>
+         <li><a href="upcoming-classes.html">Schedule</a></li>
+         <li id="cart-nav-item">
+             <a href="cart.html">
+                 <i class="fas fa-shopping-cart"></i> Cart
+                 <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
+             </a>
+         </li>
+         
+         <li id="login-nav-item"><a href="login.html">Login</a></li>
+         <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+     </ul>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+    <!-- Gallery Header -->
+    <section class="gallery-header">
+      <h1>Our Sweet Creations</h1>
+      <p>Browse through our delicious creations and baking classes</p>
+    </section>
+
+    <!-- Toggle Buttons -->
+    <div class="toggle-buttons">
+       <!-- Button handlers will be added via JS -->
+      <button class="toggle-btn active" data-category="cakes">Cakes</button>
+      <button class="toggle-btn" data-category="classes">Classes</button>
+    </div>
+
+    <!-- Gallery Container -->
+    <div class="gallery-container">
+      <!-- Cakes Gallery -->
+      <div class="gallery-row cakes active"> <!-- Add 'active' to default category -->
+        <!-- Instagram posts for cakes -->
+        <div class="post-card">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CvU221Ut8W2/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C0t_I_btXfT/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+           <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CquPoocts3v/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CRKV-Itrx1s/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CYamU4ylAWG/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CZI6l8AlbTk/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CcGG3zqteD2/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CfVc0W9lf8y/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+         <div class="post-card">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CkgDWePp3fT/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <!-- Add more cake posts if needed -->
+      </div>
+
+      <!-- Classes Gallery -->
+      <div class="gallery-row classes"> <!-- No 'active' class initially -->
+        <!-- Instagram posts for classes -->
+        <div class="post-card">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C_QiUx0tDAv/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <div class="post-card">
+           <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C-RgfY7SZ60/" data-instgrm-version="14" style="width: 100%; height: 100%;"></blockquote>
+        </div>
+        <!-- Add more class posts if needed -->
+      </div>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer>
+      <div class="footer-container">
+         <div class="footer-col">
+           <h3>Nami's Cake and Bake</h3>
+           <p>Creating delicious memories since 2015 through custom cakes and baking classes.</p>
+           <div class="social-links">
+             <a href="https://www.instagram.com/namis_cakenbake_/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+             <a href="https://wa.me/918767542742" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+           </div>
+         </div>
+         <div class="footer-col">
+           <h3>Quick Links</h3>
+           <ul class="footer-links">
+             <li><a href="index.html">Home</a></li>
+             <li><a href="cakes.html">Custom Cakes</a></li>
+             <li><a href="classes.html">Classes</a></li>
+             <li><a href="gallery.html">Gallery</a></li>
+             <li><a href="contact.html">Contact</a></li>
+           </ul>
+         </div>
+         <div class="footer-col">
+            <h3>Class Categories</h3>
+            <ul class="footer-links">
+              <li><a href="classes.html#indian">Indian Cuisine</a></li>
+              <li><a href="classes.html#baking">Baking Classes</a></li>
+              <li><a href="classes.html#snacks">Snacks & Quick Bites</a></li>
+              <li><a href="classes.html#kids">Kids Classes</a></li>
+            </ul>
+         </div>
+         <div class="footer-col">
+           <h3>Contact Info</h3>
+           <ul class="footer-links">
+             <li><a href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7" target="_blank" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Vishrambag, Sangli</a></li>
+             <li><i class="fas fa-phone"></i> +91 8767542742</li>
+             <li><i class="fas fa-envelope"></i> info@namiscakeandbake.com</li>
+             <li><i class="fas fa-clock"></i> Mon-Sat: 9am-7pm</li>
+           </ul>
+         </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 Nami's Cake and Bake. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Old non-module script REMOVED -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NXYG9PJ8KQ');
+    </script>
+
+    <!-- Module Script Added -->
+    <script type="module">
+      // Import functions from the Firebase SDKs
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+      // Your web app's Firebase configuration (Ensure this is correct)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0",
+        authDomain: "namis-cake-bake-auth.firebaseapp.com",
+        projectId: "namis-cake-bake-auth",
+        storageBucket: "namis-cake-bake-auth.appspot.com",
+        messagingSenderId: "213318410638",
+        appId: "1:213318410638:web:5d0531e93ed38f434c04df",
+        measurementId: "G-HPWS91PN1C" // Optional
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // --- Cart Management Functions ---
+      const CART_KEY = 'namiShopCart';
+      function getCart() {
+          const cart = localStorage.getItem(CART_KEY);
+          try { return cart ? JSON.parse(cart) : []; }
+          catch (e) { console.error("Error parsing cart:", e); localStorage.removeItem(CART_KEY); return []; }
+      }
+      function saveCart(cart) {
+          localStorage.setItem(CART_KEY, JSON.stringify(cart));
+          updateCartCount();
+      }
+      function updateCartCount() {
+          try {
+              const cart = getCart();
+              const cartCountSpan = document.getElementById('cart-count');
+              if (cartCountSpan) {
+                  const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+                  cartCountSpan.textContent = totalItems;
+                  cartCountSpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
+              }
+          } catch (error) { console.error("Error updating cart count:", error); }
+      }
+      // --- End Cart Functions ---
+
+      // --- Page Load Logic ---
+      document.addEventListener("DOMContentLoaded", function () {
+          console.log("gallery.html: DOM fully loaded");
+
+          const hamburger = document.getElementById("hamburger");
+          const navLinks = document.querySelector(".nav-links");
+
+          // Hamburger Toggle
+          if (hamburger && navLinks) {
+              hamburger.addEventListener("click", () => {
+                  navLinks.classList.toggle("active");
+              });
+          } else { console.warn("Hamburger/NavLinks not found on gallery.html"); }
+
+          // Auth State Listener
+          onAuthStateChanged(auth, (user) => {
+              const loginNavItem = document.getElementById('login-nav-item');
+              const profileNavItem = document.getElementById('profile-nav-item');
+              if (user) {
+                  if(loginNavItem) loginNavItem.style.display = 'none';
+                  if(profileNavItem) profileNavItem.style.display = 'list-item';
+              } else {
+                  if(loginNavItem) loginNavItem.style.display = 'list-item';
+                  if(profileNavItem) profileNavItem.style.display = 'none';
+              }
+          });
+
+          // Update cart count on initial load
+          updateCartCount();
+
+          // --- gallery.html Specific Code ---
+
+          // Show gallery category function
+           const showCategory = (category, btn) => {
+               document.querySelectorAll(".gallery-row").forEach((row) => {
+                   row.classList.remove('active'); // Use classList for active state
+               });
+               const activeRow = document.querySelector(".gallery-row." + category);
+               if (activeRow) {
+                   activeRow.classList.add('active');
+                   // Optional: Trigger Instagram processing if needed after display change
+                   if (window.instgrm) {
+                       window.instgrm.Embeds.process();
+                       console.log("Processed Instagram embeds for:", category);
+                   }
+               }
+
+               document.querySelectorAll(".toggle-btn").forEach((button) => {
+                   button.classList.remove("active");
+               });
+               if (btn) { // Check if button exists (for initial load)
+                    btn.classList.add("active");
+               }
+           };
+
+           // Attach click listeners to toggle buttons
+           const toggleButtons = document.querySelectorAll(".toggle-btn");
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    showCategory(category, this);
+                });
+            });
+
+
+           // Load Instagram embeds script (safer to ensure it's loaded)
+           if (!document.querySelector('script[src="//www.instagram.com/embed.js"]')) {
+               const instagramScript = document.createElement("script");
+               instagramScript.src = "//www.instagram.com/embed.js";
+               instagramScript.async = true;
+               // Optionally wait for script load before processing
+                instagramScript.onload = () => {
+                    console.log("Instagram embed script loaded.");
+                     if (window.instgrm) { // Check if object exists
+                        window.instgrm.Embeds.process(); // Initial processing
+                    } else {
+                         console.warn("window.instgrm object not found after script load.");
+                    }
+                };
+                instagramScript.onerror = () => {
+                    console.error("Failed to load Instagram embed script.");
+                 };
+               document.body.appendChild(instagramScript);
+           } else if (window.instgrm) {
+                 // If script already exists, try processing embeds
+                window.instgrm.Embeds.process();
+           }
+
+          // Show default category ('cakes') on load
+          const defaultActiveButton = document.querySelector(".toggle-btn.active");
+          if (defaultActiveButton) {
+              const defaultCategory = defaultActiveButton.getAttribute('data-category');
+              showCategory(defaultCategory, defaultActiveButton); // Show default
+          } else {
+               // Fallback if no button has 'active' class initially
+               const firstButton = document.querySelector(".toggle-btn");
+               if(firstButton) {
+                  const firstCategory = firstButton.getAttribute('data-category');
+                  showCategory(firstCategory, firstButton);
+               }
+          }
+
+           // --- End gallery.html Specific Code ---
+
+      }); // End of DOMContentLoaded
+    </script>
+
+  </body>
+</html>

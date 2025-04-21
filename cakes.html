@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cakes | Nami's Cake and Bake</title>
+    <!-- Link the main stylesheet (can potentially be removed if all styles are embedded or vice-versa) -->
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="shortcut icon"
+      href="assets/favicon_io/favicon-32x32.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Embedded styles specifically for cakes.html */
+      :root {
+  --primary: #E05E85;
+  --secondary: #fff;
+  --accent: #5c4033;
+  --light: #fff;
+  --dark: #3c3c3c;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --testimonial-bg: radial-gradient(circle, rgba(230, 227, 227, 1) 0%, rgba(255, 222, 235, 1) 100%);
+  --footer: #4e4e4e;
+}
+
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Quicksand", sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+      }
+      /* Navigation Styles (Should match styles.css) */
+      nav {
+        background-color: white;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .hamburger {
+        display: none;
+        font-size: 28px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--dark);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        color: var(--accent);
+        font-weight: bold;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+       /* Active Nav Link Style */
+       .nav-links a.active {
+          color: var(--primary);
+          position: relative;
+       }
+       .nav-links a.active::after {
+          content: '';
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: var(--primary);
+       }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-icon {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        padding: 30px 20px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"></path></svg>');
+        background-size: 100% 100%;
+        opacity: 0.3;
+      }
+
+      /* Ensure h1 applies only to this page's header if needed */
+      header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.5rem;
+        margin: 0;
+        position: relative;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        font-weight: 300;
+        position: relative;
+      }
+
+      /* Section */
+      .section {
+        padding: 60px 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section h2 {
+        text-align: center;
+        color: var(--accent);
+        margin-bottom: 40px;
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        position: relative;
+        display: inline-block; /* Allows transform to work correctly */
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .section h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0; /* Aligns with the start of the inline-block h2 */
+        width: 100%; /* Matches the width of the h2 */
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 3px;
+      }
+
+      /* Carousel Styling */
+      .carousel-container {
+        overflow: hidden;
+        max-width: 1200px;
+        margin: 40px auto 0;
+        position: relative;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        background: white;
+        padding: 20px 0;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        padding: 0 10px; /* Padding inside track */
+      }
+
+      /* --- Button Alignment Fix --- */
+      .cake-box {
+        flex: 0 0 calc(33.33% - 20px); /* Adjust basis based on desired items */
+        margin: 0 10px; /* Space between items */
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        display: flex;         /* ADDED: Make card flex */
+        flex-direction: column; /* ADDED: Stack image and info */
+      }
+       /* --- End Fix --- */
+
+
+      .cake-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .cake-box img {
+        width: 100%;
+        height: 250px; /* Maintain aspect ratio or set fixed height */
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        display: block; /* Prevent extra space */
+      }
+
+      .cake-box:hover img {
+        transform: scale(1.05);
+      }
+
+      /* --- Button Alignment Fix --- */
+      .cake-info {
+        padding: 20px;
+        text-align: center;
+        display: flex;          /* ADDED: Make info flex */
+        flex-direction: column;  /* ADDED: Stack vertically */
+        flex-grow: 1;           /* ADDED: Allow info to grow */
+      }
+      /* --- End Fix --- */
+
+
+      .cake-info h3 {
+        font-family: "Playfair Display", serif;
+        color: var(--accent);
+        margin-bottom: 10px;
+        font-size: 1.4rem;
+      }
+
+      .cake-info p {
+        color: var(--dark);
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+         flex-grow: 1; /* ADDED: Allow description to take up available space */
+      }
+
+      .price {
+        font-weight: bold;
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin-top: 10px; /* Keep some space above price */
+        margin-bottom: 15px; /* Space below price */
+      }
+
+      /* --- Button Alignment Fix --- */
+      .cake-info .btn.add-to-cart-btn {
+          padding: 10px 15px; /* Adjust padding */
+          width: auto; /* Allow button to size naturally */
+          min-width: 150px; /* Optional minimum width */
+          border-radius: 8px; /* Slightly less round */
+          border-style: none;
+          background-color: var(--primary); /* Use accent color */
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.3s, transform 0.2s;
+          margin-top: auto;   /* ADDED: Push button down */
+          align-self: center; /* ADDED: Center button */
+      }
+
+      .cake-info .btn.add-to-cart-btn:hover {
+          background-color: #4d3327; /* Darker accent */
+          transform: translateY(-2px);
+      }
+      /* --- End Fix --- */
+
+
+      /* Carousel Navigation Buttons */
+      .carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%); /* Center vertically */
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5px; /* Adjust padding */
+        z-index: 10;
+        pointer-events: none; /* Container doesn't block clicks */
+      }
+
+      .carousel-btn {
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        pointer-events: all; /* Buttons are clickable */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .carousel-btn i { /* Ensure icon size is reasonable */
+          font-size: 1.1rem;
+          color: var(--dark);
+      }
+
+      .carousel-btn:hover {
+        background: var(--primary);
+        color: white; /* Change icon color on hover */
+        transform: scale(1.1);
+      }
+       .carousel-btn:hover i {
+          color: white;
+       }
+
+       .carousel-btn:disabled { /* Style for disabled buttons */
+           opacity: 0.5;
+           cursor: not-allowed;
+           transform: none;
+           background: rgba(200, 200, 200, 0.7);
+       }
+
+
+       .contact-subtitle {
+  font-size: 1rem;         /* Keep it readable */
+  color: var(--dark);      /* Or use a soft tone like #666 */
+  text-align: center;
+  margin: 0.5rem 0 1.5rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+      /* Info Box Styles (General for contact section) */
+
+
+      .info-box {
+        background: white;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        padding: 25px; /* Moved padding here */
+        text-align: center; /* Moved text-align here */
+      }
+
+      .locationlink { /* Specific adjustments for location link box */
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+        padding: 0; /* Remove padding if parent has it */
+      }
+
+      .info-box i {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 15px;
+      }
+
+      .info-box h3 {
+        font-family: "Playfair Display", serif;
+        color: var(--accent);
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .info-box p {
+        color: var(--dark);
+        font-size: 0.95rem;
+      }
+
+      .info-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      .locationlink i {
+         font-size: 2.2rem; /* Keep location icon larger */
+         transition: transform 0.3s ease;
+      }
+      .locationlink:hover i {
+        transform: scale(1.1);
+      }
+
+
+      /* Contact Section Grid */
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto; /* Center container */
+      }
+
+      .contact-info { /* Grid for info boxes */
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns for info boxes */
+        gap: 20px;
+      }
+
+      /* Contact Form Specific Styles */
+      .contactForm {
+        display: flex;
+        flex-direction: column;
+        width: 100%; /* Take full grid column width */
+        color: var(--dark);
+        padding: 30px; /* More padding */
+        background-color: white;
+        box-shadow: var(--shadow);
+        border-radius: 12px;
+        /* Removed fixed height, max-width, centering margin */
+      }
+
+      .form-group {
+        width: 100%;
+        margin-bottom: 15px; /* Consistent spacing */
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px; /* Space below label */
+        font-weight: 600;
+         color: var(--accent);
+      }
+
+      .contactForm .input-field { /* Target inputs within this form */
+        padding: 12px 15px;
+        width: 100%;
+        background-color: #f3e8e3; /* Light background */
+        color: #353535;
+        border: 1px solid #ddd; /* Subtle border */
+        border-radius: 8px; /* Rounded corners */
+        font-size: 1rem;
+        resize: vertical; /* Allow textarea resize */
+        font-family: "Quicksand", sans-serif;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .contactForm .input-field:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 5px rgba(255, 126, 126, 0.4);
+      }
+
+      .contactForm .input-field::placeholder {
+        color: #aaa;
+        font-style: italic;
+      }
+      .contactForm .input-field:focus::placeholder {
+        color: transparent;
+      }
+
+
+      .contactForm .btn { /* Style submit button */
+        padding: 12px 20px;
+        width: 100%;
+        border-radius: 8px;
+        border-style: none;
+        background-color: var(--primary); /* Use primary color */
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-top: 10px; /* Space above button */
+      }
+
+      .contactForm .btn:hover {
+        background-color: #e66a6a; /* Darker primary */
+         transform: translateY(-2px);
+      }
+
+
+      /* Footer Styles (Ensure only ONE definition - maybe move to styles.css) */
+      footer {
+        background: var(--footer);
+        color: white;
+        padding: 60px 20px 30px;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+      }
+
+      .footer-col h3 {
+        font-family: "Playfair Display", serif;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-col h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .footer-col p {
+        margin-bottom: 20px;
+        font-size: 0.95rem;
+        opacity: 0.9;
+      }
+
+      .footer-links {
+        list-style: none;
+         padding-left: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-links i {
+        margin-right: 10px;
+        width: 20px;
+        color: var(--primary);
+         text-align: center;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 0.95rem;
+      }
+
+      .footer-links a:hover {
+        color: var(--secondary);
+        padding-left: 5px;
+      }
+
+      .social-links {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        margin-right: 10px;
+        color: white;
+        transition: all 0.3s;
+      }
+       .social-links a:last-child {
+           margin-right: 0;
+       }
+
+      .social-links a:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* --- Responsive Adjustments --- */
+
+      @media (max-width: 1024px) {
+        /* Reduce carousel items to 2 */
+        .cake-box { flex-basis: calc(50% - 20px); }
+        .cake-box img { height: 220px; }
+        /* Contact section stack */
+        .contact-container { grid-template-columns: 1fr; gap: 30px; }
+        .contact-info { grid-template-columns: 1fr 1fr; } /* Keep info side-by-side */
+        /* Footer adjustments */
+        .footer-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 0 20px; }
+        .footer-col h3 { font-size: 1.2rem; }
+        .footer-col p, .footer-links a { font-size: 0.9rem; }
+        .social-links a { width: 35px; height: 35px; font-size: 1rem; }
+      }
+
+       @media (max-width: 992px) { /* Additional breakpoint if needed for carousel */
+           header h1 { font-size: 3rem; } /* Adjust header size */
+       }
+
+
+      @media (max-width: 768px) {
+        /* Stack nav links under hamburger */
+        .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; right: 15px; background-color: white; box-shadow: var(--shadow); width: 200px; padding: 15px; z-index: 999; }
+        .nav-links.active { display: flex; }
+        .nav-links li { margin: 10px 0; margin-left: 0; }
+        .hamburger { display: block; }
+
+        /* Adjust header */
+        header h1 { font-size: 2.5rem; }
+        .subtitle { font-size: 1rem; }
+        header { padding: 25px 15px; }
+
+        /* Carousel items to 1 */
+        .cake-box { flex-basis: calc(100% - 20px); }
+        .cake-box img { height: 220px; } /* Adjust height for single column */
+        .carousel-nav { /* Move nav buttons below on mobile */
+            top: auto;
+            bottom: 10px; /* Position near bottom */
+            transform: none; /* Remove vertical centering */
+            padding: 0 10px;
+            justify-content: center; /* Center buttons */
+            gap: 50px; /* Space between buttons */
+         }
+         .carousel-container { padding-bottom: 60px; } /* Add padding for buttons */
+
+
+        /* Stack contact info boxes */
+        .contact-info { grid-template-columns: 1fr; }
+        .info-box { padding: 20px; }
+        .info-box i { font-size: 1.8rem; }
+        .info-box h3 { font-size: 1.1rem; }
+        .info-box p { font-size: 0.9rem; }
+
+        /* Adjust form labels/inputs */
+        .form-group label { font-size: 0.95rem; }
+        .contactForm .input-field { font-size: 1rem; }
+        .contactForm .btn { font-size: 1rem; padding: 12px; }
+
+        /* Footer to 2 columns */
+        .footer-container { grid-template-columns: 1fr 1fr; text-align: center; padding: 0 15px;}
+        .footer-col { align-items: center; }
+        .footer-col h3::after { left: 50%; transform: translateX(-50%); } /* Center underline */
+        .social-links { justify-content: center; }
+        .footer-links li { justify-content: center; }
+         .copyright { font-size: 0.85rem; }
+      }
+
+      @media (max-width: 480px) {
+        /* Further shrink nav elements */
+        .logo { font-size: 1.3rem; }
+        .nav-icon { width: 24px; height: 24px; }
+        .hamburger { font-size: 24px; }
+        .nav-links { right: 10px; width: 180px; }
+
+        /* Further shrink header */
+        header h1 { font-size: 2rem; }
+        .subtitle { font-size: 0.9rem; }
+        header { padding: 20px 10px; }
+
+        /* Adjust cake card */
+        .cake-box img { height: 200px; }
+        .cake-info { padding: 15px 10px; }
+        .cake-info h3 { font-size: 1.2rem; }
+        .cake-info p { font-size: 0.85rem; }
+        .price { font-size: 1rem; margin-bottom: 10px;}
+        .cake-info .btn.add-to-cart-btn { padding: 8px 12px; min-width: 120px; font-size: 0.9rem;}
+        .carousel-btn { width: 35px; height: 35px; }
+         .carousel-btn i { font-size: 0.9rem; }
+          .carousel-container { padding-bottom: 55px; } /* Adjust padding */
+
+
+        /* Adjust contact section */
+        .section h2 { font-size: 1.8rem; }
+        .contact-subtitle { font-size: 1rem; margin-bottom: 25px; }
+        .contact-info { gap: 15px;}
+        .contactForm { padding: 20px 15px; }
+        .form-group { margin-bottom: 12px; }
+        .contactForm .btn { padding: 10px 12px; }
+
+        /* Footer to 1 column */
+        .footer-container { grid-template-columns: 1fr; gap: 25px; padding: 0 10px; }
+        .footer-col h3 { font-size: 1.1rem; }
+        .footer-col p, .footer-links a { font-size: 0.85rem; }
+        .social-links a { width: 32px; height: 32px; font-size: 0.9rem; }
+        .copyright { font-size: 0.8rem; padding: 15px 10px 0; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+ <nav>
+  <div class="nav-container">
+    <div class="brand">
+      <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
+      <div class="logo">Nami's Cake and Bake</div>
+    </div>
+    <ul class="nav-links">
+         <li><a href="index.html">Home</a></li>
+         <li><a href="cakes.html">Cakes</a></li>
+         <li><a href="gallery.html">Gallery</a></li>
+         <li><a href="classes.html">Classes</a></li>
+         <li><a href="upcoming-classes.html">Schedule</a></li>
+         <li id="cart-nav-item">
+             <a href="cart.html">
+                 <i class="fas fa-shopping-cart"></i> Cart
+                 <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
+             </a>
+         </li>
+         
+         <li id="login-nav-item"><a href="login.html">Login</a></li>
+         <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+     </ul>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+</nav>
+    <header>
+      <h1>Nami's Cakes</h1>
+      <div class="subtitle">Handcrafted with love since 2015</div>
+    </header>
+
+    <!-- Repeat this structure for each cake category section -->
+    <div class="section">
+      <h2>Chocolate Cakes</h2>
+      <div class="carousel-container" id="chocolateCarousel">
+        <div class="carousel-track" id="chocolateTrack">
+          <!-- Cake Box Example -->
+          <div class="cake-box">
+            <img src="assets/ChocolateCake6.webp" alt="Midnight Truffle Magic Chocolate" />
+            <div class="cake-info">
+              <h3>Midnight Truffle Magic Chocolate</h3>
+              <p>Rich dark chocolate cake with silky truffle ganache.</p>
+              <div class="price">₹ 725</div>
+              <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+          <!-- Other cake boxes go here -->
+          <div class="cake-box">
+            <img src="assets/ChocolateCake5.webp" alt="Choco Craze Fudge Cake" />
+            <div class="cake-info">
+              <h3>Choco Craze Fudge Cake</h3>
+              <p>Ultra-moist chocolate cake loaded with gooey fudge.</p>
+              <div class="price">₹ 800</div>
+              <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+          <div class="cake-box">
+             <img src="assets/ChocolateCake4.webp" alt="Eggless Dutch Chocolate Cake" />
+             <div class="cake-info">
+               <h3>Eggless Dutch Chocolate Cake</h3>
+               <p>Smooth, rich cocoa delight with zero eggs, all indulgence.</p>
+               <div class="price">₹ 625</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+           <div class="cake-box">
+             <img src="assets/ChocolateCake1.webp" alt="Chocoholic Cake" />
+             <div class="cake-info">
+               <h3>Chocoholic Cake</h3>
+               <p>Loaded layers of pure chocolate indulgence.</p>
+               <div class="price">₹ 725</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+           <div class="cake-box">
+             <img src="assets/ChocolateCake2.webp" alt="Dark Chocolate Mousse Cake" />
+             <div class="cake-info">
+               <h3>Dark Chocolate Mousse Cake</h3>
+               <p>Light, airy mousse over rich dark chocolate layers.</p>
+               <div class="price">₹ 895</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+           <div class="cake-box">
+             <img src="assets/ChocolateCake10.webp" alt="Indulgent Choco Dream Cake" />
+             <div class="cake-info">
+               <h3>Indulgent Choco Dream Cake</h3>
+               <p>Creamy, rich chocolate layers for a dreamy bite every time.</p>
+               <div class="price">₹ 900</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+           <div class="cake-box">
+             <img src="assets/ChocolateCake7.webp" alt="Chocolate Pinata Ball Cake" />
+             <div class="cake-info">
+               <h3>Chocolate Pinata Ball Cake</h3>
+               <p>Smashable chocolate shell filled with cake and sweet surprises.</p>
+               <div class="price">₹ 950</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+           <div class="cake-box">
+             <img src="assets/ChocolateCake8.webp" alt="Choco Chip Cake" />
+             <div class="cake-info">
+               <h3>Choco Chip Cake</h3>
+               <p>Soft, fluffy cake loaded with melty chocolate chips.</p>
+               <div class="price">₹ 950</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+           <div class="cake-box">
+             <img src="assets/ChocolateCake9.webp" alt="Fruitful Fantasy Chocolate Cake" />
+             <div class="cake-info">
+               <h3>Fruitful Fantasy Chocolate Cake</h3>
+               <p>Rich chocolate cake topped with a burst of fresh, juicy fruits.</p>
+               <div class="price">₹ 700</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+           <div class="cake-box">
+             <img src="assets/ChocolateCake3.webp" alt="Eggless Dense Loaf" />
+             <div class="cake-info">
+               <h3>Eggless Dense Loaf</h3>
+               <p>Rich, moist, and egg-free loaf cake.</p>
+               <div class="price">₹ 300</div>
+               <button class="btn add-to-cart-btn">Add to Cart</button>
+             </div>
+           </div>
+        </div>
+        <div class="carousel-nav">
+          <button class="carousel-btn" id="chocolatePrev" disabled> <!-- Start disabled -->
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn" id="chocolateNext">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Truffle Cakes Section -->
+     <div class="section">
+       <h2>Truffle Cakes</h2>
+       <div class="carousel-container" id="truffleCarousel">
+         <div class="carousel-track" id="truffleTrack">
+             <!-- Truffle cake boxes go here -->
+             <div class="cake-box">
+                 <img src="assets/Truffle1.webp" alt="Choco-licious Truffle Extravaganza Cake"/>
+                 <div class="cake-info">
+                     <h3>Choco-licious Truffle Extravaganza Cake</h3>
+                     <p>A lavish treat of rich cake and decadent truffle layers.</p>
+                     <div class="price">₹ 700</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+             <div class="cake-box">
+                 <img src="assets/Truffle2.webp" alt="Lustrous Chocolate Cake"/>
+                 <div class="cake-info">
+                     <h3>Lustrous Chocolate Cake</h3>
+                     <p>Glossy, smooth finish over rich chocolatey layers.</p>
+                     <div class="price">₹ 600</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+             <div class="cake-box">
+                 <img src="assets/Truffle3.webp" alt="Choco Dream Truffle Cake"/>
+                 <div class="cake-info">
+                     <h3>Choco Dream Truffle Cake</h3>
+                     <p>Soft chocolate cake layered with creamy truffle delight.</p>
+                     <div class="price">₹ 800</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+             <div class="cake-box">
+                 <img src="assets/Truffle4.webp" alt="Chocolate Heart Truffle Cake"/>
+                 <div class="cake-info">
+                     <h3>Chocolate Heart Truffle Cake</h3>
+                     <p>Heart-shaped cake filled with rich chocolate truffle love.</p>
+                     <div class="price">₹ 950</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+             <div class="cake-box">
+                 <img src="assets/Truffle5.webp" alt="Almond Drizzle Truffle Cake"/>
+                 <div class="cake-info">
+                     <h3>Almond Drizzle Truffle Cake</h3>
+                     <p>Rich truffle cake topped with a crunchy almond drizzle</p>
+                     <div class="price">₹ 750</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+             <div class="cake-box">
+                 <img src="assets/Truffle6.webp" alt="Decadent Chocolate Truffle Cake"/>
+                 <div class="cake-info">
+                     <h3>Decadent Chocolate Truffle Cake</h3>
+                     <p>Ultra-rich cake with layers of smooth chocolate truffle.</p>
+                     <div class="price">₹ 500</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+             <div class="cake-box">
+                 <img src="assets/Truffle7.webp" alt="Midnight Truffle Cake"/>
+                 <div class="cake-info">
+                     <h3>Midnight Truffle Cake</h3>
+                     <p>Deep, dark chocolate cake with luscious truffle layers.</p>
+                     <div class="price">₹ 600</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+             <div class="cake-box">
+                 <img src="assets/Truffle8.webp" alt="Chocolate Truffle Cake"/>
+                 <div class="cake-info">
+                     <h3>Chocolate Truffle Cake</h3>
+                     <p>Classic rich chocolate cake with creamy truffle frosting.</p>
+                     <div class="price">₹ 750</div>
+                     <button class="btn add-to-cart-btn">Add to Cart</button>
+                 </div>
+             </div>
+         </div>
+         <div class="carousel-nav">
+           <button class="carousel-btn" id="trufflePrev" disabled>
+             <i class="fas fa-chevron-left"></i>
+           </button>
+           <button class="carousel-btn" id="truffleNext">
+             <i class="fas fa-chevron-right"></i>
+           </button>
+         </div>
+       </div>
+     </div>
+
+     <!-- Fondant Cakes Section -->
+      <div class="section">
+        <h2>Fondant/Semi-Fondant Cakes</h2>
+        <div class="carousel-container" id="semiFondantCarousel">
+          <div class="carousel-track" id="semiFondantTrack">
+              <!-- Fondant cake boxes go here -->
+              <div class="cake-box">
+                  <img src="assets/Fondant1.webp" alt="Snowman Semi Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Snowman Semi Fondant Cake</h3>
+                      <p>Cute snowman cake with a smooth semi-fondant finish.</p>
+                      <div class="price">₹ 800</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant2.webp" alt="Superhero Themed Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Superhero Themed Fondant Cake</h3>
+                      <p>Vibrant cake with fondant superhero accents.</p>
+                      <div class="price">₹ 1000</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant3.webp" alt="Minion Madness Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Minion Madness Fondant Cake</h3>
+                      <p>Fun-filled cake with playful minion fondant toppers.</p>
+                      <div class="price">₹ 950</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant4.webp" alt="Batman Bonanza Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Batman Bonanza Fondant Cake</h3>
+                      <p>Striking cake with bold Batman-themed fondant decor.</p>
+                      <div class="price">₹ 850</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant5.webp" alt="Graduation Hat Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Graduation Hat Fondant Cake</h3>
+                      <p>Celebratory cake topped with a fondant graduation cap.</p>
+                      <div class="price">₹ 950</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant6.webp" alt="Beary Delight Semi-Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Beary Delight Semi-Fondant Cake</h3>
+                      <p>Adorable bear-themed cake with a smooth semi-fondant finish.</p>
+                      <div class="price">₹ 900</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant7.webp" alt="XOXO Sweetheart Semi-fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>XOXO Sweetheart Semi-fondant Cake</h3>
+                      <p>Romantic cake with sweetheart vibes and semi-fondant charm.</p>
+                      <div class="price">₹ 800</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant8.webp" alt="Luscious Love Semi-Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Luscious Love Semi-Fondant Cake</h3>
+                      <p>Dreamy cake with romantic flair and a semi-fondant touch.</p>
+                      <div class="price">₹ 600</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant9.webp" alt="Fruits Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Fruits Fondant Cake</h3>
+                      <p>Vibrant fondant cake topped with colorful, fruity decorations.</p>
+                      <div class="price">₹ 1000</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+              <div class="cake-box">
+                  <img src="assets/Fondant10.webp" alt="Little Mermaid Fondant Cake"/>
+                  <div class="cake-info">
+                      <h3>Little Mermaid Fondant Cake</h3>
+                      <p>Ocean-themed cake with mermaid fondant decor.</p>
+                      <div class="price">₹ 750</div>
+                      <button class="btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+              </div>
+          </div>
+          <div class="carousel-nav">
+            <button class="carousel-btn" id="semiFondantPrev" disabled>
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" id="semiFondantNext">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fresh Cream Cakes Section -->
+       <div class="section">
+         <h2>Fresh Cream Cakes</h2>
+         <div class="carousel-container" id="freshCreamCarousel">
+           <div class="carousel-track" id="freshCreamTrack">
+               <!-- Cream cake boxes go here -->
+               <div class="cake-box">
+                   <img src="assets/CreamCake1.webp" alt="Fresh Fruit Cream Cake"/>
+                   <div class="cake-info">
+                       <h3>Fresh Fruit Cream Cake</h3>
+                       <p>Light, fluffy cake topped with fresh fruits and whipped cream.</p>
+                       <div class="price">₹ 545</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake2.webp" alt="Fresh Cream Pineapple Cake"/>
+                   <div class="cake-info">
+                       <h3>Fresh Cream Pineapple Cake</h3>
+                       <p>Soft sponge layered with juicy pineapple and fresh cream.</p>
+                       <div class="price">₹ 595</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake3.webp" alt="Fresh Fruit Almond Cake"/>
+                   <div class="cake-info">
+                       <h3>Fresh Fruit Almond Cake</h3>
+                       <p>Moist almond cake topped with a medley of fresh fruits.</p>
+                       <div class="price">₹ 745</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake4.webp" alt="Friendship Day Fresh Cream Cake"/>
+                   <div class="cake-info">
+                       <h3>Friendship Day Fresh Cream Cake</h3>
+                       <p>Sweet, creamy cake made to celebrate special bonds.</p>
+                       <div class="price">₹ 645</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake5.webp" alt="Classy Pearl & Ribbon Cake"/>
+                   <div class="cake-info">
+                       <h3>Classy Pearl & Ribbon Cake</h3>
+                       <p>Elegant cake adorned with fondant pearls and delicate ribbons.</p>
+                       <div class="price">₹ 575</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake6.webp" alt="Biscoff Ice Cream Cake"/>
+                   <div class="cake-info">
+                       <h3>Biscoff Ice Cream Cake</h3>
+                       <p>Creamy ice cream cake infused with crunchy Biscoff layers.</p>
+                       <div class="price">₹ 695</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake7.webp" alt="Delectable and Creamy Cake"/>
+                   <div class="cake-info">
+                       <h3>Delectable and Creamy Cake</h3>
+                       <p>Rich, smooth cake bursting with creamy goodness.</p>
+                       <div class="price">₹ 695</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake8.webp" alt="Pearly Blue Cream Cake"/>
+                   <div class="cake-info">
+                       <h3>Pearly Blue Cream Cake</h3>
+                       <p>Elegant cake with soft blue cream and pearly touches.</p>
+                       <div class="price">₹ 545</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake9.webp" alt="Chocolate Roses Cream Cake"/>
+                   <div class="cake-info">
+                       <h3>Chocolate Roses Cream Cake</h3>
+                       <p>Creamy delight topped with beautiful chocolate rose swirls.</p>
+                       <div class="price">₹ 525</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+               <div class="cake-box">
+                   <img src="assets/CreamCake10.webp" alt="Sunset Heart Cream Cake"/>
+                   <div class="cake-info">
+                       <h3>Sunset Heart Cream Cake</h3>
+                       <p>Heart-shaped cake with dreamy sunset-inspired cream swirls.</p>
+                       <div class="price">₹ 499</div>
+                       <button class="btn add-to-cart-btn">Add to Cart</button>
+                   </div>
+               </div>
+           </div>
+           <div class="carousel-nav">
+             <button class="carousel-btn" id="freshCreamPrev" disabled>
+               <i class="fas fa-chevron-left"></i>
+             </button>
+             <button class="carousel-btn" id="freshCreamNext">
+               <i class="fas fa-chevron-right"></i>
+             </button>
+           </div>
+         </div>
+       </div>
+
+
+    <!-- Get in Touch Section -->
+    <section class="section" id="contact">
+      <h2>Get in Touch</h2>
+      <p class="contact-subtitle">
+        Have questions or special requests? Send us a message!
+      </p>
+
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="info-box">
+            <a
+              href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7"
+              class="locationlink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fas fa-map-marker-alt"></i>
+              <h3>Our Location</h3>
+              <p>Vishrambag, Sangli</p>
+            </a>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-phone"></i>
+            <h3>Call Us</h3>
+            <p>+91 8767542742</p> <!-- Corrected Number -->
+          </div>
+          <div class="info-box">
+            <i class="fas fa-envelope"></i>
+            <h3>Email Us</h3>
+            <p>info@namiscakeandbake.com</p>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-clock"></i>
+            <h3>Opening Hours</h3>
+            <p>Mon-Sat: 9am-7pm</p>
+          </div>
+        </div>
+
+        <form
+          class="contactForm"
+          action="https://getform.io/f/bllyvdqb"
+          method="POST"
+        >
+          <div class="form-group">
+            <label for="contact-name">Your Name</label> <!-- Changed ID -->
+            <input
+              type="text"
+              id="contact-name"
+              class="input-field"
+              placeholder="Enter your name"
+              name="name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email">Email Address</label> <!-- Changed ID -->
+            <input
+              type="email"
+              id="contact-email"
+              class="input-field"
+              placeholder="Enter your email"
+              name="email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-phone">Contact Number</label> <!-- Changed ID -->
+            <input
+              type="tel"
+              id="contact-phone"
+              class="input-field"
+              placeholder="xxxxx xxxxx"
+              name="phone"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message">Your Message</label> <!-- Changed ID -->
+            <textarea
+              id="contact-message"
+              class="input-field"
+              name="message"
+              placeholder="Type here..."
+              rows="5"
+              required
+            ></textarea>
+          </div>
+
+          <input
+            type="hidden"
+            name="_form_name"
+            value="Nami's Cake Contact Form"
+          />
+
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Nami's Cake and Bake</h3>
+          <p>
+            Bringing joy through baking and cooking since 2010. Our cakes are
+            made with love and the finest ingredients.
+          </p>
+          <div class="social-links">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/918767542742" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com/namis_cakenbake_" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cakes.html">Our Cakes</a></li>
+            <li><a href="classes.html">Classes</a></li>
+            <li><a href="contact.html">Contact</a></li>
+             <li><a href="gallery.html">Gallery</a></li>
+            <!-- <li><a href="#">FAQ</a></li> -->
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Cake Categories</h3>
+          <ul class="footer-links">
+            <li><a href="#chocolateCarousel">Chocolate Cakes</a></li>
+            <li><a href="#truffleCarousel">Truffle Cakes</a></li>
+            <li><a href="#semiFondantCarousel">Semi Fondant</a></li>
+            <li><a href="#freshCreamCarousel">Fresh Cream</a></li>
+            <li><a href="cakes.html">All Cakes</a></li> <!-- Link to top -->
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li>
+              <a
+                href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fas fa-map-marker-alt"></i> <!-- Removed inline style -->
+                Vishrambag, Sangli
+              </a>
+            </li>
+            <li><i class="fas fa-phone"></i> +91 8767542742</li>
+            <li><i class="fas fa-envelope"></i> info@namiscakeandbake.com</li>
+            <li><i class="fas fa-clock"></i> Mon-Sat: 9am-7pm</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>© 2025 Nami's Cake and Bake. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Old non-module script REMOVED -->
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-NXYG9PJ8KQ");
+    </script>
+
+    <!-- Firebase Initialization, Cart Logic, Carousel Logic, and Page Interactions -->
+    <script type="module">
+      // Import Firebase functions
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+      // Firebase Config (ensure correct)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0",
+        authDomain: "namis-cake-bake-auth.firebaseapp.com",
+        projectId: "namis-cake-bake-auth",
+        storageBucket: "namis-cake-bake-auth.appspot.com",
+        messagingSenderId: "213318410638",
+        appId: "1:213318410638:web:5d0531e93ed38f434c04df",
+        measurementId: "G-HPWS91PN1C"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // --- Cart Management Functions ---
+      const CART_KEY = 'namiShopCart';
+
+      function getCart() {
+          const cart = localStorage.getItem(CART_KEY);
+          try {
+               return cart ? JSON.parse(cart) : [];
+          } catch (e) {
+               console.error("Error parsing cart from localStorage:", e);
+               localStorage.removeItem(CART_KEY);
+               return [];
+          }
+      }
+
+      function saveCart(cart) {
+          localStorage.setItem(CART_KEY, JSON.stringify(cart));
+          updateCartCount();
+      }
+
+       function addToCart(product) {
+          let cart = getCart();
+          const existingItemIndex = cart.findIndex(item => item.id === product.id);
+
+          if (existingItemIndex > -1) {
+              cart[existingItemIndex].quantity = (cart[existingItemIndex].quantity || 0) + 1;
+          } else {
+              product.quantity = 1;
+              cart.push(product);
+          }
+          saveCart(cart);
+          console.log(`${product.name} added/updated in cart. New Quantity: ${product.quantity}`);
+          alert(`${product.name} added to cart!`);
+      }
+
+
+      function updateCartCount() {
+          try {
+              const cart = getCart();
+              const cartCountSpan = document.getElementById('cart-count');
+              if (cartCountSpan) {
+                  const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+                  cartCountSpan.textContent = totalItems;
+                  cartCountSpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
+              }
+          } catch (error) {
+              console.error("Error updating cart count:", error);
+          }
+      }
+      // --- End Cart Management ---
+
+
+      // --- Carousel Function ---
+       function initCarousel(type) {
+           const container = document.getElementById(`${type}Carousel`);
+           const track = document.getElementById(`${type}Track`);
+           const prevBtn = document.getElementById(`${type}Prev`);
+           const nextBtn = document.getElementById(`${type}Next`);
+
+           if (!container || !track || !prevBtn || !nextBtn) {
+               console.warn(`Carousel elements not found for type: ${type}`);
+               return;
+           }
+           const items = Array.from(track.querySelectorAll(".cake-box")); // Use Array.from
+           if (items.length === 0) {
+               console.warn(`No items found in carousel track for type: ${type}`);
+               return;
+           }
+
+           let itemWidth = 0; // Initialize
+           let visibleItems = 1; // Default
+           let maxScroll = 0; // Initialize
+           let currentScrollIndex = 0; // Track index
+
+            function calculateLayout() {
+                const itemStyle = window.getComputedStyle(items[0]);
+                const marginLeft = parseFloat(itemStyle.marginLeft) || 10; // Use fallback
+                const marginRight = parseFloat(itemStyle.marginRight) || 10;// Use fallback
+                const itemMargin = marginLeft + marginRight;
+                itemWidth = items[0].offsetWidth + itemMargin;
+
+                if (itemWidth <= 0) {
+                     console.error(`Calculated itemWidth is invalid for type: ${type} on resize/init`);
+                     return false; // Indicate failure
+                 }
+
+                const containerWidth = container.offsetWidth;
+                 // Calculate visible items based on container, fallback for safety
+                visibleItems = Math.max(1, Math.floor(containerWidth / itemWidth));
+                if (window.innerWidth <= 768) { // Mobile override
+                    visibleItems = 1;
+                 } else if (window.innerWidth <= 1024) { // Tablet override
+                    visibleItems = 2;
+                 } else { // Desktop
+                    visibleItems = 3;
+                 }
+
+                maxScroll = Math.max(0, items.length - visibleItems);
+                // Ensure current index isn't out of bounds after resize
+                currentScrollIndex = Math.min(currentScrollIndex, maxScroll);
+                return true; // Indicate success
+            }
+
+
+            function updatePosition() {
+                if (itemWidth <= 0) return; // Don't update if width is invalid
+
+                const newPosition = currentScrollIndex * itemWidth;
+                 // Add check for track existence again just in case
+                if(track) {
+                    track.style.transform = `translateX(-${newPosition}px)`;
+                }
+                // Add checks for buttons
+                if(prevBtn) prevBtn.disabled = currentScrollIndex === 0;
+                if(nextBtn) nextBtn.disabled = currentScrollIndex >= maxScroll;
+            }
+
+           prevBtn.onclick = () => {
+               if (currentScrollIndex > 0) {
+                   currentScrollIndex--;
+                   updatePosition();
+               }
+           };
+
+           nextBtn.onclick = () => {
+               if (currentScrollIndex < maxScroll) {
+                   currentScrollIndex++;
+                   updatePosition();
+               }
+           };
+
+           let resizeTimeout;
+           window.addEventListener('resize', () => {
+               clearTimeout(resizeTimeout);
+               resizeTimeout = setTimeout(() => {
+                    console.log(`Resizing carousel: ${type}`);
+                     if (calculateLayout()) { // Recalculate layout
+                       updatePosition(); // Update position based on new layout
+                   }
+               }, 250);
+           });
+
+           // Initial setup
+           if (calculateLayout()) { // Calculate initial layout
+                updatePosition(); // Set initial position
+            } else {
+                 console.error(`Initial layout calculation failed for carousel: ${type}`);
+            }
+       }
+       // --- End Carousel Function ---
+
+
+      // --- Page Load Logic ---
+      document.addEventListener("DOMContentLoaded", function () {
+          console.log("cakes.html: DOM fully loaded");
+          const hamburger = document.getElementById("hamburger");
+          const navLinks = document.querySelector(".nav-links");
+
+          // Hamburger Menu
+          if (hamburger && navLinks) {
+              hamburger.addEventListener("click", () => {
+                  navLinks.classList.toggle("active");
+              });
+          } else {
+               console.warn("Hamburger or NavLinks not found on cakes.html.");
+          }
+
+          // Auth State Listener
+          onAuthStateChanged(auth, (user) => {
+              const loginNavItem = document.getElementById('login-nav-item');
+              const profileNavItem = document.getElementById('profile-nav-item');
+              if (user) {
+                  if(loginNavItem) loginNavItem.style.display = 'none';
+                  if(profileNavItem) profileNavItem.style.display = 'list-item';
+              } else {
+                  if(loginNavItem) loginNavItem.style.display = 'list-item';
+                  if(profileNavItem) profileNavItem.style.display = 'none';
+              }
+          });
+
+          // Initialize All Carousels
+          ["chocolate", "truffle", "semiFondant", "freshCream"].forEach((type) => {
+              initCarousel(type);
+          });
+
+           // Add Listeners for "Add to Cart" Buttons
+          const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+          addToCartButtons.forEach(button => {
+              button.addEventListener('click', (event) => {
+                  try {
+                      const card = event.target.closest('.cake-box');
+                      if (!card) throw new Error("Could not find parent .cake-box");
+
+                      const nameElement = card.querySelector('.cake-info h3');
+                      const priceElement = card.querySelector('.price');
+                      const imgElement = card.querySelector('img'); // Get image for potential use
+
+                      if (!nameElement || !priceElement) throw new Error("Could not find name or price element.");
+
+                      const name = nameElement.textContent.trim();
+                      const priceText = priceElement.textContent.trim();
+                      const price = priceText.replace(/[^0-9.]/g, ''); // Extract number
+                      const id = name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(); // Simple ID generation
+                       const image = imgElement ? imgElement.src : ''; // Get image source
+
+
+                      if (!name || !price || !id) throw new Error("Extracted product data is invalid.");
+
+                       // Include image in product data sent to cart
+                       const product = { id, name, price: priceText, image: image }; // Store original price text, add image
+                      addToCart(product);
+                  } catch (error) {
+                       console.error("Error adding product to cart:", error);
+                       alert("Sorry, there was an error adding this item to the cart.");
+                  }
+              });
+          });
+
+
+          // Update cart count on initial load
+          updateCartCount();
+
+          // --- Other cakes.html specific JS ---
+          // Hover effects for cake boxes (moved from non-module script)
+           const cakeBoxes = document.querySelectorAll(".cake-box");
+            cakeBoxes.forEach((box) => {
+              box.addEventListener("mouseenter", function () {
+                this.style.transform = "translateY(-10px)";
+                this.style.boxShadow = "0 15px 30px rgba(0,0,0,0.15)";
+              });
+              box.addEventListener("mouseleave", function () {
+                this.style.transform = "translateY(0)";
+                this.style.boxShadow = "0 5px 15px rgba(0,0,0,0.1)";
+              });
+            });
+
+            // Contact form submission (moved from non-module script)
+            const contactForm = document.querySelector("#contact .contactForm");
+            if (contactForm) {
+              contactForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                 // Optionally disable button here
+                 // const submitBtn = contactForm.querySelector('button[type="submit"]');
+                 // if(submitBtn) submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
+                const formAction = this.action || "https://getform.io/f/bllyvdqb";
+                fetch(formAction, {
+                  method: "POST", body: new FormData(this), headers: { Accept: "application/json" },
+                }).then(response => {
+                    if (response.ok) {
+                         alert("Thank you! We will contact you soon.");
+                         contactForm.reset();
+                         // if(submitBtn) submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
+                    } else {
+                        response.json().then(data => console.error("Form submission error:", data)).catch(()=>{});
+                        alert("Oops! Something went wrong submitting the form.");
+                         // if(submitBtn) submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
+                    }
+                }).catch(error => {
+                    console.error("Fetch error:", error);
+                    alert("Error sending message: " + error);
+                     // if(submitBtn) submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
+                });
+              });
+            } else {
+               console.warn("Contact form not found on cakes page.");
+            }
+
+      }); // End DOMContentLoaded
+
+    </script>
+  </body>
+</html>
