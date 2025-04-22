@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Class Catalog | Nami's Cake and Bake</title> <!-- Changed Title -->
+    <title>Nami's Cake and Bake - Classes </title> <!-- Changed Title -->
     <link
       rel="shortcut icon"
-      href="assets/favicon_io/favicon-32x32.png"
+      href="assets/favicon_io/favicon-16x16.png"
       type="image/x-icon"
     />
     <link
@@ -25,8 +25,9 @@
     <nav>
       <div class="nav-container">
         <div class="brand">
-          <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
-          <div class="logo">Nami's Cake and Bake</div>
+          <div class="logo-text">
+            Nami's <span class="highlight-word">Cake</span> & Bake
+          </div>
         </div>
         <ul class="nav-links">
              <li><a href="index.html">Home</a></li>
@@ -40,7 +41,7 @@
                      <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
                  </a>
              </li>
-             
+
              <li id="login-nav-item"><a href="login.html">Login</a></li>
              <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
          </ul>
@@ -326,11 +327,19 @@
     <!-- Contact Form (for Registration) -->
     <section class="section" id="contact-form">
       <h2 class="section-title">Class Registration</h2>
+      <!-- START: Updated Form Tag for Netlify -->
       <form
         class="contact-form"
-        action="https://getform.io/f/bllyvdqb"
+        name="class-registration" /* --- ADDED: Name for Netlify --- */
         method="POST"
+        netlify /* --- ADDED: Netlify attribute --- */
+        /* --- REMOVED: action attribute --- */
       >
+        <!-- Hidden input for Netlify forms processing -->
+        <input type="hidden" name="form-name" value="class-registration" />
+
+      <!-- END: Updated Form Tag for Netlify -->
+
         <div class="form-group">
           <label for="reg-name">Your Name</label>
           <input type="text" id="reg-name" name="name" placeholder="Enter your full name" required />
@@ -373,7 +382,7 @@
           <label for="reg-message">Additional Notes (Include Class Date if known)</label> <!-- Updated Placeholder -->
           <textarea id="reg-message" name="message" rows="4" placeholder="Please mention the specific class date if registering for a scheduled class. Also note allergies, preferences, or questions."></textarea>
         </div>
-         <input type="hidden" name="_form_name" value="Nami's Class Registration Form">
+         <!-- REMOVED: Getform specific hidden input <input type="hidden" name="_form_name" ...> -->
         <button type="submit" class="btn">Submit Registration</button>
       </form>
     </section>
@@ -585,48 +594,16 @@
              });
            });
 
-           // ======= FORM SUBMISSION =======
+           // ======= FORM SUBMISSION (Removed Fetch Logic for Netlify) =======
            const registrationForm = document.querySelector("#contact-form .contact-form");
            if (registrationForm) {
              registrationForm.addEventListener("submit", function (e) {
-               e.preventDefault(); // Prevent default form submission
-               const submitBtn = registrationForm.querySelector('button[type="submit"]');
-               const originalButtonText = submitBtn.textContent; // Store original text
-               if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting...'; }
-
-               // Submit using fetch to Getform endpoint
-               fetch(this.action, {
-                 method: "POST",
-                 body: new FormData(this),
-                 headers: {
-                    'Accept': 'application/json' // Important for Getform to redirect correctly or send JSON response
-                 }
-               })
-                 .then(response => {
-                   if (response.ok) {
-                     // Success!
-                     alert("Thank you! Your registration request has been submitted. We will contact you shortly to confirm.");
-                     registrationForm.reset(); // Clear the form fields
-                   } else {
-                     // Handle server-side errors from Getform (less common for basic setup)
-                     response.json().then(data => { // Try to get error details if available
-                        console.error("Form submission error:", data);
-                        alert("Oops! Something went wrong submitting the form. Please check your details and try again.");
-                     }).catch(err => {
-                        console.error("Error parsing error response:", err);
-                        alert("Oops! Something went wrong submitting the form. Please try again.");
-                     });
-                   }
-                 })
-                 .catch(error => {
-                   // Handle network errors
-                   console.error("Network error submitting form:", error);
-                   alert("Error submitting form: Could not connect. Please check your internet connection and try again.");
-                 })
-                 .finally(() => {
-                      // Re-enable button and restore text regardless of success/failure
-                      if(submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalButtonText; }
-                 });
+                // No preventDefault() needed for basic Netlify submission
+                // No Fetch logic needed
+                console.log("Submitting registration form to Netlify...");
+                // Optional: Disable button briefly on submit, but Netlify handles page redirect
+                // const submitBtn = registrationForm.querySelector('button[type="submit"]');
+                // if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting...'; }
              });
            } else {
              console.warn("Registration form not found on classes.html");
