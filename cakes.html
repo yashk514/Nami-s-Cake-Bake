@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cakes | Nami's Cake and Bake</title>
+    <title>Nami's Cake and Bake - Cakes</title>
     <!-- Link the main stylesheet (can potentially be removed if all styles are embedded or vice-versa) -->
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="shortcut icon"
-      href="assets/favicon_io/favicon-32x32.png"
+      href="assets/favicon_io/favicon-16x16.png"
       type="image/x-icon"
     />
     <link
@@ -125,7 +125,11 @@
 
       /* Header */
       header {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background:radial-gradient(
+  circle,
+  #f8a7bb 0%,     /* lighter pink in center */
+  #e05e85 100%    /* your original primary pink on edges */
+);
         padding: 30px 20px;
         text-align: center;
         color: white;
@@ -293,7 +297,7 @@
       }
 
       .cake-info .btn.add-to-cart-btn:hover {
-          background-color: #4d3327; /* Darker accent */
+          background-color: #d14e73; 
           transform: translateY(-2px);
       }
       /* --- End Fix --- */
@@ -496,7 +500,7 @@
       }
 
       .contactForm .btn:hover {
-        background-color: #e66a6a; /* Darker primary */
+        background-color: #d14e73; /* Darker primary */
          transform: translateY(-2px);
       }
 
@@ -720,8 +724,9 @@
  <nav>
   <div class="nav-container">
     <div class="brand">
-      <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
-      <div class="logo">Nami's Cake and Bake</div>
+      <div class="logo-text">
+        Nami's <span class="highlight-word">Cake</span> & Bake
+      </div>
     </div>
     <ul class="nav-links">
          <li><a href="index.html">Home</a></li>
