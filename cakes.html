@@ -356,7 +356,7 @@
           font-size: 1rem;         /* Keep it readable */
           color: var(--dark);      /* Or use a soft tone like #666 */
           text-align: center;
-          margin: 0.5rem 0 1.5rem;
+          margin: 0.5rem 0 1.5rem; /* Adjusted top margin */
           line-height: 1.6;
           opacity: 0.9;
           max-width: 600px;
@@ -1193,8 +1193,9 @@
     <!-- Get in Touch Section -->
     <section class="section" id="contact">
       <h2>Get in Touch</h2>
+      <!-- UPDATED Subtitle -->
       <p class="contact-subtitle">
-        Have questions, special requests, or want to register for a class? Send us a message!
+        Have questions about our cakes or want to request a custom order? Fill out the form below!
       </p>
 
       <div class="contact-container">
@@ -1229,16 +1230,15 @@
           </div>
         </div>
 
-        <!-- START: Updated Contact Form for Netlify -->
+        <!-- START: Updated Contact Form for Netlify (Cake Focus) -->
         <form
           class="contactForm"
-          name="cake-page-contact" /* --- ADDED: Name for Netlify --- */
+          name="cake-page-inquiry" /* --- UPDATED: More specific name --- */
           method="POST"
-          netlify /* --- ADDED: Netlify attribute --- */
-          /* --- REMOVED: action attribute --- */
+          netlify
         >
-          <!-- Hidden input for Netlify forms processing, value MUST match form name -->
-          <input type="hidden" name="form-name" value="cake-page-contact" />
+          <!-- Hidden input for Netlify forms processing -->
+          <input type="hidden" name="form-name" value="cake-page-inquiry" />
 
           <div class="form-group">
             <label for="name">Your Name</label>
@@ -1277,52 +1277,41 @@
           </div>
 
           <div class="form-group">
-            <label for="subject">Subject / Class Type</label>
-            <select id="subject" name="subject" class="select input-field" required>
-               <option value="">Select a subject or class...</option>
-               <option value="general-inquiry">General Inquiry</option>
+            <!-- UPDATED Label -->
+            <label for="inquiry-type">Inquiry Type / Cake Category</label>
+            <!-- UPDATED ID and Name -->
+            <select id="inquiry-type" name="inquiry-type" class="select input-field" required>
+               <!-- UPDATED Options -->
+               <option value="">Select inquiry type...</option>
                <option value="custom-cake-order">Custom Cake Order Inquiry</option>
-               <option value="north-indian">North Indian Cooking Class</option>
-               <option value="south-indian">South Indian Cooking Class</option>
-               <option value="cake-basics">Cake Basics Class</option>
-               <option value="bread-making">Bread Making Class</option>
-               <option value="indian-snacks">Indian Snacks Class</option>
-               <option value="kids-cookie">Kids Cookie Decorating Class</option>
-               <option value="kids-cupcake">Kids Cupcake Workshop</option>
-               <option value="ice-cream">Ice Cream Making Class</option>
-               <option value="birthday-party">Birthday Party Inquiry</option>
-               <option value="holiday-camp">Holiday Baking Camp Inquiry</option>
-               <option value="other">Other</option>
+               <option value="general-cake-question">General Cake Question</option>
+               <option value="chocolate-cake-inquiry">Chocolate Cake Inquiry</option>
+               <option value="truffle-cake-inquiry">Truffle Cake Inquiry</option>
+               <option value="fondant-cake-inquiry">Fondant/Semi-Fondant Cake Inquiry</option>
+               <option value="fresh-cream-cake-inquiry">Fresh Cream Cake Inquiry</option>
+               <option value="specific-cake-inquiry">Question about a specific cake shown</option>
+               <option value="other-cake-inquiry">Other Cake-Related Inquiry</option>
             </select>
           </div>
 
-          <div class="form-group" id="participants-group" style="display: none;">
-            <label for="participants">Number of Participants (for classes)</label>
-            <input
-              type="number"
-              id="participants"
-              name="participants"
-              min="1"
-              class="input-field"
-              placeholder="Enter number"
-            />
-          </div>
+          <!-- REMOVED Participants Group -->
+          <!-- <div class="form-group" id="participants-group" style="display: none;"> ... </div> -->
 
           <div class="form-group">
-            <label for="message">Your Message / Notes</label>
+            <label for="message">Your Message / Cake Details</label> <!-- Slightly updated label -->
             <textarea
               id="message"
               class="input-field"
               name="message"
-              placeholder="Type your message, class details, or questions here..."
+              placeholder="Please provide details about your inquiry or custom cake request (e.g., occasion, theme, servings, date needed)..." /* Updated placeholder */
               rows="5"
               required
             ></textarea>
           </div>
 
-          <!-- REMOVED: Getform specific hidden input <input type="hidden" name="_form_name" ...> -->
 
-          <button type="submit" class="btn">Send Message / Register</button>
+          <!-- UPDATED Button Text -->
+          <button type="submit" class="btn">Send Inquiry</button>
         </form>
         <!-- END: Updated Contact Form -->
 
@@ -1662,55 +1651,16 @@
           // Update cart count on initial load
           updateCartCount();
 
-          // --- START: Contact Form Logic (for Netlify submission) ---
-          const subjectSelect = document.getElementById('subject');
-          const participantsGroup = document.getElementById('participants-group');
-          const participantsInput = document.getElementById('participants');
-          const contactForm = document.querySelector("#contact .contactForm"); // Target the form within the #contact section
-
-          // Function to handle participant field visibility and requirement
-          const handleSubjectChange = () => {
-              if (!subjectSelect || !participantsGroup || !participantsInput) return; // Safety check
-
-              const selectedValue = subjectSelect.value;
-              const isClass = selectedValue.includes('Class') || selectedValue.includes('Workshop') || selectedValue.includes('Camp');
-
-              if (isClass) {
-                  participantsGroup.style.display = 'block';
-                  participantsInput.required = true; // Make required if it's a class
-              } else {
-                  participantsGroup.style.display = 'none';
-                  participantsInput.required = false; // Not required otherwise
-                  participantsInput.value = ''; // Clear value if hidden
-              }
-          };
-
-          // Add event listener to the subject dropdown
-          if (subjectSelect) {
-              subjectSelect.addEventListener('change', handleSubjectChange);
-              // Initial check in case the page loads with a class pre-selected
-              handleSubjectChange();
-          } else {
-              console.warn("Subject select element not found in #contact form.");
-          }
-
-          // Add submit listener JUST for participant validation
-          if (contactForm) {
-              contactForm.addEventListener("submit", function (e) {
-                 // Participant Validation Check
-                 if (participantsInput && participantsInput.required && (!participantsInput.value || parseInt(participantsInput.value) < 1)) {
-                     alert('Please enter a valid number of participants (at least 1) for the selected class.');
-                     e.preventDefault(); // Stop form submission ONLY if invalid
-                     return; // Exit the handler
-                 }
-                 // If validation passes, the form will submit normally to Netlify
-                 console.log("Form validated, submitting to Netlify...");
-                 // --- REMOVED e.preventDefault() here ---
-                 // --- REMOVED fetch() block here ---
-              });
-          } else {
-             console.warn("Contact form not found in #contact section.");
-          }
+          // --- START: Contact Form Logic (REMOVED - No JS needed for basic Netlify forms) ---
+          // const contactForm = document.querySelector("#contact .contactForm");
+          // if (contactForm) {
+          //     contactForm.addEventListener("submit", function (e) {
+          //          // No validation or fetch needed for basic Netlify submission
+          //          console.log("Form submitting to Netlify...");
+          //     });
+          // } else {
+          //    console.warn("Contact form not found in #contact section.");
+          // }
           // --- END: Contact Form Logic ---
 
 
