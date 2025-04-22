@@ -51,12 +51,20 @@ nav {
   align-items: center;
 }
 
-.logo {
-  font-family: "Playfair Display", serif;
-  font-size: 1.8rem;
-  color: var(--accent);
+.logo-text {
+  
+  font-family: "Playfair Display", serif; 
+  font-size: 1.8rem; 
   font-weight: bold;
+  color: #333333; 
+                 
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+ 
 }
+.logo-text .highlight-word {
+  color: #F4ACB7; 
+}
+
 
 .nav-links {
   display: flex;
@@ -107,7 +115,11 @@ nav {
 
 /* Hero Section (Used on Classes page) */
 .classes-hero {
-  background: radial-gradient(circle, var(--primary), rgba(255, 255, 255, 0.6));
+  background:radial-gradient(
+  circle,
+  #f8a7bb 0%,     /* lighter pink in center */
+  #e05e85 100%    /* your original primary pink on edges */
+);
 
   color: white;
   padding: 100px 20px;
@@ -343,7 +355,7 @@ nav {
 /* CTA Section (General Use) */
 .cta {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"); /* Consider a local image */
+    url("assets/cta-bg.jpg"); /* Consider a local image */
   background-size: cover;
   background-position: center;
   color: white;
