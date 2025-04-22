@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart | Nami's Cake and Bake</title>
-    <link rel="shortcut icon" href="assets/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon_io/favicon-16x16.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css"> <!-- Link the main stylesheet -->
+    <link rel="stylesheet" href="styles.css"> 
     <style>
         .cart-container {
             max-width: 900px;
@@ -105,6 +105,9 @@
             padding: 12px 30px;
             font-size: 1.1rem;
         }
+        .checkout-btn:hover{
+            background-color: #d14e73;
+        }
 
         .empty-cart-message {
             text-align: center;
@@ -149,10 +152,11 @@
     <!-- Navigation -->
  <nav>
     <div class="nav-container">
-      <div class="brand">
-        <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
-        <div class="logo">Nami's Cake and Bake</div>
-      </div>
+        <div class="brand">
+            <div class="logo-text">
+              Nami's <span class="highlight-word">Cake</span> & Bake
+            </div>
+          </div>
       <ul class="nav-links">
            <li><a href="index.html">Home</a></li>
            <li><a href="cakes.html">Cakes</a></li>
