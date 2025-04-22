@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nami's Cake and Bake - Home</title>
     <link
-      rel="shortcut icon"
-      href="assets/favicon_io/favicon-32x32.png"
-      type="image/x-icon"
-    />
-    <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
@@ -18,6 +13,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link rel="shortcut icon" href="assets/favicon_io/favicon-16x16.png" type="image/x-icon">
     <style>
       :root {
   --primary: #E05E85;
@@ -44,12 +40,22 @@
         line-height: 1.6;
       }
 
-      /* Navigation */
-      .nav-icon {
-    width: 64px;
-    height: 64px;
-    object-fit: contain; /* Ensures the logo doesn't stretch */
-  }
+      
+.logo-text {
+  
+  font-family: "Playfair Display", serif; 
+  font-size: 1.8rem; 
+  font-weight: bold;
+  color: #333333; 
+                 
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+ 
+}
+.logo-text .highlight-word {
+  color: #F4ACB7; 
+}
+
+
       nav {
         background-color: white;
         box-shadow: var(--shadow);
@@ -269,29 +275,7 @@
           justify-content: center; /* Keep buttons centered */
       }
 
-      /* Animations */
-      /* @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      } */
-
-      /* @keyframes fadeInScaleUp {
-        0% {
-          opacity: 0;
-          transform: scale(0.95);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-      } */
-
+    
       /* Floating decorations */
       .floating-decoration {
         position: absolute;
@@ -340,8 +324,8 @@
       }
 
       .btn:hover {
-        background-color: #ff7a8a;
-        border-color: #ff7a8a;
+        background-color: #d14e73;
+        border-color: #d14e73;
         transform: translateY(-3px);
         box-shadow: 0 7px 20px rgba(232, 90, 79, 0.4);
       }
@@ -956,31 +940,32 @@
   <body>
 
  <!-- Navigation -->
- <nav>
-  <div class="nav-container">
-    <div class="brand">
-      <img src="assets/favicon_io/favicon-32x32.png" alt="Logo Icon" class="nav-icon">
-      <div class="logo">Nami's Cake and Bake</div>
-    </div>
-    <ul class="nav-links">
-         <li><a href="index.html">Home</a></li>
-         <li><a href="cakes.html">Cakes</a></li>
-         <li><a href="gallery.html">Gallery</a></li>
-         <li><a href="classes.html">Classes</a></li>
-         <li><a href="upcoming-classes.html">Schedule</a></li>
-         <li id="cart-nav-item">
-             <a href="cart.html">
-                 <i class="fas fa-shopping-cart"></i> Cart
-                 <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
-             </a>
-         </li>
-         
-         <li id="login-nav-item"><a href="login.html">Login</a></li>
-         <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
-     </ul>
-    <button class="hamburger" id="hamburger">☰</button>
-  </div>
-</nav>
+    <nav>
+      <div class="nav-container">
+        <div class="brand">
+          <div class="logo-text">
+            Nami's <span class="highlight-word">Cake</span> & Bake
+          </div>
+        </div>
+        <ul class="nav-links">
+             <li><a href="index.html">Home</a></li>
+             <li><a href="cakes.html">Cakes</a></li>
+             <li><a href="gallery.html">Gallery</a></li>
+             <li><a href="classes.html">Classes</a></li>
+             <li><a href="upcoming-classes.html">Schedule</a></li>
+             <li id="cart-nav-item">
+                 <a href="cart.html">
+                     <i class="fas fa-shopping-cart"></i> Cart
+                     <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
+                 </a>
+             </li>
+             
+             <li id="login-nav-item"><a href="login.html">Login</a></li>
+             <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+         </ul>
+        <button class="hamburger" id="hamburger">☰</button>
+      </div>
+    </nav>
     <!-- SUPER AESTHETIC Hero Section -->
     <section class="hero">
       <!-- Floating decorative elements -->
