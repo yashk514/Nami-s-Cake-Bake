@@ -297,7 +297,7 @@
       }
 
       .cake-info .btn.add-to-cart-btn:hover {
-          background-color: #d14e73; 
+          background-color: #d14e73;
           transform: translateY(-2px);
       }
       /* --- End Fix --- */
@@ -353,16 +353,16 @@
 
 
        .contact-subtitle {
-  font-size: 1rem;         /* Keep it readable */
-  color: var(--dark);      /* Or use a soft tone like #666 */
-  text-align: center;
-  margin: 0.5rem 0 1.5rem;
-  line-height: 1.6;
-  opacity: 0.9;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
+          font-size: 1rem;         /* Keep it readable */
+          color: var(--dark);      /* Or use a soft tone like #666 */
+          text-align: center;
+          margin: 0.5rem 0 1.5rem;
+          line-height: 1.6;
+          opacity: 0.9;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+       }
 
 
       /* Info Box Styles (General for contact section) */
@@ -432,8 +432,8 @@
         gap: 20px;
       }
 
-      /* Contact Form Specific Styles */
-      .contactForm {
+      /* --- Contact Form Specific Styles (using cakes.html existing styles) --- */
+      .contactForm { /* Keep existing class name */
         display: flex;
         flex-direction: column;
         width: 100%; /* Take full grid column width */
@@ -455,9 +455,11 @@
         margin-bottom: 5px; /* Space below label */
         font-weight: 600;
          color: var(--accent);
+         font-size: 0.95rem; /* Consistent label size */
       }
 
-      .contactForm .input-field { /* Target inputs within this form */
+      /* --- Apply existing input-field styles to all inputs/select/textarea --- */
+      .contactForm .input-field {
         padding: 12px 15px;
         width: 100%;
         background-color: #f3e8e3; /* Light background */
@@ -465,10 +467,26 @@
         border: 1px solid #ddd; /* Subtle border */
         border-radius: 8px; /* Rounded corners */
         font-size: 1rem;
-        resize: vertical; /* Allow textarea resize */
         font-family: "Quicksand", sans-serif;
         transition: border-color 0.3s, box-shadow 0.3s;
+        box-sizing: border-box; /* Ensure padding included in width */
       }
+
+      .contactForm textarea.input-field {
+         resize: vertical; /* Allow textarea resize */
+         min-height: 100px;
+      }
+
+      .contactForm select.input-field { /* Basic select styling, can be enhanced */
+          appearance: none; /* Remove default arrow */
+          background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%235C4033%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+          background-repeat: no-repeat;
+          background-position: right 15px center;
+          background-size: .65em auto;
+          padding-right: 35px; /* Make space for arrow */
+          cursor: pointer;
+      }
+      /* --- End existing input field application --- */
 
       .contactForm .input-field:focus {
         outline: none;
@@ -485,7 +503,7 @@
       }
 
 
-      .contactForm .btn { /* Style submit button */
+      .contactForm .btn { /* Style submit button (using existing styles) */
         padding: 12px 20px;
         width: 100%;
         border-radius: 8px;
@@ -497,11 +515,15 @@
         cursor: pointer;
         transition: background-color 0.3s, transform 0.2s;
         margin-top: 10px; /* Space above button */
+        text-align: center; /* Ensure text is centered */
       }
 
       .contactForm .btn:hover {
         background-color: #d14e73; /* Darker primary */
          transform: translateY(-2px);
+      }
+      .contactForm .btn:active {
+         transform: translateY(0);
       }
 
 
@@ -740,7 +762,7 @@
                  <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
              </a>
          </li>
-         
+
          <li id="login-nav-item"><a href="login.html">Login</a></li>
          <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
      </ul>
@@ -752,8 +774,9 @@
       <div class="subtitle">Handcrafted with love since 2015</div>
     </header>
 
-    <!-- Repeat this structure for each cake category section -->
-    <div class="section">
+    <!-- Cake Category Sections (Chocolate, Truffle, etc.) -->
+    <!-- ... (These sections remain unchanged) ... -->
+     <div class="section">
       <h2>Chocolate Cakes</h2>
       <div class="carousel-container" id="chocolateCarousel">
         <div class="carousel-track" id="chocolateTrack">
@@ -1167,17 +1190,17 @@
          </div>
        </div>
 
-
     <!-- Get in Touch Section -->
     <section class="section" id="contact">
       <h2>Get in Touch</h2>
       <p class="contact-subtitle">
-        Have questions or special requests? Send us a message!
+        Have questions, special requests, or want to register for a class? Send us a message!
       </p>
 
       <div class="contact-container">
         <div class="contact-info">
-          <div class="info-box">
+          <!-- Info Boxes remain the same -->
+           <div class="info-box">
             <a
               href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7"
               class="locationlink"
@@ -1206,16 +1229,22 @@
           </div>
         </div>
 
+        <!-- START: Updated Contact Form for Netlify -->
         <form
           class="contactForm"
-          action="https://getform.io/f/bllyvdqb"
+          name="cake-page-contact" /* --- ADDED: Name for Netlify --- */
           method="POST"
+          netlify /* --- ADDED: Netlify attribute --- */
+          /* --- REMOVED: action attribute --- */
         >
+          <!-- Hidden input for Netlify forms processing, value MUST match form name -->
+          <input type="hidden" name="form-name" value="cake-page-contact" />
+
           <div class="form-group">
-            <label for="contact-name">Your Name</label> <!-- Changed ID -->
+            <label for="name">Your Name</label>
             <input
               type="text"
-              id="contact-name"
+              id="name"
               class="input-field"
               placeholder="Enter your name"
               name="name"
@@ -1224,10 +1253,10 @@
           </div>
 
           <div class="form-group">
-            <label for="contact-email">Email Address</label> <!-- Changed ID -->
+            <label for="email">Email Address</label>
             <input
               type="email"
-              id="contact-email"
+              id="email"
               class="input-field"
               placeholder="Enter your email"
               name="email"
@@ -1236,41 +1265,73 @@
           </div>
 
           <div class="form-group">
-            <label for="contact-phone">Contact Number</label> <!-- Changed ID -->
+            <label for="phone">Contact Number</label>
             <input
               type="tel"
-              id="contact-phone"
+              id="phone"
               class="input-field"
               placeholder="xxxxx xxxxx"
               name="phone"
+              required
             />
           </div>
 
           <div class="form-group">
-            <label for="contact-message">Your Message</label> <!-- Changed ID -->
+            <label for="subject">Subject / Class Type</label>
+            <select id="subject" name="subject" class="select input-field" required>
+               <option value="">Select a subject or class...</option>
+               <option value="general-inquiry">General Inquiry</option>
+               <option value="custom-cake-order">Custom Cake Order Inquiry</option>
+               <option value="north-indian">North Indian Cooking Class</option>
+               <option value="south-indian">South Indian Cooking Class</option>
+               <option value="cake-basics">Cake Basics Class</option>
+               <option value="bread-making">Bread Making Class</option>
+               <option value="indian-snacks">Indian Snacks Class</option>
+               <option value="kids-cookie">Kids Cookie Decorating Class</option>
+               <option value="kids-cupcake">Kids Cupcake Workshop</option>
+               <option value="ice-cream">Ice Cream Making Class</option>
+               <option value="birthday-party">Birthday Party Inquiry</option>
+               <option value="holiday-camp">Holiday Baking Camp Inquiry</option>
+               <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="participants-group" style="display: none;">
+            <label for="participants">Number of Participants (for classes)</label>
+            <input
+              type="number"
+              id="participants"
+              name="participants"
+              min="1"
+              class="input-field"
+              placeholder="Enter number"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message / Notes</label>
             <textarea
-              id="contact-message"
+              id="message"
               class="input-field"
               name="message"
-              placeholder="Type here..."
+              placeholder="Type your message, class details, or questions here..."
               rows="5"
               required
             ></textarea>
           </div>
 
-          <input
-            type="hidden"
-            name="_form_name"
-            value="Nami's Cake Contact Form"
-          />
+          <!-- REMOVED: Getform specific hidden input <input type="hidden" name="_form_name" ...> -->
 
-          <button type="submit" class="btn">Send Message</button>
+          <button type="submit" class="btn">Send Message / Register</button>
         </form>
+        <!-- END: Updated Contact Form -->
+
       </div>
     </section>
 
     <!-- Footer -->
     <footer>
+        <!-- Footer content remains unchanged -->
       <div class="footer-container">
         <div class="footer-col">
           <h3>Nami's Cake and Bake</h3>
@@ -1338,7 +1399,6 @@
       </div>
     </footer>
 
-    <!-- Old non-module script REMOVED -->
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -1450,6 +1510,11 @@
            let currentScrollIndex = 0; // Track index
 
             function calculateLayout() {
+                // Ensure items[0] exists before accessing offsetWidth
+                if (!items[0]) {
+                    console.error(`No items found to calculate layout for type: ${type}`);
+                    return false;
+                }
                 const itemStyle = window.getComputedStyle(items[0]);
                 const marginLeft = parseFloat(itemStyle.marginLeft) || 10; // Use fallback
                 const marginRight = parseFloat(itemStyle.marginRight) || 10;// Use fallback
@@ -1464,7 +1529,7 @@
                 const containerWidth = container.offsetWidth;
                  // Calculate visible items based on container, fallback for safety
                 visibleItems = Math.max(1, Math.floor(containerWidth / itemWidth));
-                if (window.innerWidth <= 768) { // Mobile override
+                 if (window.innerWidth <= 768) { // Mobile override
                     visibleItems = 1;
                  } else if (window.innerWidth <= 1024) { // Tablet override
                     visibleItems = 2;
@@ -1576,12 +1641,12 @@
 
                       const name = nameElement.textContent.trim();
                       const priceText = priceElement.textContent.trim();
-                      const price = priceText.replace(/[^0-9.]/g, ''); // Extract number
+                      // const price = priceText.replace(/[^0-9.]/g, ''); // Extract number - Not currently used in addToCart
                       const id = name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(); // Simple ID generation
                        const image = imgElement ? imgElement.src : ''; // Get image source
 
 
-                      if (!name || !price || !id) throw new Error("Extracted product data is invalid.");
+                      if (!name || !priceText || !id) throw new Error("Extracted product data is invalid.");
 
                        // Include image in product data sent to cart
                        const product = { id, name, price: priceText, image: image }; // Store original price text, add image
@@ -1597,50 +1662,70 @@
           // Update cart count on initial load
           updateCartCount();
 
-          // --- Other cakes.html specific JS ---
-          // Hover effects for cake boxes (moved from non-module script)
-           const cakeBoxes = document.querySelectorAll(".cake-box");
-            cakeBoxes.forEach((box) => {
-              box.addEventListener("mouseenter", function () {
-                this.style.transform = "translateY(-10px)";
-                this.style.boxShadow = "0 15px 30px rgba(0,0,0,0.15)";
-              });
-              box.addEventListener("mouseleave", function () {
-                this.style.transform = "translateY(0)";
-                this.style.boxShadow = "0 5px 15px rgba(0,0,0,0.1)";
-              });
-            });
+          // --- START: Contact Form Logic (for Netlify submission) ---
+          const subjectSelect = document.getElementById('subject');
+          const participantsGroup = document.getElementById('participants-group');
+          const participantsInput = document.getElementById('participants');
+          const contactForm = document.querySelector("#contact .contactForm"); // Target the form within the #contact section
 
-            // Contact form submission (moved from non-module script)
-            const contactForm = document.querySelector("#contact .contactForm");
-            if (contactForm) {
+          // Function to handle participant field visibility and requirement
+          const handleSubjectChange = () => {
+              if (!subjectSelect || !participantsGroup || !participantsInput) return; // Safety check
+
+              const selectedValue = subjectSelect.value;
+              const isClass = selectedValue.includes('Class') || selectedValue.includes('Workshop') || selectedValue.includes('Camp');
+
+              if (isClass) {
+                  participantsGroup.style.display = 'block';
+                  participantsInput.required = true; // Make required if it's a class
+              } else {
+                  participantsGroup.style.display = 'none';
+                  participantsInput.required = false; // Not required otherwise
+                  participantsInput.value = ''; // Clear value if hidden
+              }
+          };
+
+          // Add event listener to the subject dropdown
+          if (subjectSelect) {
+              subjectSelect.addEventListener('change', handleSubjectChange);
+              // Initial check in case the page loads with a class pre-selected
+              handleSubjectChange();
+          } else {
+              console.warn("Subject select element not found in #contact form.");
+          }
+
+          // Add submit listener JUST for participant validation
+          if (contactForm) {
               contactForm.addEventListener("submit", function (e) {
-                e.preventDefault();
-                 // Optionally disable button here
-                 // const submitBtn = contactForm.querySelector('button[type="submit"]');
-                 // if(submitBtn) submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
-                const formAction = this.action || "https://getform.io/f/bllyvdqb";
-                fetch(formAction, {
-                  method: "POST", body: new FormData(this), headers: { Accept: "application/json" },
-                }).then(response => {
-                    if (response.ok) {
-                         alert("Thank you! We will contact you soon.");
-                         contactForm.reset();
-                         // if(submitBtn) submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
-                    } else {
-                        response.json().then(data => console.error("Form submission error:", data)).catch(()=>{});
-                        alert("Oops! Something went wrong submitting the form.");
-                         // if(submitBtn) submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
-                    }
-                }).catch(error => {
-                    console.error("Fetch error:", error);
-                    alert("Error sending message: " + error);
-                     // if(submitBtn) submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
-                });
+                 // Participant Validation Check
+                 if (participantsInput && participantsInput.required && (!participantsInput.value || parseInt(participantsInput.value) < 1)) {
+                     alert('Please enter a valid number of participants (at least 1) for the selected class.');
+                     e.preventDefault(); // Stop form submission ONLY if invalid
+                     return; // Exit the handler
+                 }
+                 // If validation passes, the form will submit normally to Netlify
+                 console.log("Form validated, submitting to Netlify...");
+                 // --- REMOVED e.preventDefault() here ---
+                 // --- REMOVED fetch() block here ---
               });
-            } else {
-               console.warn("Contact form not found on cakes page.");
-            }
+          } else {
+             console.warn("Contact form not found in #contact section.");
+          }
+          // --- END: Contact Form Logic ---
+
+
+          // Hover effects for cake boxes (existing)
+          const cakeBoxes = document.querySelectorAll(".cake-box");
+          cakeBoxes.forEach((box) => {
+            box.addEventListener("mouseenter", function () {
+              this.style.transform = "translateY(-10px)";
+              this.style.boxShadow = "0 15px 30px rgba(0,0,0,0.15)";
+            });
+            box.addEventListener("mouseleave", function () {
+              this.style.transform = "translateY(0)";
+              this.style.boxShadow = "0 5px 15px rgba(0,0,0,0.1)";
+            });
+          });
 
       }); // End DOMContentLoaded
 
