@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upcoming Classes | Nami's Cake and Bake</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nami's Cake and Bake - Upcoming Classes</title>
     <link
       rel="shortcut icon"
-      href="assets/favicon_io/favicon-32x32.png"
+      href="assets/favicon_io/favicon-16x16.png"
       type="image/x-icon"
     />
     <link
@@ -20,479 +20,666 @@
     <link rel="stylesheet" href="styles.css" />
     <!-- Add specific styles if needed for the schedule cards and iframe -->
     <style>
-        /* Section styling */
-        .schedule-section, .calendar-widget-section {
-            padding: 40px 20px;
-            max-width: 1100px;
-            margin: 20px auto;
-            background-color: #fff;
-             border-radius: 8px;
-             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .schedule-section h2, .calendar-widget-section h2 {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            color: var(--accent);
-            margin-bottom: 30px;
-        }
+      /* Section styling */
+      .schedule-section,
+      .calendar-widget-section {
+        padding: 40px 20px;
+        max-width: 1100px;
+        margin: 20px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .schedule-section h2,
+      .calendar-widget-section h2 {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        color: var(--accent);
+        margin-bottom: 30px;
+      }
 
-        /* Card grid styling */
-        #class-schedule-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            gap: 25px;
-        }
-        /* Schedule Card styling (reusing or specific) - Renamed to schedule-card for clarity */
-        .schedule-card { /* Changed from .class-card to avoid potential conflicts if styles differ */
-            background-color: var(--background-light);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .schedule-card:hover {
-             transform: translateY(-5px);
-             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
+      /* Card grid styling */
+      #class-schedule-container {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(300px, 1fr)
+        ); /* Responsive grid */
+        gap: 25px;
+      }
+      /* Schedule Card styling (reusing or specific) - Renamed to schedule-card for clarity */
+      .schedule-card {
+        /* Changed from .class-card to avoid potential conflicts if styles differ */
+        background-color: var(--background-light);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .schedule-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
 
-        .schedule-card .class-info { /* Assuming you reuse class-info */
-             padding: 20px;
-             flex-grow: 1; /* Make info section fill space */
-             display: flex;
-             flex-direction: column;
-        }
+      .schedule-card .class-info {
+        /* Assuming you reuse class-info */
+        padding: 20px;
+        flex-grow: 1; /* Make info section fill space */
+        display: flex;
+        flex-direction: column;
+      }
 
-        .schedule-card h3 {
-             font-family: 'Playfair Display', serif;
-             color: var(--primary);
-             margin-bottom: 10px;
-             font-size: 1.4em;
-         }
-         .schedule-card .class-meta {
-             font-size: 0.9em;
-             color: var(--text-secondary);
-             margin-bottom: 15px;
-             display: flex;
-             flex-wrap: wrap; /* Allow wrapping on smaller screens */
-             gap: 5px 15px; /* Row and column gap */
-         }
-         .schedule-card .class-meta span {
-              display: inline-flex; /* Align icon and text */
-              align-items: center;
-              gap: 5px; /* Space between icon and text */
-         }
-         /* Ensure icons have a fixed width for alignment */
-         .schedule-card .class-meta i {
-            width: 14px; /* Adjust as needed */
-            text-align: center;
-         }
-         .schedule-card .class-description {
-             font-size: 0.95em;
-             margin-bottom: 15px;
-             color: var(--text-primary);
-             line-height: 1.5;
-             flex-grow: 1; /* Push price/button down */
-         }
-         .schedule-card .price {
-             font-weight: bold;
-             color: var(--accent);
-             margin-bottom: 15px;
-             font-size: 1.1em;
-             display: block; /* Ensure it takes its own line */
-         }
-         .schedule-card .btn { /* Style the button */
-            align-self: flex-start; /* Align button to the left */
-            margin-top: auto; /* Push button to bottom if description is short */
-         }
+      .schedule-card h3 {
+        font-family: "Playfair Display", serif;
+        color: var(--primary);
+        margin-bottom: 10px;
+        font-size: 1.4em;
+      }
+      .schedule-card .class-meta {
+        font-size: 0.9em;
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        gap: 5px 15px; /* Row and column gap */
+      }
+      .schedule-card .class-meta span {
+        display: inline-flex; /* Align icon and text */
+        align-items: center;
+        gap: 5px; /* Space between icon and text */
+      }
+      /* Ensure icons have a fixed width for alignment */
+      .schedule-card .class-meta i {
+        width: 14px; /* Adjust as needed */
+        text-align: center;
+      }
+      .schedule-card .class-description {
+        font-size: 0.95em;
+        margin-bottom: 15px;
+        color: var(--text-primary);
+        line-height: 1.5;
+        flex-grow: 1; /* Push price/button down */
+      }
+      .schedule-card .price {
+        font-weight: bold;
+        color: var(--accent);
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        display: block; /* Ensure it takes its own line */
+      }
+      .schedule-card .btn {
+        /* Style the button */
+        align-self: flex-start; /* Align button to the left */
+        margin-top: auto; /* Push button to bottom if description is short */
+      }
 
-         /* Styling for loading/error messages inside the container */
-         #class-schedule-container p {
-             text-align: center;
-             grid-column: 1 / -1; /* Span full width */
-             padding: 20px;
-             font-size: 1.1em;
-         }
-         #class-schedule-container .fa-spinner {
-             color: var(--primary);
-             margin-right: 8px;
-         }
-          #class-schedule-container p.error-message {
-              color: red;
-              font-weight: bold;
-              line-height: 1.5;
-          }
+      /* Styling for loading/error messages inside the container */
+      #class-schedule-container p {
+        text-align: center;
+        grid-column: 1 / -1; /* Span full width */
+        padding: 20px;
+        font-size: 1.1em;
+      }
+      #class-schedule-container .fa-spinner {
+        color: var(--primary);
+        margin-right: 8px;
+      }
+      #class-schedule-container p.error-message {
+        color: red;
+        font-weight: bold;
+        line-height: 1.5;
+      }
 
-        /* Calendar Iframe Styling */
-        .calendar-widget-section iframe {
-            border: 1px solid #ddd; /* Optional: adds a subtle border */
-            border-radius: 4px;
-            width: 100%; /* Make iframe responsive */
-            max-width: 800px; /* Maintain Google's intended max width */
-            height: 600px; /* Default height */
-            display: block; /* Center the iframe */
-            margin: 0 auto; /* Center the iframe */
-        }
+      /* Calendar Iframe Styling */
+      .calendar-widget-section iframe {
+        border: 1px solid #ddd; /* Optional: adds a subtle border */
+        border-radius: 4px;
+        width: 100%; /* Make iframe responsive */
+        max-width: 800px; /* Maintain Google's intended max width */
+        height: 600px; /* Default height */
+        display: block; /* Center the iframe */
+        margin: 0 auto; /* Center the iframe */
+      }
+
+      .logo-text {
+  font-family: 'Abril Fatface', serif; /* or any font you prefer */
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4B0019; /* deep burgundy that contrasts beautifully with your pink */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav>
       <div class="nav-container">
         <div class="brand">
-          <img
-            src="assets/favicon_io/favicon-32x32.png"
-            alt="Logo Icon"
-            class="nav-icon"
-          />
-          <div class="logo">Nami's Cake and Bake</div>
-        </div>
+            <div class="logo-text">
+              Nami's <span class="highlight-word">Cake</span> & Bake
+            </div>
+          </div>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="cakes.html">Cakes</a></li>
-          <li><a href="classes.html">Classes</a></li>
-          <li><a href="upcoming-classes.html" class="active">Schedule</a></li> <!-- Active link -->
           <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="classes.html">Classes</a></li>
+          <li><a href="upcoming-classes.html">Schedule</a></li>
           <li id="cart-nav-item">
-              <a href="cart.html">
-                  <i class="fas fa-shopping-cart"></i> Cart
-                  <span id="cart-count" style="background-color: var(--primary); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7em; margin-left: 4px; display: none;">0</span>
-              </a>
+            <a href="cart.html">
+              <i class="fas fa-shopping-cart"></i> Cart
+              <span
+                id="cart-count"
+                style="
+                  background-color: var(--primary);
+                  color: white;
+                  border-radius: 50%;
+                  padding: 2px 6px;
+                  font-size: 0.7em;
+                  margin-left: 4px;
+                  display: none;
+                "
+                >0</span
+              >
+            </a>
           </li>
 
           <li id="login-nav-item"><a href="login.html">Login</a></li>
-          <li id="profile-nav-item" style="display:none;"><a href="profile.html">My Profile</a></li>
+          <li id="profile-nav-item" style="display: none">
+            <a href="profile.html">My Profile</a>
+          </li>
         </ul>
         <button class="hamburger" id="hamburger">☰</button>
       </div>
     </nav>
 
-    <section class="classes-hero"> <!-- Reused hero style -->
-        <h1>Upcoming Class Schedule</h1>
-        <p>Find our currently scheduled classes below and register to secure your spot! You can also browse the full calendar view.</p>
+    <section class="classes-hero">
+      <!-- Reused hero style -->
+      <h1>Upcoming Class Schedule</h1>
+      <p>
+        Find our currently scheduled classes below and register to secure your
+        spot! You can also browse the full calendar view.
+      </p>
     </section>
 
     <!-- Section for Dynamically Loaded Class Cards -->
     <section class="schedule-section">
-        <h2>Available Classes (Register Below)</h2>
-        <div id="class-schedule-container">
-            <!-- Classes will be loaded here by JavaScript -->
-            <p><i class="fas fa-spinner fa-spin"></i> Loading schedule...</p>
-        </div>
+      <h2>Available Classes (Register Below)</h2>
+      <div id="class-schedule-container">
+        <!-- Classes will be loaded here by JavaScript -->
+        <p><i class="fas fa-spinner fa-spin"></i> Loading schedule...</p>
+      </div>
     </section>
 
     <!-- Section for Google Calendar Iframe Embed -->
     <section class="calendar-widget-section">
-        <h2>Full Calendar View</h2>
-        <!-- MAKE SURE THE calendarId in the JS below matches the src here -->
-        <iframe src="https://calendar.google.com/calendar/embed?src=c_c0d99f764555f8d5d987025381d4ba498138ccecf99b4cc9c14e522cd5e54b66%40group.calendar.google.com&ctz=Asia%2FKolkata" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-        <!-- Note: Added ctz=Asia%2FKolkata for Indian timezone, adjust if needed -->
+      <h2>Full Calendar View</h2>
+      <!-- MAKE SURE THE calendarId in the JS below matches the src here -->
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=c_c0d99f764555f8d5d987025381d4ba498138ccecf99b4cc9c14e522cd5e54b66%40group.calendar.google.com&ctz=Asia%2FKolkata"
+        style="border: 0"
+        width="800"
+        height="600"
+        frameborder="0"
+        scrolling="no"
+      ></iframe>
+      <!-- Note: Added ctz=Asia%2FKolkata for Indian timezone, adjust if needed -->
     </section>
 
-
-    <!-- Footer -->
-     <footer>
-        <div class="footer-container">
-           <div class="footer-col">
-             <h3>Nami's Cake and Bake</h3>
-             <p>Bringing joy through baking and cooking since 2010. Inspiring creativity in the kitchen.</p>
-             <div class="social-links">
-               <a href="https://www.instagram.com/namis_cakenbake_/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-               <a href="https://wa.me/918767542742" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-             </div>
-           </div>
-           <div class="footer-col">
-             <h3>Quick Links</h3>
-             <ul class="footer-links">
-               <li><a href="index.html">Home</a></li>
-               <li><a href="cakes.html">Our Cakes</a></li>
-               <li><a href="classes.html">Class Catalog</a></li>
-               <li><a href="upcoming-classes.html">Schedule</a></li>
-               <li><a href="gallery.html">Gallery</a></li>
-               <li><a href="contact.html">Contact</a></li>
-             </ul>
-           </div>
-           <div class="footer-col">
-             <h3>Class Categories</h3>
-             <ul class="footer-links">
-               <li><a href="classes.html#indian">Indian Cuisine</a></li>
-               <li><a href="classes.html#baking">Baking Classes</a></li>
-               <li><a href="classes.html#snacks">Snacks & Quick Bites</a></li>
-               <li><a href="classes.html#kids">Kids Classes</a></li>
-               <li><a href="classes.html#contact-cta">Private Events</a></li>
-             </ul>
-           </div>
-           <div class="footer-col">
-             <h3>Contact Us</h3>
-             <ul class="footer-links">
-               <li><a href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7" target="_blank" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i>Vishrambag, Sangli</a></li>
-               <li><i class="fas fa-phone"></i>+91 8767542742</li>
-               <li><i class="fas fa-envelope"></i>info@namiscakeandbake.com</li>
-               <li><i class="fas fa-clock"></i>Mon-Sat: 9am-7pm</li>
-             </ul>
-           </div>
+    <!-- Footer (Copy the exact footer structure from classes.html) -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Nami's Cake and Bake</h3>
+          <p>
+            Bringing joy through baking and cooking since 2010. Inspiring
+            creativity in the kitchen.
+          </p>
+          <div class="social-links">
+            <a
+              href="https://www.instagram.com/namis_cakenbake_/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://wa.me/918767542742"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
         </div>
-        <div class="copyright">
-          <p>© 2025 Nami's Cake and Bake. All Rights Reserved.</p>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cakes.html">Our Cakes</a></li>
+            <li><a href="classes.html">Class Catalog</a></li>
+            <li><a href="upcoming-classes.html">Schedule</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
         </div>
-      </footer>
+        <div class="footer-col">
+          <h3>Class Categories</h3>
+          <ul class="footer-links">
+            <li><a href="classes.html#indian">Indian Cuisine</a></li>
+            <li><a href="classes.html#baking">Baking Classes</a></li>
+            <li><a href="classes.html#snacks">Snacks & Quick Bites</a></li>
+            <li><a href="classes.html#kids">Kids Classes</a></li>
+            <li><a href="classes.html#contact-cta">Private Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li>
+              <a
+                href="https://maps.app.goo.gl/rrWJ13ZhduxjfGzz7"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fas fa-map-marker-alt"></i>Vishrambag, Sangli</a
+              >
+            </li>
+            <li><i class="fas fa-phone"></i>+91 8767542742</li>
+            <li><i class="fas fa-envelope"></i>info@namiscakeandbake.com</li>
+            <li><i class="fas fa-clock"></i>Mon-Sat: 9am-7pm</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 Nami's Cake and Bake. All Rights Reserved.</p>
+      </div>
+    </footer>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NXYG9PJ8KQ"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-NXYG9PJ8KQ');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-NXYG9PJ8KQ");
     </script>
 
     <!-- Module Script -->
-     <script type="module">
-       // Import functions from the Firebase SDKs
-       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-       import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    <script type="module">
+      // Import functions from the Firebase SDKs
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            // NOTE: This apiKey is for Firebase Authentication, NOT Google Calendar
-            apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0", // Replace with your actual Firebase API Key if needed for auth
-            authDomain: "namis-cake-bake-auth.firebaseapp.com",
-            projectId: "namis-cake-bake-auth",
-            storageBucket: "namis-cake-bake-auth.firebasestorage.app",
-            messagingSenderId: "213318410638",
-            appId: "1:213318410638:web:5d0531e93ed38f434c04df",
-            measurementId: "G-HPWS91PN1C" // Optional Measurement ID for Firebase Analytics
-        };
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        // NOTE: This apiKey is for Firebase Authentication, NOT Google Calendar
+        apiKey: "AIzaSyCmCvKtfl6QtA4EUEyTsfQxczvpy-5jTt0",
+        authDomain: "namis-cake-bake-auth.firebaseapp.com",
+        projectId: "namis-cake-bake-auth",
+        storageBucket: "namis-cake-bake-auth.firebasestorage.app",
+        messagingSenderId: "213318410638",
+        appId: "1:213318410638:web:5d0531e93ed38f434c04df",
+        measurementId: "G-HPWS91PN1C",
+      };
 
-       // Initialize Firebase
-       const app = initializeApp(firebaseConfig);
-       const auth = getAuth(app);
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
 
-       // --- Cart Management Functions ---
-       const CART_KEY = 'namiShopCart';
-       function getCart() {
-           const cart = localStorage.getItem(CART_KEY);
-           try { return cart ? JSON.parse(cart) : []; }
-           catch (e) { console.error("Error parsing cart:", e); localStorage.removeItem(CART_KEY); return []; }
-       }
-       function updateCartCount() {
-           try {
-               const cart = getCart();
-               const cartCountSpan = document.getElementById('cart-count');
-               if (cartCountSpan) {
-                   const totalItems = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
-                   cartCountSpan.textContent = totalItems;
-                   cartCountSpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
-               }
-           } catch (error) { console.error("Error updating cart count:", error); }
-       }
-       // --- End Cart Functions ---
+      // --- Cart Management Functions (Copied from classes.html) ---
+      const CART_KEY = "namiShopCart";
+      function getCart() {
+        const cart = localStorage.getItem(CART_KEY);
+        try {
+          return cart ? JSON.parse(cart) : [];
+        } catch (e) {
+          console.error("Error parsing cart:", e);
+          localStorage.removeItem(CART_KEY);
+          return [];
+        }
+      }
+      function updateCartCount() {
+        try {
+          const cart = getCart();
+          const cartCountSpan = document.getElementById("cart-count");
+          if (cartCountSpan) {
+            const totalItems = cart.reduce(
+              (sum, item) => sum + (Number(item.quantity) || 0),
+              0
+            );
+            cartCountSpan.textContent = totalItems;
+            cartCountSpan.style.display =
+              totalItems > 0 ? "inline-block" : "none";
+          }
+        } catch (error) {
+          console.error("Error updating cart count:", error);
+        }
+      }
+      // --- End Cart Functions ---
 
-       // --- Page Load Logic ---
-       document.addEventListener("DOMContentLoaded", function () {
-           console.log("upcoming-classes.html: DOM fully loaded");
+      // --- Page Load Logic ---
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("upcoming-classes.html: DOM fully loaded");
 
-           const hamburger = document.getElementById("hamburger");
-           const navLinks = document.querySelector(".nav-links");
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.querySelector(".nav-links");
 
-           // Hamburger Toggle
-           if (hamburger && navLinks) {
-               hamburger.addEventListener("click", () => {
-                   navLinks.classList.toggle("active");
-               });
-           } else { console.warn("Hamburger/NavLinks not found on upcoming-classes.html"); }
-
-           // Auth State Listener
-           onAuthStateChanged(auth, (user) => {
-               const loginNavItem = document.getElementById('login-nav-item');
-               const profileNavItem = document.getElementById('profile-nav-item');
-               if (user) {
-                   if(loginNavItem) loginNavItem.style.display = 'none';
-                   if(profileNavItem) profileNavItem.style.display = 'list-item';
-               } else {
-                   if(loginNavItem) loginNavItem.style.display = 'list-item';
-                   if(profileNavItem) profileNavItem.style.display = 'none';
-               }
-           });
-
-           // Update cart count on initial load
-           updateCartCount();
-
-           // --- Load Google Calendar Events ---
-           fetchUpcomingClasses();
-       }); // End of DOMContentLoaded
-
-
-        // --- Google Calendar Fetching Logic ---
-        async function fetchUpcomingClasses() {
-            // !!! Configuration Values !!!
-            const calendarId = 'c_c0d99f764555f8d5d987025381d4ba498138ccecf99b4cc9c14e522cd5e54b66@group.calendar.google.com'; // Your public calendar ID
-            const apiKey = 'AIzaSyBK0TeRwIJ2M6Z56w3StOnkcQplPoq3Fhg'; // <-- YOUR GOOGLE CALENDAR API KEY IS HERE
-
-            const container = document.getElementById('class-schedule-container');
-            if (!container) {
-                console.error("Schedule container not found!");
-                return;
-            }
-
-            if (!apiKey || apiKey === 'YOUR_GOOGLE_API_KEY_HERE') {
-                 console.error("CRITICAL: Google API Key is missing or still set to the default placeholder 'YOUR_GOOGLE_API_KEY_HERE'. Update the apiKey variable in the script.");
-                 container.innerHTML = `<p class="error-message">Configuration Error: API Key is missing or invalid.<br>Please contact the site administrator.</p><p>The full calendar may still be visible below.</p>`;
-                 return;
-            }
-
-            const timeMin = new Date().toISOString(); // Get events starting from now
-            const maxResults = 15; // How many upcoming events to show
-            const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?key=${apiKey}&timeMin=${timeMin}&orderBy=startTime&singleEvents=true&maxResults=${maxResults}`;
-
-            container.innerHTML = `<p><i class="fas fa-spinner fa-spin"></i> Loading schedule...</p>`;
-
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                     let errorData = { message: `HTTP error! status: ${response.status} - ${response.statusText}` };
-                     try {
-                         const errorJson = await response.json();
-                         if (errorJson.error && errorJson.error.message) {
-                            errorData.message = errorJson.error.message;
-                            errorData.details = errorJson.error;
-                         }
-                     } catch (e) { /* Ignore parsing error */ }
-
-                     console.error("Google Calendar API Error:", errorData);
-                     let userErrorMessage = `Could not load class schedule details due to an API error (${response.status}).`;
-                     if (response.status === 403) {
-                         userErrorMessage += "<br>Possible causes: API key restrictions (HTTP referrers), API not enabled, or Calendar not public.";
-                     } else if (response.status === 400) {
-                         userErrorMessage += "<br>Possible causes: Invalid API key format or incorrect Calendar ID.";
-                     } else {
-                         userErrorMessage += "<br>Please try again later or contact us for assistance.";
-                     }
-                     userErrorMessage += "<br>(Details logged to browser console).";
-                     container.innerHTML = `<p class="error-message">${userErrorMessage}</p>`;
-                     return;
-                }
-                const data = await response.json();
-
-                if (data.items && data.items.length > 0) {
-                    displayClasses(data.items);
-                } else {
-                    container.innerHTML = '<p>No upcoming classes scheduled at the moment. Please check back soon, browse the full calendar below, or contact us!</p>';
-                }
-            } catch (error) {
-                console.error('Error fetching or processing Google Calendar events:', error);
-                container.innerHTML = `<p class="error-message">Could not load class schedule details. <br>This might be due to network problems or a script error. Please try again later or contact us for assistance. <br>(Details logged to browser console).</p>`;
-            }
+        // Hamburger Toggle
+        if (hamburger && navLinks) {
+          hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+          });
+        } else {
+          console.warn("Hamburger/NavLinks not found on upcoming-classes.html");
         }
 
-        function displayClasses(events) {
-            const container = document.getElementById('class-schedule-container');
-            if (!container) return;
-            container.innerHTML = ''; // Clear loading
+        // Auth State Listener
+        onAuthStateChanged(auth, (user) => {
+          const loginNavItem = document.getElementById("login-nav-item");
+          const profileNavItem = document.getElementById("profile-nav-item");
+          if (user) {
+            if (loginNavItem) loginNavItem.style.display = "none";
+            if (profileNavItem) profileNavItem.style.display = "list-item";
+          } else {
+            if (loginNavItem) loginNavItem.style.display = "list-item";
+            if (profileNavItem) profileNavItem.style.display = "none";
+          }
+        });
 
-            events.forEach(event => {
-                if (!event.summary || !(event.start?.dateTime || event.start?.date)) {
-                    console.warn("Skipping event with missing summary or start date/time:", event);
-                    return;
-                }
-                if (event.status === 'cancelled') {
-                     console.log("Skipping cancelled event:", event.summary);
-                    return;
-                }
+        // Update cart count on initial load
+        updateCartCount();
 
-                const isAllDay = !!event.start.date;
-                const startDate = new Date(event.start.dateTime || event.start.date);
-                let endDate = isAllDay ? startDate : (event.end?.dateTime ? new Date(event.end.dateTime) : startDate);
+        // --- Load Google Calendar Events ---
+        fetchUpcomingClasses();
+      }); // End of DOMContentLoaded
 
-                const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
-                const eventDateStr = startDate.toLocaleDateString('en-IN', dateOptions);
-                let eventTimeStr = '';
-                if (!isAllDay) {
-                    const startTime = startDate.toLocaleTimeString('en-US', timeOptions);
-                    const endTime = endDate.toLocaleTimeString('en-US', timeOptions);
-                    const timeZoneAbbr = startDate.toLocaleTimeString('en-US',{timeZoneName:'short'}).split(' ').pop();
-                    eventTimeStr = `${startTime} - ${endTime} ${timeZoneAbbr || ''}`.trim();
-                } else {
-                    eventTimeStr = "All Day";
-                }
+      // --- Google Calendar Fetching Logic ---
+      async function fetchUpcomingClasses() {
+        // !!! Configuration Values !!!
+        const calendarId =
+          "c_c0d99f764555f8d5d987025381d4ba498138ccecf99b4cc9c14e522cd5e54b66@group.calendar.google.com"; // Your public calendar ID
+        // Your Google Calendar API Key from Google Cloud Console
+        const apiKey = "AIzaSyBK0TeRwIJ2M6Z56w3StOnkcQplPoq3Fhg"; // <-- YOUR KEY IS HERE
 
-                let price = "Contact us";
-                let spots = "";
-                let ageInfo = "";
-                let descriptionText = event.description || "";
+        const container = document.getElementById("class-schedule-container");
+        if (!container) {
+          console.error("Schedule container not found!");
+          return;
+        }
 
-                if (event.description) {
-                    descriptionText = event.description.replace(/<br\s*\/?>/gi, '\n');
-                    const priceMatch = descriptionText.match(/(?:^|\s)Price:\s*₹?\s*([\d,]+)/im);
-                    if (priceMatch && priceMatch[1]) {
-                         price = `₹${priceMatch[1].replace(/,/g, '')}`;
-                         descriptionText = descriptionText.replace(/(?:^|\s)Price:\s*₹?\s*[\d,]+/im, '').trim();
-                    }
-                    const spotsMatch = descriptionText.match(/(?:^|\s)(?:Spots Available|Max Spots|Seats):\s*(\d+)/im);
-                     if (spotsMatch && spotsMatch[1]) {
-                         spots = spotsMatch[1];
-                         descriptionText = descriptionText.replace(/(?:^|\s)(?:Spots Available|Max Spots|Seats):\s*\d+/im, '').trim();
-                    }
-                     const ageMatch = descriptionText.match(/(?:^|\s)Ages?:\s*([\w\s-]+)/im);
-                     if (ageMatch && ageMatch[1]) {
-                        ageInfo = ageMatch[1].trim();
-                        descriptionText = descriptionText.replace(/(?:^|\s)Ages?:\s*[\w\s-]+/im, '').trim();
-                     }
-                     descriptionText = descriptionText.replace(/(\r\n|\n|\r){2,}/gm, "\n").replace(/\n/g, " ").replace(/\s\s+/g, ' ').trim();
-                     const maxDescLength = 140;
-                     if (descriptionText.length > maxDescLength) {
-                        descriptionText = descriptionText.substring(0, maxDescLength).trim() + "...";
-                     }
-                }
+        // --- Check if API key is the placeholder ---
+        // CORRECTED CHECK: Verifies if the key is missing OR if it's still the default placeholder string.
+        if (!apiKey || apiKey === "YOUR_GOOGLE_API_KEY_HERE") {
+          // <-- *** THIS IS THE CORRECTED LINE ***
+          console.error(
+            "CRITICAL: Google API Key is missing or still set to the default placeholder 'YOUR_GOOGLE_API_KEY_HERE'. Update the apiKey variable in the script."
+          );
+          container.innerHTML = `<p class="error-message">Configuration Error: API Key is missing or invalid.<br>Please contact the site administrator.</p><p>The full calendar may still be visible below.</p>`;
+          return; // Stop execution if key is missing or is the placeholder
+        }
 
-                const encodedDateString = encodeURIComponent(eventDateStr + (isAllDay ? '' : ' ' + eventTimeStr));
-                const encodedClassName = encodeURIComponent(event.summary);
+        const timeMin = new Date().toISOString(); // Get events starting from now
+        const maxResults = 15; // How many upcoming events to show
 
-                const classCard = document.createElement('div');
-                classCard.className = 'schedule-card';
-                classCard.innerHTML = `
+        // Construct the API URL
+        const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
+          calendarId
+        )}/events?key=${apiKey}&timeMin=${timeMin}&orderBy=startTime&singleEvents=true&maxResults=${maxResults}`;
+
+        // Keep the loading message until data is fetched or error occurs
+        container.innerHTML = `<p><i class="fas fa-spinner fa-spin"></i> Loading schedule...</p>`;
+
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            // Try to get more specific error from Google API response body
+            let errorData = {
+              message: `HTTP error! status: ${response.status} - ${response.statusText}`,
+            };
+            try {
+              const errorJson = await response.json();
+              if (errorJson.error && errorJson.error.message) {
+                errorData.message = errorJson.error.message;
+                errorData.details = errorJson.error; // Contains more detailed error info
+              }
+            } catch (e) {
+              /* Ignore parsing error if response is not JSON */
+            }
+
+            console.error("Google Calendar API Error:", errorData);
+            // Display a more informative error message based on potential issues
+            let userErrorMessage = `Could not load class schedule details due to an API error (${response.status}).`;
+            if (response.status === 403) {
+              // Forbidden - likely permissions or key restrictions
+              userErrorMessage +=
+                "<br>Possible causes: API key restrictions (HTTP referrers), API not enabled, or Calendar not public.";
+            } else if (response.status === 400) {
+              // Bad Request - often invalid key or parameters
+              userErrorMessage +=
+                "<br>Possible causes: Invalid API key format or incorrect Calendar ID.";
+            } else {
+              userErrorMessage +=
+                "<br>Please try again later or contact us for assistance.";
+            }
+            userErrorMessage += "<br>(Details logged to browser console).";
+
+            container.innerHTML = `<p class="error-message">${userErrorMessage}</p>`;
+            return; // Stop further processing on error
+          }
+          const data = await response.json();
+
+          if (data.items && data.items.length > 0) {
+            displayClasses(data.items);
+          } else {
+            container.innerHTML =
+              "<p>No upcoming classes scheduled at the moment. Please check back soon, browse the full calendar below, or contact us!</p>";
+          }
+        } catch (error) {
+          // Catch network errors or errors thrown before the response.ok check
+          console.error(
+            "Error fetching or processing Google Calendar events:",
+            error
+          );
+          container.innerHTML = `<p class="error-message">Could not load class schedule details. <br>This might be due to network problems or a script error. Please try again later or contact us for assistance. <br>(Details logged to browser console).</p>`;
+        }
+      }
+
+      function displayClasses(events) {
+        const container = document.getElementById("class-schedule-container");
+        if (!container) return; // Exit if container not found
+        container.innerHTML = ""; // Clear loading message
+
+        events.forEach((event) => {
+          // Skip events without a summary (title) or essential date info
+          if (!event.summary || !(event.start?.dateTime || event.start?.date)) {
+            console.warn(
+              "Skipping event with missing summary or start date/time:",
+              event
+            );
+            return;
+          }
+          // Skip events that might be marked as cancelled
+          if (event.status === "cancelled") {
+            console.log("Skipping cancelled event:", event.summary);
+            return;
+          }
+
+          // Determine Start and End Dates/Times
+          const isAllDay = !!event.start.date; // Check if it's an all-day event
+          const startDate = new Date(event.start.dateTime || event.start.date);
+          let endDate;
+          if (isAllDay) {
+            endDate = startDate;
+          } else {
+            // Ensure end date/time exists before creating a Date object
+            endDate = event.end?.dateTime
+              ? new Date(event.end.dateTime)
+              : startDate; // Default to start if end is missing
+          }
+
+          // Format Date and Time nicely
+          const dateOptions = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          };
+          const timeOptions = {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true,
+          };
+
+          const eventDateStr = startDate.toLocaleDateString(
+            "en-IN",
+            dateOptions
+          );
+
+          let eventTimeStr = "";
+          if (!isAllDay) {
+            const startTime = startDate.toLocaleTimeString(
+              "en-US",
+              timeOptions
+            );
+            // Use endDate safely now
+            const endTime = endDate.toLocaleTimeString("en-US", timeOptions);
+            const timeZoneAbbr = startDate
+              .toLocaleTimeString("en-US", { timeZoneName: "short" })
+              .split(" ")
+              .pop();
+            eventTimeStr = `${startTime} - ${endTime} ${
+              timeZoneAbbr || ""
+            }`.trim();
+          } else {
+            eventTimeStr = "All Day";
+          }
+
+          // --- Extract Details from Description (Adjust Regex as needed) ---
+          let price = "Contact us";
+          let spots = "";
+          let ageInfo = "";
+          let descriptionText = event.description || "";
+
+          if (event.description) {
+            descriptionText = event.description.replace(/<br\s*\/?>/gi, "\n");
+
+            const priceMatch = descriptionText.match(
+              /(?:^|\s)Price:\s*₹?\s*([\d,]+)/im
+            );
+            if (priceMatch && priceMatch[1]) {
+              price = `₹${priceMatch[1].replace(/,/g, "")}`;
+              descriptionText = descriptionText
+                .replace(/(?:^|\s)Price:\s*₹?\s*[\d,]+/im, "")
+                .trim();
+            }
+
+            const spotsMatch = descriptionText.match(
+              /(?:^|\s)(?:Spots Available|Max Spots|Seats):\s*(\d+)/im
+            );
+            if (spotsMatch && spotsMatch[1]) {
+              spots = spotsMatch[1];
+              descriptionText = descriptionText
+                .replace(
+                  /(?:^|\s)(?:Spots Available|Max Spots|Seats):\s*\d+/im,
+                  ""
+                )
+                .trim();
+            }
+
+            const ageMatch = descriptionText.match(
+              /(?:^|\s)Ages?:\s*([\w\s-]+)/im
+            );
+            if (ageMatch && ageMatch[1]) {
+              ageInfo = ageMatch[1].trim();
+              descriptionText = descriptionText
+                .replace(/(?:^|\s)Ages?:\s*[\w\s-]+/im, "")
+                .trim();
+            }
+
+            descriptionText = descriptionText
+              .replace(/(\r\n|\n|\r){2,}/gm, "\n")
+              .replace(/\n/g, " ")
+              .replace(/\s\s+/g, " ")
+              .trim();
+
+            const maxDescLength = 140;
+            if (descriptionText.length > maxDescLength) {
+              descriptionText =
+                descriptionText.substring(0, maxDescLength).trim() + "...";
+            }
+          }
+          // --- End Detail Extraction ---
+
+          const classCard = document.createElement("div");
+          classCard.className = "schedule-card";
+          classCard.innerHTML = `
                     <div class="class-info">
                         <h3>${event.summary}</h3>
                         <div class="class-meta">
                             <span><i class="far fa-calendar-alt"></i> ${eventDateStr}</span>
-                            ${!isAllDay ? `<span><i class="far fa-clock"></i> ${eventTimeStr}</span>` : ''}
-                            ${spots ? `<span><i class="fas fa-users"></i> Max ${spots} spots</span>` : ''}
-                            ${ageInfo ? `<span><i class="fas fa-child"></i> Ages: ${ageInfo}</span>` : ''}
-                            ${event.location ? `<span><i class="fas fa-map-marker-alt"></i> ${event.location}</span>` : ''}
+                            ${
+                              !isAllDay
+                                ? `<span><i class="far fa-clock"></i> ${eventTimeStr}</span>`
+                                : ""
+                            }
+                            ${
+                              spots
+                                ? `<span><i class="fas fa-users"></i> Max ${spots} spots</span>`
+                                : ""
+                            }
+                            ${
+                              ageInfo
+                                ? `<span><i class="fas fa-child"></i> Ages: ${ageInfo}</span>`
+                                : ""
+                            }
+                            ${
+                              event.location
+                                ? `<span><i class="fas fa-map-marker-alt"></i> ${event.location}</span>`
+                                : ""
+                            }
                         </div>
-                        <p class="class-description">${descriptionText || 'See calendar event for more details.'}</p>
+                        <p class="class-description">${
+                          descriptionText ||
+                          "See calendar event for more details."
+                        }</p>
                         <span class="price">${price}</span>
-                        <button class="btn register-btn" data-class-name="${encodedClassName}" data-class-date="${encodedDateString}">Register Now</button>
+                        <button class="btn register-btn" data-class-name="${encodeURIComponent(
+                          event.summary
+                        )}" data-class-date="${encodeURIComponent(
+            eventDateStr + (isAllDay ? "" : " " + eventTimeStr)
+          )}">Register Now</button>
                     </div>
                 `;
-                container.appendChild(classCard);
-            });
+          container.appendChild(classCard);
+        });
 
-             addRegisterButtonListeners();
-        }
+        // Add event listeners to the newly created Register buttons
+        addRegisterButtonListeners();
+      }
 
-        // --- CORRECTED FUNCTION ---
-        function addRegisterButtonListeners() {
-            document.querySelectorAll('.register-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    // Get the already encoded class name and date from data attributes
-                    const encodedClassName = this.dataset.className;
-                    const encodedClassDate = this.dataset.classDate;
-
-                    // *** THIS IS THE CORRECTED LINE ***
-                    // Construct the URL for contact.html, passing class name and date
-                    const contactUrl = `contact.html?class=${encodedClassName}&date=${encodedClassDate}`;
-
-                    console.log("Redirecting to contact page:", contactUrl);
-                    window.location.href = contactUrl; // Redirect the browser to contact.html
-                });
-            });
-        }
-        // --- END OF CORRECTED FUNCTION ---
-
-     </script>
-
-</body>
+      function addRegisterButtonListeners() {
+        document.querySelectorAll(".register-btn").forEach((button) => {
+          button.addEventListener("click", function () {
+            const className = decodeURIComponent(this.dataset.className);
+            const classDate = decodeURIComponent(this.dataset.classDate);
+            const formUrl = `contact.html#contact-form?class=${encodeURIComponent(
+              className
+            )}&date=${encodeURIComponent(classDate.trim())}`;
+            console.log("Redirecting to:", formUrl);
+            window.location.href = formUrl;
+          });
+        });
+      }
+    </script>
+  </body>
 </html>
