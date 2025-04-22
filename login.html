@@ -20,6 +20,16 @@
     <link rel="stylesheet" href="styles.css" />
     <!-- Link the main stylesheet -->
     <style>
+      :root {
+  --primary: #E05E85;
+  --secondary: #fff;
+  --accent: #5c4033;
+  --light: #fff;
+  --dark: #3c3c3c;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --testimonial-bg: radial-gradient(circle, rgba(230, 227, 227, 1) 0%, rgba(255, 222, 235, 1) 100%);
+  --footer: #4e4e4e;
+}
       body{
         background: linear-gradient(to bottom right, #ffffff, rgba(224, 94, 133, 0.2));
       }
@@ -88,11 +98,11 @@
         align-items: center;
         gap: 8px;
         border: none;
-        background-color: #4d3327;
+        background-color: var(--primary);
         color: white;
       }
       .auth-buttons .btn:hover {
-        background-color: var(--accent);
+        background-color: #d14e73;
         color: white; /* Make sure text stays visible */
       }
 
